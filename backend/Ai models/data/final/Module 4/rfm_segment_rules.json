@@ -1,0 +1,20 @@
+{
+  "description": "RFM segment rules based on R_score, F_score, M_score, and rfm_score.",
+  "segments": [
+    "At Risk",
+    "Cannot Lose Them",
+    "Champions",
+    "Lost / Hibernating",
+    "Loyal Customers",
+    "Need Attention",
+    "New / Promising",
+    "Others",
+    "Potential Loyalists"
+  ],
+  "value_tier_rules": {
+    "High-Value": "rfm_score >= 12",
+    "Mid-Value": "8 <= rfm_score < 12",
+    "Low-Value": "0 < rfm_score < 8",
+    "No-History": "rfm_score == 0"
+  }
+}

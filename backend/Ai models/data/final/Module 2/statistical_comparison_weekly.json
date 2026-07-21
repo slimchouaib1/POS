@@ -1,0 +1,128 @@
+{
+  "comparison": "prophet_vs_sarima_weekly",
+  "granularity": "weekly",
+  "overall_metrics": {
+    "prophet": {
+      "val": {
+        "mae": 2.8864640633754814,
+        "rmse": 3.7281665062225136,
+        "mape": 0.6366709589620235,
+        "smape": 0.4286553140358239,
+        "wape": 0.3734039155394383,
+        "mase": NaN,
+        "r2": 0.4936622843069174,
+        "bias": -0.7890747328334132
+      },
+      "test": {
+        "mae": 2.900973058598886,
+        "rmse": 3.7452098858857483,
+        "mape": 0.4152652727407125,
+        "smape": 0.3321513279385138,
+        "wape": 0.2837344504864329,
+        "mase": NaN,
+        "r2": 0.6196100551655064,
+        "bias": -0.07430915017827473
+      }
+    },
+    "sarima": {
+      "val": {
+        "mae": 3.1067619856270206,
+        "rmse": 3.986514788146366,
+        "mape": 0.7157734995019089,
+        "smape": 0.4460468271677265,
+        "wape": 0.4019024885158609,
+        "mase": NaN,
+        "r2": 0.4210561617809453,
+        "bias": -1.3036493857995788
+      },
+      "test": {
+        "mae": 2.9313656295221597,
+        "rmse": 3.9256081257673685,
+        "mape": 0.3738889633665729,
+        "smape": 0.32861033076668617,
+        "wape": 0.28670704596925684,
+        "mase": NaN,
+        "r2": 0.5820824646271601,
+        "bias": 1.0429010593796841
+      }
+    }
+  },
+  "head_to_head": [
+    {
+      "Split": "val",
+      "Metric": "WAPE",
+      "Prophet_wins": 69,
+      "SARIMA_wins": 53,
+      "Total": 122
+    },
+    {
+      "Split": "val",
+      "Metric": "MAE",
+      "Prophet_wins": 69,
+      "SARIMA_wins": 53,
+      "Total": 122
+    },
+    {
+      "Split": "val",
+      "Metric": "R2",
+      "Prophet_wins": 72,
+      "SARIMA_wins": 50,
+      "Total": 122
+    },
+    {
+      "Split": "test",
+      "Metric": "WAPE",
+      "Prophet_wins": 49,
+      "SARIMA_wins": 73,
+      "Total": 122
+    },
+    {
+      "Split": "test",
+      "Metric": "MAE",
+      "Prophet_wins": 49,
+      "SARIMA_wins": 73,
+      "Total": 122
+    },
+    {
+      "Split": "test",
+      "Metric": "R2",
+      "Prophet_wins": 60,
+      "SARIMA_wins": 62,
+      "Total": 122
+    }
+  ],
+  "wilcoxon_results": [
+    {
+      "Split": "val",
+      "N": 122,
+      "Median_diff": -0.010579485530158611,
+      "Mean_diff": -0.036806357687380775,
+      "Statistic": 2646.0,
+      "P_value": 0.004734745670921249,
+      "Effect_size": 0.25572249861735863,
+      "Significant": true,
+      "Direction": "Prophet better"
+    },
+    {
+      "Split": "test",
+      "N": 122,
+      "Median_diff": 0.007168716905064085,
+      "Mean_diff": 0.00707485895194632,
+      "Statistic": 3301.0,
+      "P_value": 0.24972179106939518,
+      "Effect_size": 0.10420894222263236,
+      "Significant": false,
+      "Direction": "SARIMA better"
+    }
+  ],
+  "decision": {
+    "primary_winner": "Prophet",
+    "r2_winner": "Prophet",
+    "bias_winner": "Prophet",
+    "overall_winner": "Prophet",
+    "votes": {
+      "Prophet": 3,
+      "SARIMA": 0
+    }
+  }
+}

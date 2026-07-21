@@ -1,0 +1,2 @@
+selected_model,selected_family,selected_threshold,precision,recall,f1,pr_auc,roc_auc,false_alerts,missed_anomalies,selection_reason
+Random Forest,Supervised,0.2545094002249068,0.9649122807017544,0.9375,0.9510086455331412,0.9769731898177996,0.999371951577834,6,11,Highest supervised F1-score with strong precision-recall balance.

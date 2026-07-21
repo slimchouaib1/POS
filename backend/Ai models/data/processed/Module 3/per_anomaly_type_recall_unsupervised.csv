@@ -1,0 +1,49 @@
+model,anomaly_type,n_true,n_detected,recall
+Rule-Based Baseline,basket_size_outlier,30,14,0.4666666666666667
+Rule-Based Baseline,odd_hour,32,32,1.0
+Rule-Based Baseline,price_tampering,27,27,1.0
+Rule-Based Baseline,shift_end_void_cluster,15,1,0.06666666666666667
+Rule-Based Baseline,suspicious_discount,38,38,1.0
+Rule-Based Baseline,void_after_payment,34,6,0.17647058823529413
+Isolation Forest,basket_size_outlier,30,11,0.36666666666666664
+Isolation Forest,odd_hour,32,1,0.03125
+Isolation Forest,price_tampering,27,0,0.0
+Isolation Forest,shift_end_void_cluster,15,9,0.6
+Isolation Forest,suspicious_discount,38,26,0.6842105263157895
+Isolation Forest,void_after_payment,34,22,0.6470588235294118
+KNN Local Distance Outlier,basket_size_outlier,30,30,1.0
+KNN Local Distance Outlier,odd_hour,32,1,0.03125
+KNN Local Distance Outlier,price_tampering,27,0,0.0
+KNN Local Distance Outlier,shift_end_void_cluster,15,14,0.9333333333333333
+KNN Local Distance Outlier,suspicious_discount,38,38,1.0
+KNN Local Distance Outlier,void_after_payment,34,24,0.7058823529411765
+Gaussian Density Model,basket_size_outlier,30,30,1.0
+Gaussian Density Model,odd_hour,32,32,1.0
+Gaussian Density Model,price_tampering,27,27,1.0
+Gaussian Density Model,shift_end_void_cluster,15,6,0.4
+Gaussian Density Model,suspicious_discount,38,38,1.0
+Gaussian Density Model,void_after_payment,34,14,0.4117647058823529
+PCA Reconstruction,basket_size_outlier,30,30,1.0
+PCA Reconstruction,odd_hour,32,28,0.875
+PCA Reconstruction,price_tampering,27,0,0.0
+PCA Reconstruction,shift_end_void_cluster,15,4,0.26666666666666666
+PCA Reconstruction,suspicious_discount,38,27,0.7105263157894737
+PCA Reconstruction,void_after_payment,34,14,0.4117647058823529
+Robust Z-Score Model,basket_size_outlier,30,0,0.0
+Robust Z-Score Model,odd_hour,32,1,0.03125
+Robust Z-Score Model,price_tampering,27,0,0.0
+Robust Z-Score Model,shift_end_void_cluster,15,15,1.0
+Robust Z-Score Model,suspicious_discount,38,38,1.0
+Robust Z-Score Model,void_after_payment,34,34,1.0
+Autoencoder Reconstruction,basket_size_outlier,30,30,1.0
+Autoencoder Reconstruction,odd_hour,32,31,0.96875
+Autoencoder Reconstruction,price_tampering,27,0,0.0
+Autoencoder Reconstruction,shift_end_void_cluster,15,4,0.26666666666666666
+Autoencoder Reconstruction,suspicious_discount,38,38,1.0
+Autoencoder Reconstruction,void_after_payment,34,10,0.29411764705882354
+Hybrid Unsupervised Anomaly Detector,basket_size_outlier,30,30,1.0
+Hybrid Unsupervised Anomaly Detector,odd_hour,32,32,1.0
+Hybrid Unsupervised Anomaly Detector,price_tampering,27,27,1.0
+Hybrid Unsupervised Anomaly Detector,shift_end_void_cluster,15,14,0.9333333333333333
+Hybrid Unsupervised Anomaly Detector,suspicious_discount,38,38,1.0
+Hybrid Unsupervised Anomaly Detector,void_after_payment,34,25,0.7352941176470589

@@ -1,0 +1,29 @@
+{
+  "n_customers": 10001,
+  "n_features_after_modeling": 84,
+  "n_rfm_segments": 9,
+  "n_kmeans_clusters_final": 5,
+  "n_gmm_components_final": 5,
+  "n_hybrid_segments": 15,
+  "best_k_by_silhouette": 2,
+  "best_gmm_k_by_bic": 10,
+  "best_gmm_k_by_silhouette": 3,
+  "k_selection_note": "Silhouette selected K=2, but final K=5 was manually selected for better business interpretability and actionable segmentation.",
+  "outputs": {
+    "customer_segments": "../Module 4\\customer_segments_model_outputs.csv",
+    "rfm_summary": "../Module 4\\rfm_segment_summary.csv",
+    "kmeans_profiles": "../Module 4\\kmeans_cluster_profiles.csv",
+    "hybrid_profiles": "../Module 4\\hybrid_segment_profiles.csv",
+    "model_comparison": "../Module 4\\model_comparison_report.csv",
+    "gmm_results": "../Module 4\\gmm_model_selection_results.csv",
+    "clustering_comparison": "../Module 4\\clustering_model_comparison.csv"
+  },
+  "models": {
+    "preprocessor": "../Module 4/models\\behavior_preprocessor.pkl",
+    "kmeans": "../Module 4/models\\kmeans_model.pkl",
+    "pca": "../Module 4/models\\pca_model.pkl",
+    "gmm": "../Module 4/models\\gmm_model.pkl",
+    "rfm_rules": "../Module 4/models\\rfm_segment_rules.json",
+    "hybrid_mapping": "../Module 4/models\\hybrid_segment_mapping.json"
+  }
+}

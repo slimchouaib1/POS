@@ -1,0 +1,5 @@
+approach,role,main_question,output,production_use,limitation
+RFM rule-based segmentation,Business baseline,How valuable and active is the customer?,rfm_segment,"Lifecycle, loyalty, churn priority",Does not capture preferences or detailed behavior
+K-Means clustering,Main behavioral ML model,What natural behavioral group does the customer belong to?,kmeans_cluster / kmeans_segment_name,Behavioral personalization and targeting,Cluster IDs need profiling and interpretation
+Hierarchical clustering,Validation and explainability,Are the behavioral groups structurally meaningful?,Dendrograms / hierarchy,Report validation and cluster explanation,Not used as main production model
+Hybrid RFM + behavioral segmentation,Final business segmentation,What action should the business take for each customer?,hybrid_segment,"Campaigns, dashboards, Module 5 assistant insights",Requires clear business naming and playbook

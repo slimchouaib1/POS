@@ -1,0 +1,13 @@
+cashier_id,shift,flagged
+C01,morning,False
+C02,morning,False
+C03,morning,False
+C04,morning,False
+C05,afternoon,False
+C06,afternoon,False
+C07,afternoon,True
+C08,afternoon,False
+C09,evening,False
+C10,evening,False
+C11,evening,False
+C12,evening,False

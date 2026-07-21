@@ -1,0 +1,469 @@
+order_id,anomaly_type,description
+147479,void_after_payment,Paid order voided with weak reason
+121532,void_after_payment,Paid order voided with weak reason
+141042,void_after_payment,Paid order voided with weak reason
+109389,void_after_payment,Paid order voided with weak reason
+157293,void_after_payment,Paid order voided with weak reason
+129018,void_after_payment,Paid order voided with weak reason
+100041,void_after_payment,Paid order voided with weak reason
+113596,void_after_payment,Paid order voided with weak reason
+110027,void_after_payment,Paid order voided with weak reason
+148543,void_after_payment,Paid order voided with weak reason
+134688,void_after_payment,Paid order voided with weak reason
+122792,void_after_payment,Paid order voided with weak reason
+152073,void_after_payment,Paid order voided with weak reason
+133883,void_after_payment,Paid order voided with weak reason
+152305,void_after_payment,Paid order voided with weak reason
+101526,void_after_payment,Paid order voided with weak reason
+128221,void_after_payment,Paid order voided with weak reason
+119909,void_after_payment,Paid order voided with weak reason
+105732,void_after_payment,Paid order voided with weak reason
+119474,void_after_payment,Paid order voided with weak reason
+157384,void_after_payment,Paid order voided with weak reason
+161682,void_after_payment,Paid order voided with weak reason
+131737,void_after_payment,Paid order voided with weak reason
+117026,void_after_payment,Paid order voided with weak reason
+147354,void_after_payment,Paid order voided with weak reason
+135005,void_after_payment,Paid order voided with weak reason
+160172,void_after_payment,Paid order voided with weak reason
+127209,void_after_payment,Paid order voided with weak reason
+126010,void_after_payment,Paid order voided with weak reason
+115326,void_after_payment,Paid order voided with weak reason
+148423,void_after_payment,Paid order voided with weak reason
+144096,void_after_payment,Paid order voided with weak reason
+139329,void_after_payment,Paid order voided with weak reason
+152579,void_after_payment,Paid order voided with weak reason
+127579,void_after_payment,Paid order voided with weak reason
+128285,void_after_payment,Paid order voided with weak reason
+145363,void_after_payment,Paid order voided with weak reason
+136367,void_after_payment,Paid order voided with weak reason
+159318,void_after_payment,Paid order voided with weak reason
+150184,void_after_payment,Paid order voided with weak reason
+124356,void_after_payment,Paid order voided with weak reason
+133235,void_after_payment,Paid order voided with weak reason
+106413,void_after_payment,Paid order voided with weak reason
+162096,void_after_payment,Paid order voided with weak reason
+161512,void_after_payment,Paid order voided with weak reason
+125206,void_after_payment,Paid order voided with weak reason
+116514,void_after_payment,Paid order voided with weak reason
+153208,void_after_payment,Paid order voided with weak reason
+149624,void_after_payment,Paid order voided with weak reason
+144438,void_after_payment,Paid order voided with weak reason
+102993,void_after_payment,Paid order voided with weak reason
+150360,void_after_payment,Paid order voided with weak reason
+138118,void_after_payment,Paid order voided with weak reason
+131702,void_after_payment,Paid order voided with weak reason
+140552,void_after_payment,Paid order voided with weak reason
+150241,void_after_payment,Paid order voided with weak reason
+115850,void_after_payment,Paid order voided with weak reason
+103068,void_after_payment,Paid order voided with weak reason
+147364,void_after_payment,Paid order voided with weak reason
+102617,void_after_payment,Paid order voided with weak reason
+119541,void_after_payment,Paid order voided with weak reason
+153158,void_after_payment,Paid order voided with weak reason
+137721,void_after_payment,Paid order voided with weak reason
+133675,void_after_payment,Paid order voided with weak reason
+154459,void_after_payment,Paid order voided with weak reason
+141404,void_after_payment,Paid order voided with weak reason
+125627,void_after_payment,Paid order voided with weak reason
+153654,void_after_payment,Paid order voided with weak reason
+151662,void_after_payment,Paid order voided with weak reason
+101726,void_after_payment,Paid order voided with weak reason
+103983,void_after_payment,Paid order voided with weak reason
+103845,void_after_payment,Paid order voided with weak reason
+158204,void_after_payment,Paid order voided with weak reason
+147609,void_after_payment,Paid order voided with weak reason
+159058,void_after_payment,Paid order voided with weak reason
+152193,void_after_payment,Paid order voided with weak reason
+118674,void_after_payment,Paid order voided with weak reason
+110918,void_after_payment,Paid order voided with weak reason
+120349,void_after_payment,Paid order voided with weak reason
+118742,void_after_payment,Paid order voided with weak reason
+105412,void_after_payment,Paid order voided with weak reason
+146757,void_after_payment,Paid order voided with weak reason
+111774,void_after_payment,Paid order voided with weak reason
+162338,void_after_payment,Paid order voided with weak reason
+132271,void_after_payment,Paid order voided with weak reason
+125521,void_after_payment,Paid order voided with weak reason
+110182,void_after_payment,Paid order voided with weak reason
+132508,void_after_payment,Paid order voided with weak reason
+154008,void_after_payment,Paid order voided with weak reason
+123008,void_after_payment,Paid order voided with weak reason
+108940,void_after_payment,Paid order voided with weak reason
+148296,void_after_payment,Paid order voided with weak reason
+127252,void_after_payment,Paid order voided with weak reason
+123510,void_after_payment,Paid order voided with weak reason
+113291,suspicious_discount,Discount 85.0% (>70% threshold)
+161778,suspicious_discount,Discount 90.0% (>70% threshold)
+105901,suspicious_discount,Discount 85.0% (>70% threshold)
+162482,suspicious_discount,Discount 95.0% (>70% threshold)
+128188,suspicious_discount,Discount 75.0% (>70% threshold)
+138907,suspicious_discount,Discount 75.0% (>70% threshold)
+161539,suspicious_discount,Discount 90.0% (>70% threshold)
+103503,suspicious_discount,Discount 95.0% (>70% threshold)
+118519,suspicious_discount,Discount 80.0% (>70% threshold)
+109956,suspicious_discount,Discount 90.0% (>70% threshold)
+140386,suspicious_discount,Discount 75.0% (>70% threshold)
+118755,suspicious_discount,Discount 75.0% (>70% threshold)
+154025,suspicious_discount,Discount 80.0% (>70% threshold)
+106043,suspicious_discount,Discount 75.0% (>70% threshold)
+150426,suspicious_discount,Discount 95.0% (>70% threshold)
+101207,suspicious_discount,Discount 80.0% (>70% threshold)
+133234,suspicious_discount,Discount 75.0% (>70% threshold)
+151237,suspicious_discount,Discount 75.0% (>70% threshold)
+109220,suspicious_discount,Discount 95.0% (>70% threshold)
+151147,suspicious_discount,Discount 75.0% (>70% threshold)
+108743,suspicious_discount,Discount 75.0% (>70% threshold)
+114460,suspicious_discount,Discount 85.0% (>70% threshold)
+127122,suspicious_discount,Discount 80.0% (>70% threshold)
+127927,suspicious_discount,Discount 75.0% (>70% threshold)
+107435,suspicious_discount,Discount 95.0% (>70% threshold)
+148759,suspicious_discount,Discount 95.0% (>70% threshold)
+111678,suspicious_discount,Discount 95.0% (>70% threshold)
+119337,suspicious_discount,Discount 90.0% (>70% threshold)
+119365,suspicious_discount,Discount 85.0% (>70% threshold)
+127717,suspicious_discount,Discount 80.0% (>70% threshold)
+120508,suspicious_discount,Discount 85.0% (>70% threshold)
+143903,suspicious_discount,Discount 75.0% (>70% threshold)
+130578,suspicious_discount,Discount 85.0% (>70% threshold)
+107805,suspicious_discount,Discount 85.0% (>70% threshold)
+114184,suspicious_discount,Discount 85.0% (>70% threshold)
+160495,suspicious_discount,Discount 95.0% (>70% threshold)
+125630,suspicious_discount,Discount 85.0% (>70% threshold)
+119827,suspicious_discount,Discount 90.0% (>70% threshold)
+108027,suspicious_discount,Discount 95.0% (>70% threshold)
+140326,suspicious_discount,Discount 95.0% (>70% threshold)
+114598,suspicious_discount,Discount 85.0% (>70% threshold)
+121689,suspicious_discount,Discount 90.0% (>70% threshold)
+145026,suspicious_discount,Discount 85.0% (>70% threshold)
+104525,suspicious_discount,Discount 80.0% (>70% threshold)
+151727,suspicious_discount,Discount 80.0% (>70% threshold)
+113354,suspicious_discount,Discount 85.0% (>70% threshold)
+100870,suspicious_discount,Discount 90.0% (>70% threshold)
+108233,suspicious_discount,Discount 85.0% (>70% threshold)
+111647,suspicious_discount,Discount 75.0% (>70% threshold)
+153848,suspicious_discount,Discount 90.0% (>70% threshold)
+142583,suspicious_discount,Discount 80.0% (>70% threshold)
+156479,suspicious_discount,Discount 90.0% (>70% threshold)
+151864,suspicious_discount,Discount 75.0% (>70% threshold)
+140324,suspicious_discount,Discount 80.0% (>70% threshold)
+103264,suspicious_discount,Discount 95.0% (>70% threshold)
+120370,suspicious_discount,Discount 80.0% (>70% threshold)
+133838,suspicious_discount,Discount 85.0% (>70% threshold)
+158459,suspicious_discount,Discount 80.0% (>70% threshold)
+113859,suspicious_discount,Discount 85.0% (>70% threshold)
+120446,suspicious_discount,Discount 75.0% (>70% threshold)
+112928,suspicious_discount,Discount 90.0% (>70% threshold)
+133079,suspicious_discount,Discount 90.0% (>70% threshold)
+104080,suspicious_discount,Discount 90.0% (>70% threshold)
+126633,suspicious_discount,Discount 90.0% (>70% threshold)
+151205,suspicious_discount,Discount 75.0% (>70% threshold)
+141592,suspicious_discount,Discount 90.0% (>70% threshold)
+130404,suspicious_discount,Discount 75.0% (>70% threshold)
+142791,suspicious_discount,Discount 95.0% (>70% threshold)
+147735,suspicious_discount,Discount 80.0% (>70% threshold)
+124451,suspicious_discount,Discount 85.0% (>70% threshold)
+123412,suspicious_discount,Discount 80.0% (>70% threshold)
+107311,suspicious_discount,Discount 85.0% (>70% threshold)
+106746,suspicious_discount,Discount 95.0% (>70% threshold)
+101031,suspicious_discount,Discount 75.0% (>70% threshold)
+131598,suspicious_discount,Discount 80.0% (>70% threshold)
+152646,suspicious_discount,Discount 95.0% (>70% threshold)
+150979,suspicious_discount,Discount 90.0% (>70% threshold)
+137566,suspicious_discount,Discount 75.0% (>70% threshold)
+136130,suspicious_discount,Discount 75.0% (>70% threshold)
+161104,suspicious_discount,Discount 75.0% (>70% threshold)
+153402,suspicious_discount,Discount 85.0% (>70% threshold)
+109192,suspicious_discount,Discount 85.0% (>70% threshold)
+112866,suspicious_discount,Discount 75.0% (>70% threshold)
+103465,suspicious_discount,Discount 95.0% (>70% threshold)
+153008,suspicious_discount,Discount 90.0% (>70% threshold)
+144640,suspicious_discount,Discount 80.0% (>70% threshold)
+127776,suspicious_discount,Discount 80.0% (>70% threshold)
+129964,suspicious_discount,Discount 90.0% (>70% threshold)
+100633,suspicious_discount,Discount 75.0% (>70% threshold)
+105090,suspicious_discount,Discount 85.0% (>70% threshold)
+141944,suspicious_discount,Discount 75.0% (>70% threshold)
+144863,suspicious_discount,Discount 80.0% (>70% threshold)
+154876,suspicious_discount,Discount 80.0% (>70% threshold)
+104774,suspicious_discount,Discount 80.0% (>70% threshold)
+141465,suspicious_discount,Discount 90.0% (>70% threshold)
+100266,suspicious_discount,Discount 75.0% (>70% threshold)
+103814,suspicious_discount,Discount 95.0% (>70% threshold)
+101126,suspicious_discount,Discount 85.0% (>70% threshold)
+107719,suspicious_discount,Discount 95.0% (>70% threshold)
+140984,suspicious_discount,Discount 90.0% (>70% threshold)
+131613,suspicious_discount,Discount 75.0% (>70% threshold)
+152941,suspicious_discount,Discount 80.0% (>70% threshold)
+122165,suspicious_discount,Discount 95.0% (>70% threshold)
+155144,suspicious_discount,Discount 95.0% (>70% threshold)
+116382,suspicious_discount,Discount 80.0% (>70% threshold)
+147923,suspicious_discount,Discount 80.0% (>70% threshold)
+104013,suspicious_discount,Discount 80.0% (>70% threshold)
+121149,suspicious_discount,Discount 90.0% (>70% threshold)
+104973,suspicious_discount,Discount 85.0% (>70% threshold)
+122008,suspicious_discount,Discount 90.0% (>70% threshold)
+125348,suspicious_discount,Discount 80.0% (>70% threshold)
+154242,suspicious_discount,Discount 75.0% (>70% threshold)
+102591,suspicious_discount,Discount 95.0% (>70% threshold)
+107475,suspicious_discount,Discount 90.0% (>70% threshold)
+138327,suspicious_discount,Discount 80.0% (>70% threshold)
+116054,suspicious_discount,Discount 80.0% (>70% threshold)
+133275,suspicious_discount,Discount 95.0% (>70% threshold)
+127947,suspicious_discount,Discount 75.0% (>70% threshold)
+108555,suspicious_discount,Discount 90.0% (>70% threshold)
+129593,suspicious_discount,Discount 75.0% (>70% threshold)
+153063,suspicious_discount,Discount 75.0% (>70% threshold)
+124003,suspicious_discount,Discount 95.0% (>70% threshold)
+105561,suspicious_discount,Discount 95.0% (>70% threshold)
+116141,suspicious_discount,Discount 75.0% (>70% threshold)
+159989,suspicious_discount,Discount 85.0% (>70% threshold)
+135521,price_tampering,Line item price 13.0 → 4.52
+106819,price_tampering,Line item price 11.0 → 4.19
+115006,price_tampering,Line item price 15.5 → 6.39
+125676,price_tampering,Line item price 10.5 → 4.2
+120223,price_tampering,Line item price 16.0 → 7.88
+155311,price_tampering,Line item price 6.0 → 1.87
+103319,price_tampering,Line item price 12.0 → 4.84
+150312,price_tampering,Line item price 16.0 → 6.57
+159354,price_tampering,Line item price 12.0 → 3.82
+107832,price_tampering,Line item price 4.75 → 1.74
+140249,price_tampering,Line item price 15.0 → 6.26
+139295,price_tampering,Line item price 4.0 → 1.73
+150712,price_tampering,Line item price 2.5 → 0.9
+100079,price_tampering,Line item price 15.0 → 6.28
+111321,price_tampering,Line item price 17.0 → 6.66
+129671,price_tampering,Line item price 5.5 → 2.7
+151115,price_tampering,Line item price 3.75 → 1.78
+137591,price_tampering,Line item price 22.0 → 9.59
+141744,price_tampering,Line item price 17.0 → 7.58
+161181,price_tampering,Line item price 8.5 → 2.9
+160196,price_tampering,Line item price 35.0 → 14.57
+101114,price_tampering,Line item price 10.5 → 4.55
+160067,price_tampering,Line item price 15.5 → 6.86
+121209,price_tampering,Line item price 3.5 → 1.17
+147147,price_tampering,Line item price 13.0 → 5.62
+112988,price_tampering,Line item price 12.5 → 5.14
+144537,price_tampering,Line item price 7.0 → 3.07
+162122,price_tampering,Line item price 26.0 → 9.4
+107861,price_tampering,Line item price 4.5 → 1.42
+146763,price_tampering,Line item price 11.0 → 4.12
+155491,price_tampering,Line item price 35.0 → 15.44
+117967,price_tampering,Line item price 12.0 → 3.64
+113254,price_tampering,Line item price 16.0 → 7.65
+144209,price_tampering,Line item price 13.0 → 6.16
+141708,price_tampering,Line item price 4.0 → 1.25
+150931,price_tampering,Line item price 15.0 → 6.52
+148079,price_tampering,Line item price 10.0 → 3.76
+162164,price_tampering,Line item price 11.5 → 4.07
+160450,price_tampering,Line item price 12.5 → 5.75
+118649,price_tampering,Line item price 9.5 → 3.45
+100453,price_tampering,Line item price 9.0 → 3.97
+136735,price_tampering,Line item price 17.0 → 7.67
+153159,price_tampering,Line item price 4.5 → 1.87
+110485,price_tampering,Line item price 5.25 → 2.36
+123060,price_tampering,Line item price 10.5 → 4.8
+112153,price_tampering,Line item price 8.0 → 2.85
+110671,price_tampering,Line item price 6.5 → 2.56
+153341,price_tampering,Line item price 9.5 → 4.04
+104079,price_tampering,Line item price 35.0 → 12.47
+104127,price_tampering,Line item price 5.0 → 2.39
+129400,price_tampering,Line item price 14.0 → 6.68
+116119,price_tampering,Line item price 4.5 → 1.78
+161246,price_tampering,Line item price 6.0 → 2.3
+117959,price_tampering,Line item price 14.0 → 6.05
+157310,price_tampering,Line item price 7.0 → 2.42
+135060,price_tampering,Line item price 10.5 → 4.58
+148502,price_tampering,Line item price 7.0 → 2.26
+144823,price_tampering,Line item price 14.0 → 5.55
+123927,price_tampering,Line item price 10.0 → 3.19
+156639,price_tampering,Line item price 4.5 → 1.54
+157377,price_tampering,Line item price 11.5 → 5.0
+153057,price_tampering,Line item price 3.75 → 1.68
+153675,odd_hour,Transaction logged outside operating hours
+118671,odd_hour,Transaction logged outside operating hours
+161862,odd_hour,Transaction logged outside operating hours
+143388,odd_hour,Transaction logged outside operating hours
+139714,odd_hour,Transaction logged outside operating hours
+113228,odd_hour,Transaction logged outside operating hours
+144453,odd_hour,Transaction logged outside operating hours
+131819,odd_hour,Transaction logged outside operating hours
+125900,odd_hour,Transaction logged outside operating hours
+114789,odd_hour,Transaction logged outside operating hours
+149250,odd_hour,Transaction logged outside operating hours
+106154,odd_hour,Transaction logged outside operating hours
+155102,odd_hour,Transaction logged outside operating hours
+159293,odd_hour,Transaction logged outside operating hours
+135776,odd_hour,Transaction logged outside operating hours
+124514,odd_hour,Transaction logged outside operating hours
+143429,odd_hour,Transaction logged outside operating hours
+117782,odd_hour,Transaction logged outside operating hours
+154310,odd_hour,Transaction logged outside operating hours
+146711,odd_hour,Transaction logged outside operating hours
+110569,odd_hour,Transaction logged outside operating hours
+153562,odd_hour,Transaction logged outside operating hours
+131622,odd_hour,Transaction logged outside operating hours
+116710,odd_hour,Transaction logged outside operating hours
+156805,odd_hour,Transaction logged outside operating hours
+132557,odd_hour,Transaction logged outside operating hours
+151821,odd_hour,Transaction logged outside operating hours
+145194,odd_hour,Transaction logged outside operating hours
+125077,odd_hour,Transaction logged outside operating hours
+156449,odd_hour,Transaction logged outside operating hours
+143082,odd_hour,Transaction logged outside operating hours
+115912,odd_hour,Transaction logged outside operating hours
+105869,odd_hour,Transaction logged outside operating hours
+104335,odd_hour,Transaction logged outside operating hours
+114678,odd_hour,Transaction logged outside operating hours
+140951,odd_hour,Transaction logged outside operating hours
+146185,odd_hour,Transaction logged outside operating hours
+122750,odd_hour,Transaction logged outside operating hours
+154436,odd_hour,Transaction logged outside operating hours
+106891,odd_hour,Transaction logged outside operating hours
+135460,odd_hour,Transaction logged outside operating hours
+151426,odd_hour,Transaction logged outside operating hours
+121014,odd_hour,Transaction logged outside operating hours
+134111,odd_hour,Transaction logged outside operating hours
+115148,odd_hour,Transaction logged outside operating hours
+135273,odd_hour,Transaction logged outside operating hours
+121153,odd_hour,Transaction logged outside operating hours
+145618,odd_hour,Transaction logged outside operating hours
+101807,odd_hour,Transaction logged outside operating hours
+157041,odd_hour,Transaction logged outside operating hours
+128614,odd_hour,Transaction logged outside operating hours
+126127,odd_hour,Transaction logged outside operating hours
+133334,odd_hour,Transaction logged outside operating hours
+140679,odd_hour,Transaction logged outside operating hours
+146444,odd_hour,Transaction logged outside operating hours
+121234,odd_hour,Transaction logged outside operating hours
+112841,odd_hour,Transaction logged outside operating hours
+132843,odd_hour,Transaction logged outside operating hours
+153661,odd_hour,Transaction logged outside operating hours
+105249,odd_hour,Transaction logged outside operating hours
+153971,odd_hour,Transaction logged outside operating hours
+139561,odd_hour,Transaction logged outside operating hours
+162955,basket_size_outlier,Basket of 18 items
+162956,basket_size_outlier,Basket of 20 items
+162957,basket_size_outlier,Basket of 19 items
+162958,basket_size_outlier,Basket of 15 items
+162959,basket_size_outlier,Basket of 22 items
+162960,basket_size_outlier,Basket of 20 items
+162961,basket_size_outlier,Basket of 15 items
+162962,basket_size_outlier,Basket of 15 items
+162963,basket_size_outlier,Basket of 20 items
+162964,basket_size_outlier,Basket of 18 items
+162965,basket_size_outlier,Basket of 22 items
+162966,basket_size_outlier,Basket of 17 items
+162967,basket_size_outlier,Basket of 15 items
+162968,basket_size_outlier,Basket of 17 items
+162969,basket_size_outlier,Basket of 21 items
+162970,basket_size_outlier,Basket of 15 items
+162971,basket_size_outlier,Basket of 20 items
+162972,basket_size_outlier,Basket of 16 items
+162973,basket_size_outlier,Basket of 21 items
+162974,basket_size_outlier,Basket of 15 items
+162975,basket_size_outlier,Basket of 21 items
+162976,basket_size_outlier,Basket of 18 items
+162977,basket_size_outlier,Basket of 18 items
+162978,basket_size_outlier,Basket of 21 items
+162979,basket_size_outlier,Basket of 15 items
+162980,basket_size_outlier,Basket of 21 items
+162981,basket_size_outlier,Basket of 17 items
+162982,basket_size_outlier,Basket of 18 items
+162983,basket_size_outlier,Basket of 15 items
+162984,basket_size_outlier,Basket of 20 items
+162985,basket_size_outlier,Basket of 17 items
+162986,basket_size_outlier,Basket of 22 items
+162987,basket_size_outlier,Basket of 20 items
+162988,basket_size_outlier,Basket of 16 items
+162989,basket_size_outlier,Basket of 17 items
+162990,basket_size_outlier,Basket of 16 items
+162991,basket_size_outlier,Basket of 16 items
+162992,basket_size_outlier,Basket of 20 items
+162993,basket_size_outlier,Basket of 15 items
+162994,basket_size_outlier,Basket of 21 items
+162995,basket_size_outlier,Basket of 19 items
+162996,basket_size_outlier,Basket of 20 items
+162997,basket_size_outlier,Basket of 20 items
+162998,basket_size_outlier,Basket of 18 items
+162999,basket_size_outlier,Basket of 18 items
+163000,basket_size_outlier,Basket of 19 items
+163001,basket_size_outlier,Basket of 15 items
+163002,basket_size_outlier,Basket of 18 items
+163003,basket_size_outlier,Basket of 15 items
+163004,basket_size_outlier,Basket of 21 items
+163005,basket_size_outlier,Basket of 19 items
+163006,basket_size_outlier,Basket of 17 items
+163007,basket_size_outlier,Basket of 16 items
+163008,basket_size_outlier,Basket of 17 items
+163009,basket_size_outlier,Basket of 15 items
+163010,basket_size_outlier,Basket of 17 items
+163011,basket_size_outlier,Basket of 19 items
+163012,basket_size_outlier,Basket of 20 items
+163013,basket_size_outlier,Basket of 15 items
+163014,basket_size_outlier,Basket of 15 items
+163015,basket_size_outlier,Basket of 16 items
+163016,basket_size_outlier,Basket of 21 items
+163017,basket_size_outlier,Basket of 22 items
+163018,basket_size_outlier,Basket of 17 items
+163019,basket_size_outlier,Basket of 17 items
+163020,basket_size_outlier,Basket of 20 items
+163021,basket_size_outlier,Basket of 18 items
+163022,basket_size_outlier,Basket of 22 items
+163023,basket_size_outlier,Basket of 18 items
+163024,basket_size_outlier,Basket of 19 items
+163025,basket_size_outlier,Basket of 15 items
+163026,basket_size_outlier,Basket of 18 items
+163027,basket_size_outlier,Basket of 16 items
+163028,basket_size_outlier,Basket of 15 items
+163029,basket_size_outlier,Basket of 18 items
+163030,basket_size_outlier,Basket of 18 items
+163031,basket_size_outlier,Basket of 22 items
+163032,basket_size_outlier,Basket of 15 items
+163033,basket_size_outlier,Basket of 21 items
+163034,basket_size_outlier,Basket of 21 items
+163035,basket_size_outlier,Basket of 22 items
+163036,basket_size_outlier,Basket of 19 items
+163037,basket_size_outlier,Basket of 20 items
+163038,basket_size_outlier,Basket of 16 items
+163039,basket_size_outlier,Basket of 16 items
+163040,basket_size_outlier,Basket of 16 items
+163041,basket_size_outlier,Basket of 17 items
+163042,basket_size_outlier,Basket of 21 items
+163043,basket_size_outlier,Basket of 19 items
+163044,basket_size_outlier,Basket of 16 items
+163045,basket_size_outlier,Basket of 19 items
+163046,basket_size_outlier,Basket of 16 items
+163047,basket_size_outlier,Basket of 22 items
+163048,basket_size_outlier,Basket of 20 items
+108399,shift_end_void_cluster,Part of cluster of end-of-shift voids
+121032,shift_end_void_cluster,Part of cluster of end-of-shift voids
+144811,shift_end_void_cluster,Part of cluster of end-of-shift voids
+131422,shift_end_void_cluster,Part of cluster of end-of-shift voids
+120038,shift_end_void_cluster,Part of cluster of end-of-shift voids
+159948,shift_end_void_cluster,Part of cluster of end-of-shift voids
+121863,shift_end_void_cluster,Part of cluster of end-of-shift voids
+125811,shift_end_void_cluster,Part of cluster of end-of-shift voids
+156772,shift_end_void_cluster,Part of cluster of end-of-shift voids
+109338,shift_end_void_cluster,Part of cluster of end-of-shift voids
+110109,shift_end_void_cluster,Part of cluster of end-of-shift voids
+121356,shift_end_void_cluster,Part of cluster of end-of-shift voids
+117042,shift_end_void_cluster,Part of cluster of end-of-shift voids
+162241,shift_end_void_cluster,Part of cluster of end-of-shift voids
+132700,shift_end_void_cluster,Part of cluster of end-of-shift voids
+145051,shift_end_void_cluster,Part of cluster of end-of-shift voids
+137661,shift_end_void_cluster,Part of cluster of end-of-shift voids
+125681,shift_end_void_cluster,Part of cluster of end-of-shift voids
+112263,shift_end_void_cluster,Part of cluster of end-of-shift voids
+132015,shift_end_void_cluster,Part of cluster of end-of-shift voids
+104179,shift_end_void_cluster,Part of cluster of end-of-shift voids
+102965,shift_end_void_cluster,Part of cluster of end-of-shift voids
+123503,shift_end_void_cluster,Part of cluster of end-of-shift voids
+130763,shift_end_void_cluster,Part of cluster of end-of-shift voids
+145357,shift_end_void_cluster,Part of cluster of end-of-shift voids
+143469,shift_end_void_cluster,Part of cluster of end-of-shift voids
+113599,shift_end_void_cluster,Part of cluster of end-of-shift voids
+104563,shift_end_void_cluster,Part of cluster of end-of-shift voids
+120156,shift_end_void_cluster,Part of cluster of end-of-shift voids
+127269,shift_end_void_cluster,Part of cluster of end-of-shift voids
+100868,shift_end_void_cluster,Part of cluster of end-of-shift voids

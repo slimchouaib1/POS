@@ -1,0 +1,11 @@
+{
+  "n_rows": 10001,
+  "n_columns": 78,
+  "source_files": [
+    "../datasets/customers.csv",
+    "../datasets/enterprise_pos_dataset.csv"
+  ],
+  "output_file": "../Module 4\\customer_features.csv",
+  "reference_date_for_recency": "2026-01-01 21:00:00",
+  "figures_dir": "../Module 4/figures"
+}

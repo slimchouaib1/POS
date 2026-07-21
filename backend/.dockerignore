@@ -1,0 +1,9 @@
+__pycache__
+**/__pycache__
+.pytest_cache
+.venv
+venv
+pos.db
+*.pyc
+Ai models/data
+Ai models/notebooks

@@ -1,0 +1,471 @@
+model,feature,importance
+Random Forest,is_odd_hour,0.08775819207229475
+Random Forest,order_hour,0.06797261836478796
+Random Forest,mean_abs_price_deviation_pct,0.06257986787938144
+Random Forest,max_abs_price_deviation_pct,0.062401214093284946
+Random Forest,mean_price_deviation_pct,0.05377401146750833
+Random Forest,void_line_rate,0.0484857429113342
+Random Forest,min_line_total,0.04098753208452436
+Random Forest,void_reason_exists,0.03823099024024308
+Random Forest,is_voided_order,0.03736464668807107
+Random Forest,max_discount_rate,0.03249043758575764
+Random Forest,void_line_count,0.030449943115290617
+Random Forest,mean_discount_rate,0.028881183791875178
+Random Forest,n_unique_items,0.025638254991243937
+Random Forest,avg_amount_per_item,0.025637848511785424
+Random Forest,cashier_avg_discount_rate,0.024688117449852078
+Random Forest,avg_line_total,0.02103349360298181
+Random Forest,cashier_amount_zscore,0.01896936662198214
+Random Forest,cashier_void_rate,0.01809133073478519
+Random Forest,basket_size,0.017627852773179006
+Random Forest,cashier_discount_order_rate,0.016792368026744754
+Random Forest,unique_item_ratio,0.016448582608440548
+Random Forest,total_amount,0.01613941240773975
+Random Forest,cashier_flagged,0.015102566141609262
+Random Forest,customer_avg_basket_size,0.014709853784797843
+Random Forest,customer_std_order_amount,0.014310767005302505
+Random Forest,estimated_discount_amount,0.013369815985265687
+Random Forest,is_dinner,0.012661180564981707
+Random Forest,max_line_total,0.012063333159697629
+Random Forest,min_item_price,0.00959171850257362
+Random Forest,customer_avg_order_amount,0.00944564555402066
+Random Forest,customer_total_orders,0.008333343855068065
+Random Forest,customer_basket_deviation,0.0067595167965233734
+Random Forest,customer_amount_zscore,0.005446336814259262
+Random Forest,n_unique_categories,0.005051440661441371
+Random Forest,cashier_total_orders,0.004919964872703494
+Random Forest,max_abs_demand_zscore,0.0044655193643270905
+Random Forest,max_item_price,0.00424875450955063
+Random Forest,has_discount_order,0.004182618872560115
+Random Forest,avg_item_price,0.004179212023110269
+Random Forest,mean_demand_zscore,0.0041788953431347925
+Random Forest,discount_line_rate,0.004153912944648667
+Random Forest,is_lunch,0.0037430673322629143
+Random Forest,cashier_std_order_amount,0.0035674263414087
+Random Forest,discount_line_count,0.0032788427231454187
+Random Forest,cashier_avg_order_amount,0.002739267349903861
+Random Forest,table_number,0.0024663228648438675
+Random Forest,is_morning,0.0023038854930564367
+Random Forest,actual_visits,0.002281662853608112
+Random Forest,order_month,0.002093918581653458
+Random Forest,mean_daily_item_quantity,0.0020389917126027064
+Random Forest,expected_visits,0.0019795943811146467
+Random Forest,cashier_shift_afternoon,0.0018908008541248947
+Random Forest,max_daily_item_quantity,0.0016471145283986138
+Random Forest,cashier_shift_evening,0.0014494910172827506
+Random Forest,order_dayofweek,0.0014340764431738221
+Random Forest,time_preference_dinner,0.0013139761237047536
+Random Forest,cashier_shift_morning,0.001245858405207364
+Random Forest,customer_visit_ratio,0.0010486621152296116
+Random Forest,restaurant_type_Cafe,0.0010145678593376152
+Random Forest,customer_visit_gap,0.0008119578743865915
+Random Forest,main_category_Main,0.0007157459056322461
+Random Forest,price_tier_mid,0.0006362016863429759
+Random Forest,time_preference_lunch,0.0006274496624731729
+Random Forest,restaurant_type_Italian,0.0005975031589768484
+Random Forest,payment_method_cash,0.0005770713491200781
+Random Forest,payment_method_card,0.0004618916378677573
+Random Forest,day_preference_any,0.0004540538136154638
+Random Forest,archetype_occasional,0.0003898517662550576
+Random Forest,restaurant_type_Mexican,0.00038782475859459225
+Random Forest,restaurant_type_American,0.0003874743432764063
+Random Forest,restaurant_type_Healthy_Vegan,0.00038270645753382996
+Random Forest,day_preference_weekday,0.00037396650545562244
+Random Forest,time_preference_flexible,0.0003726912785258241
+Random Forest,time_preference_morning,0.0003612074869077934
+Random Forest,restaurant_type_Japanese,0.0003588389241404628
+Random Forest,price_tier_premium,0.00034658467293943084
+Random Forest,main_category_Beverage,0.0003434765922179362
+Random Forest,price_tier_budget,0.0003338319313994226
+Random Forest,day_preference_weekend,0.00033222575220956244
+Random Forest,main_category_Side,0.0003031393725310039
+Random Forest,basket_size_bias_medium,0.00029319629377611765
+Random Forest,main_category_Alcohol,0.00027799203607925906
+Random Forest,archetype_infrequent,0.00026950471763776513
+Random Forest,is_weekend,0.00026824546870511147
+Random Forest,main_category_Food,0.0002680401528139498
+Random Forest,payment_method_mobile,0.00026610599340675116
+Random Forest,restaurant_type_Steakhouse,0.00026569318039459824
+Random Forest,basket_size_bias_large,0.0002524392129593065
+Random Forest,archetype_regular,0.00024413515158736124
+Random Forest,basket_size_bias_small,0.00023172615205318214
+Random Forest,main_category_Dessert,0.0001942965285872349
+Random Forest,main_category_Bakery,0.00018850804366511055
+Random Forest,main_category_Appetizer,0.00015959943264823534
+Random Forest,archetype_one_timer,0.00010989094656017722
+Extra Trees,max_abs_price_deviation_pct,0.10663904111832521
+Extra Trees,is_odd_hour,0.10425036756984712
+Extra Trees,mean_price_deviation_pct,0.04846738858602569
+Extra Trees,max_discount_rate,0.048097363666481284
+Extra Trees,mean_abs_price_deviation_pct,0.04720396233737541
+Extra Trees,void_reason_exists,0.04657270188521782
+Extra Trees,mean_discount_rate,0.04433664108102401
+Extra Trees,is_voided_order,0.04300679808462324
+Extra Trees,void_line_rate,0.04204585872326691
+Extra Trees,basket_size,0.026345852789828657
+Extra Trees,order_hour,0.025523992553232906
+Extra Trees,unique_item_ratio,0.023035193804401013
+Extra Trees,cashier_flagged,0.020091967609694072
+Extra Trees,cashier_avg_discount_rate,0.019296311822201716
+Extra Trees,cashier_void_rate,0.018451213713032016
+Extra Trees,is_dinner,0.017473703366988932
+Extra Trees,has_discount_order,0.016388601823851195
+Extra Trees,void_line_count,0.016205266625540785
+Extra Trees,n_unique_items,0.015911204719693667
+Extra Trees,discount_line_rate,0.015369379759821044
+Extra Trees,customer_avg_basket_size,0.01216035063130472
+Extra Trees,cashier_discount_order_rate,0.011978817614654759
+Extra Trees,customer_avg_order_amount,0.011708671305033903
+Extra Trees,customer_total_orders,0.011414230247044454
+Extra Trees,total_amount,0.010727822436771688
+Extra Trees,cashier_amount_zscore,0.010333181827174957
+Extra Trees,estimated_discount_amount,0.010053910823276162
+Extra Trees,avg_line_total,0.009314943544817829
+Extra Trees,n_unique_categories,0.00920173873961607
+Extra Trees,min_line_total,0.009058600290485462
+Extra Trees,avg_amount_per_item,0.007717509220352218
+Extra Trees,customer_std_order_amount,0.007662041623820908
+Extra Trees,max_line_total,0.007573367601747571
+Extra Trees,is_lunch,0.0074529330140663055
+Extra Trees,discount_line_count,0.0066811509531412485
+Extra Trees,cashier_shift_afternoon,0.006325020847647617
+Extra Trees,customer_basket_deviation,0.006070800571721673
+Extra Trees,is_morning,0.005192322656632326
+Extra Trees,cashier_avg_order_amount,0.00445141966475963
+Extra Trees,customer_amount_zscore,0.003659711173811391
+Extra Trees,cashier_total_orders,0.0036472874554338403
+Extra Trees,min_item_price,0.003331164126594252
+Extra Trees,cashier_shift_morning,0.003288472476176761
+Extra Trees,cashier_std_order_amount,0.0031978215552366197
+Extra Trees,cashier_shift_evening,0.0029366128548808986
+Extra Trees,time_preference_dinner,0.0025610215745763883
+Extra Trees,max_abs_demand_zscore,0.002495448189515837
+Extra Trees,max_item_price,0.0023149249267787005
+Extra Trees,payment_method_cash,0.002158414848709951
+Extra Trees,day_preference_any,0.0020945337368592012
+Extra Trees,avg_item_price,0.00203080920860818
+Extra Trees,price_tier_mid,0.001977248677713033
+Extra Trees,main_category_Main,0.001963311936154457
+Extra Trees,restaurant_type_Italian,0.001952868812087867
+Extra Trees,payment_method_card,0.0019445863507811258
+Extra Trees,archetype_occasional,0.0019209912652886272
+Extra Trees,restaurant_type_American,0.001896064216258619
+Extra Trees,order_dayofweek,0.0017875659021682933
+Extra Trees,order_month,0.0017661042314306376
+Extra Trees,basket_size_bias_medium,0.0017121044854504512
+Extra Trees,max_daily_item_quantity,0.00171063419124828
+Extra Trees,table_number,0.001629849696890791
+Extra Trees,expected_visits,0.0016165723827322378
+Extra Trees,day_preference_weekday,0.0016131166579319205
+Extra Trees,time_preference_lunch,0.001546238427990496
+Extra Trees,price_tier_budget,0.001485491121320636
+Extra Trees,actual_visits,0.0014801954671655947
+Extra Trees,mean_demand_zscore,0.0014682225246547185
+Extra Trees,restaurant_type_Cafe,0.0014319142423917853
+Extra Trees,basket_size_bias_large,0.0014187106922940388
+Extra Trees,is_weekend,0.001413804282021711
+Extra Trees,basket_size_bias_small,0.0013960839782097953
+Extra Trees,restaurant_type_Mexican,0.0013425646370667551
+Extra Trees,archetype_regular,0.0013265046291819943
+Extra Trees,mean_daily_item_quantity,0.0012817855314091573
+Extra Trees,archetype_infrequent,0.0011783022293153321
+Extra Trees,time_preference_morning,0.001178213208785631
+Extra Trees,restaurant_type_Japanese,0.0011716412732262571
+Extra Trees,price_tier_premium,0.001152845658625174
+Extra Trees,restaurant_type_Healthy_Vegan,0.001150954766569804
+Extra Trees,restaurant_type_Steakhouse,0.0011352616153215817
+Extra Trees,payment_method_mobile,0.0011169476277022791
+Extra Trees,day_preference_weekend,0.0010829474938454052
+Extra Trees,time_preference_flexible,0.001074894041187697
+Extra Trees,main_category_Side,0.0010542382554764793
+Extra Trees,main_category_Beverage,0.000911373199495995
+Extra Trees,customer_visit_ratio,0.0008538204730065961
+Extra Trees,customer_visit_gap,0.0007802183269808646
+Extra Trees,main_category_Alcohol,0.0007156720188858857
+Extra Trees,archetype_one_timer,0.0006676085105087782
+Extra Trees,main_category_Food,0.0006588105463047854
+Extra Trees,main_category_Appetizer,0.0005546261525530417
+Extra Trees,main_category_Bakery,0.0005363533270198902
+Extra Trees,main_category_Dessert,0.00043486955362105487
+XGBoost,is_odd_hour,0.12826654314994812
+XGBoost,basket_size,0.11515176296234131
+XGBoost,mean_discount_rate,0.10312385857105255
+XGBoost,mean_price_deviation_pct,0.0923081710934639
+XGBoost,void_line_count,0.08506906777620316
+XGBoost,min_line_total,0.08073396235704422
+XGBoost,max_discount_rate,0.0610724501311779
+XGBoost,max_abs_price_deviation_pct,0.05442584678530693
+XGBoost,n_unique_items,0.05152992531657219
+XGBoost,void_line_rate,0.028875792399048805
+XGBoost,mean_abs_price_deviation_pct,0.024934547021985054
+XGBoost,cashier_discount_order_rate,0.017245305702090263
+XGBoost,estimated_discount_amount,0.017207089811563492
+XGBoost,cashier_void_rate,0.015723979100584984
+XGBoost,order_hour,0.015179784037172794
+XGBoost,is_voided_order,0.010648702271282673
+XGBoost,time_preference_flexible,0.003886014921590686
+XGBoost,main_category_Dessert,0.0038727382197976112
+XGBoost,price_tier_budget,0.0029498818330466747
+XGBoost,discount_line_count,0.002852257341146469
+XGBoost,customer_avg_basket_size,0.002582881599664688
+XGBoost,max_item_price,0.002570901997387409
+XGBoost,max_line_total,0.0024594443384557962
+XGBoost,cashier_shift_afternoon,0.002350306138396263
+XGBoost,min_item_price,0.0021982418838888407
+XGBoost,basket_size_bias_large,0.0021386300213634968
+XGBoost,max_daily_item_quantity,0.0021305764093995094
+XGBoost,payment_method_cash,0.0021247228141874075
+XGBoost,customer_visit_ratio,0.002010162454098463
+XGBoost,cashier_avg_discount_rate,0.0019748276099562645
+XGBoost,total_amount,0.0019372907700017095
+XGBoost,order_dayofweek,0.0019258406246080995
+XGBoost,restaurant_type_Japanese,0.0019166505662724376
+XGBoost,actual_visits,0.0018881048308685422
+XGBoost,payment_method_mobile,0.0017701162723824382
+XGBoost,cashier_total_orders,0.00174821843393147
+XGBoost,cashier_amount_zscore,0.001740095904096961
+XGBoost,avg_amount_per_item,0.0017199584981426597
+XGBoost,cashier_std_order_amount,0.0016540628857910633
+XGBoost,main_category_Beverage,0.0016478953184559941
+XGBoost,customer_std_order_amount,0.0016443216009065509
+XGBoost,table_number,0.0016305241733789444
+XGBoost,cashier_avg_order_amount,0.001624110620468855
+XGBoost,n_unique_categories,0.0015779539244249463
+XGBoost,customer_avg_order_amount,0.001560150645673275
+XGBoost,avg_item_price,0.0015567161608487368
+XGBoost,customer_basket_deviation,0.0015200841007754207
+XGBoost,expected_visits,0.0014668829971924424
+XGBoost,avg_line_total,0.0014061738038435578
+XGBoost,max_abs_demand_zscore,0.0013980948133394122
+XGBoost,customer_total_orders,0.0013895813608542085
+XGBoost,order_month,0.001327976700849831
+XGBoost,archetype_occasional,0.0012854505330324173
+XGBoost,customer_amount_zscore,0.0012263950193300843
+XGBoost,is_lunch,0.0012088906951248646
+XGBoost,restaurant_type_Cafe,0.0012009106576442719
+XGBoost,customer_visit_gap,0.0011935749789699912
+XGBoost,restaurant_type_Mexican,0.0011756373569369316
+XGBoost,day_preference_any,0.0011520725674927235
+XGBoost,restaurant_type_Italian,0.0011050320463255048
+XGBoost,mean_demand_zscore,0.0011014072224497795
+XGBoost,day_preference_weekday,0.0010987629648298025
+XGBoost,main_category_Main,0.0010459227487444878
+XGBoost,mean_daily_item_quantity,0.001022965763695538
+XGBoost,price_tier_mid,0.0010089711286127567
+XGBoost,is_dinner,0.0010027571115642786
+XGBoost,day_preference_weekend,0.0009910963708534837
+XGBoost,archetype_infrequent,0.0009308169828727841
+XGBoost,payment_method_card,0.0008932466735132039
+XGBoost,restaurant_type_Healthy_Vegan,0.0008885870920494199
+XGBoost,is_weekend,0.0008866479620337486
+XGBoost,restaurant_type_Steakhouse,0.0008503293502144516
+XGBoost,main_category_Alcohol,0.0008031083852984011
+XGBoost,main_category_Side,0.0007606896688230336
+XGBoost,main_category_Food,0.0007271501235663891
+XGBoost,price_tier_premium,0.0007055537425912917
+XGBoost,time_preference_morning,0.0006586230592802167
+XGBoost,time_preference_dinner,0.0004809852398466319
+XGBoost,basket_size_bias_medium,0.0004389920213725418
+XGBoost,basket_size_bias_small,0.0004129650187678635
+XGBoost,unique_item_ratio,4.8194175178650767e-05
+XGBoost,restaurant_type_American,4.5127657358534634e-05
+XGBoost,archetype_regular,0.0
+XGBoost,archetype_one_timer,0.0
+XGBoost,cashier_shift_morning,0.0
+XGBoost,cashier_shift_evening,0.0
+XGBoost,main_category_Appetizer,0.0
+XGBoost,discount_line_rate,0.0
+XGBoost,time_preference_lunch,0.0
+XGBoost,is_morning,0.0
+XGBoost,cashier_flagged,0.0
+XGBoost,has_discount_order,0.0
+XGBoost,void_reason_exists,0.0
+XGBoost,main_category_Bakery,0.0
+LightGBM,customer_std_order_amount,964.0
+LightGBM,order_hour,781.0
+LightGBM,customer_avg_order_amount,763.0
+LightGBM,mean_demand_zscore,750.0
+LightGBM,max_abs_demand_zscore,703.0
+LightGBM,customer_avg_basket_size,644.0
+LightGBM,customer_amount_zscore,625.0
+LightGBM,customer_basket_deviation,606.0
+LightGBM,table_number,578.0
+LightGBM,total_amount,574.0
+LightGBM,cashier_amount_zscore,567.0
+LightGBM,order_month,542.0
+LightGBM,cashier_void_rate,510.0
+LightGBM,min_line_total,443.0
+LightGBM,order_dayofweek,423.0
+LightGBM,mean_discount_rate,405.0
+LightGBM,basket_size,394.0
+LightGBM,is_odd_hour,366.0
+LightGBM,mean_price_deviation_pct,359.0
+LightGBM,void_line_count,357.0
+LightGBM,mean_daily_item_quantity,316.0
+LightGBM,actual_visits,296.0
+LightGBM,avg_line_total,286.0
+LightGBM,expected_visits,276.0
+LightGBM,avg_item_price,265.0
+LightGBM,customer_visit_ratio,248.0
+LightGBM,min_item_price,239.0
+LightGBM,cashier_discount_order_rate,228.0
+LightGBM,cashier_total_orders,224.0
+LightGBM,max_daily_item_quantity,199.0
+LightGBM,max_line_total,179.0
+LightGBM,max_item_price,139.0
+LightGBM,cashier_avg_order_amount,138.0
+LightGBM,cashier_avg_discount_rate,136.0
+LightGBM,customer_visit_gap,126.0
+LightGBM,payment_method_cash,118.0
+LightGBM,max_abs_price_deviation_pct,106.0
+LightGBM,basket_size_bias_large,96.0
+LightGBM,n_unique_categories,94.0
+LightGBM,customer_total_orders,83.0
+LightGBM,estimated_discount_amount,79.0
+LightGBM,day_preference_any,75.0
+LightGBM,basket_size_bias_medium,69.0
+LightGBM,archetype_occasional,68.0
+LightGBM,payment_method_card,67.0
+LightGBM,cashier_std_order_amount,65.0
+LightGBM,void_line_rate,52.0
+LightGBM,day_preference_weekday,51.0
+LightGBM,day_preference_weekend,50.0
+LightGBM,price_tier_premium,48.0
+LightGBM,max_discount_rate,46.0
+LightGBM,n_unique_items,42.0
+LightGBM,price_tier_mid,42.0
+LightGBM,main_category_Side,41.0
+LightGBM,price_tier_budget,34.0
+LightGBM,restaurant_type_Mexican,34.0
+LightGBM,time_preference_dinner,30.0
+LightGBM,main_category_Main,30.0
+LightGBM,is_lunch,28.0
+LightGBM,payment_method_mobile,26.0
+LightGBM,restaurant_type_American,25.0
+LightGBM,is_dinner,23.0
+LightGBM,restaurant_type_Steakhouse,22.0
+LightGBM,time_preference_lunch,20.0
+LightGBM,time_preference_flexible,19.0
+LightGBM,restaurant_type_Italian,19.0
+LightGBM,main_category_Beverage,19.0
+LightGBM,avg_amount_per_item,19.0
+LightGBM,discount_line_count,18.0
+LightGBM,main_category_Alcohol,17.0
+LightGBM,is_weekend,16.0
+LightGBM,unique_item_ratio,15.0
+LightGBM,cashier_shift_evening,15.0
+LightGBM,basket_size_bias_small,14.0
+LightGBM,main_category_Food,14.0
+LightGBM,main_category_Appetizer,13.0
+LightGBM,time_preference_morning,13.0
+LightGBM,restaurant_type_Japanese,12.0
+LightGBM,restaurant_type_Cafe,10.0
+LightGBM,cashier_shift_afternoon,9.0
+LightGBM,mean_abs_price_deviation_pct,7.0
+LightGBM,is_voided_order,7.0
+LightGBM,cashier_shift_morning,7.0
+LightGBM,is_morning,5.0
+LightGBM,archetype_infrequent,5.0
+LightGBM,restaurant_type_Healthy_Vegan,5.0
+LightGBM,archetype_regular,3.0
+LightGBM,main_category_Dessert,3.0
+LightGBM,main_category_Bakery,1.0
+LightGBM,has_discount_order,1.0
+LightGBM,discount_line_rate,1.0
+LightGBM,archetype_one_timer,0.0
+LightGBM,cashier_flagged,0.0
+LightGBM,void_reason_exists,0.0
+CatBoost,is_odd_hour,21.166704588653886
+CatBoost,mean_abs_price_deviation_pct,9.677003285376816
+CatBoost,mean_price_deviation_pct,9.631409447041406
+CatBoost,mean_discount_rate,7.645347180759591
+CatBoost,void_line_count,7.5534056869535195
+CatBoost,max_abs_price_deviation_pct,6.472676867565084
+CatBoost,max_discount_rate,5.872279586668279
+CatBoost,n_unique_items,5.099769339789486
+CatBoost,unique_item_ratio,3.7232259088705777
+CatBoost,void_line_rate,3.6073492802982816
+CatBoost,order_hour,2.61933580522556
+CatBoost,void_reason_exists,2.209024513178527
+CatBoost,basket_size,1.9566592651509895
+CatBoost,min_line_total,0.9906832365959798
+CatBoost,is_voided_order,0.9811630960880304
+CatBoost,estimated_discount_amount,0.9172126920130489
+CatBoost,cashier_avg_discount_rate,0.8224299632963222
+CatBoost,customer_total_orders,0.7643708938664153
+CatBoost,cashier_discount_order_rate,0.6977928735804579
+CatBoost,cashier_void_rate,0.6136648003330891
+CatBoost,customer_avg_order_amount,0.5660622297228785
+CatBoost,max_line_total,0.4987477095988358
+CatBoost,cashier_amount_zscore,0.4663319463907622
+CatBoost,customer_avg_basket_size,0.3870702571186069
+CatBoost,n_unique_categories,0.3201533777815574
+CatBoost,avg_line_total,0.28706695876914323
+CatBoost,avg_amount_per_item,0.25013737624200755
+CatBoost,customer_amount_zscore,0.24245642734233452
+CatBoost,max_abs_demand_zscore,0.2372307932811818
+CatBoost,cashier_flagged,0.22509065820064922
+CatBoost,cashier_avg_order_amount,0.21408864965136354
+CatBoost,mean_demand_zscore,0.20467948560551816
+CatBoost,total_amount,0.20387360276684113
+CatBoost,order_month,0.19499144608316762
+CatBoost,cashier_std_order_amount,0.17421948887672042
+CatBoost,customer_std_order_amount,0.15989525678417624
+CatBoost,customer_basket_deviation,0.1577511492351618
+CatBoost,table_number,0.15467463528087266
+CatBoost,cashier_total_orders,0.1512242124731096
+CatBoost,max_item_price,0.12750585240263965
+CatBoost,actual_visits,0.12146821394860037
+CatBoost,avg_item_price,0.12068633955280725
+CatBoost,order_dayofweek,0.11507583798833852
+CatBoost,mean_daily_item_quantity,0.10783813813982891
+CatBoost,discount_line_rate,0.09034400150611538
+CatBoost,expected_visits,0.08803815909890149
+CatBoost,max_daily_item_quantity,0.08488034607410064
+CatBoost,min_item_price,0.07746171141908358
+CatBoost,cashier_shift_afternoon,0.06994599900569715
+CatBoost,archetype_occasional,0.05584452992514008
+CatBoost,day_preference_any,0.05428225387576933
+CatBoost,is_dinner,0.054111027906416934
+CatBoost,customer_visit_gap,0.049766554294575216
+CatBoost,customer_visit_ratio,0.045472673083957006
+CatBoost,basket_size_bias_large,0.044161543234121074
+CatBoost,cashier_shift_morning,0.03673006509638665
+CatBoost,day_preference_weekday,0.03601938463899848
+CatBoost,has_discount_order,0.028721938413442994
+CatBoost,price_tier_premium,0.026429222575826642
+CatBoost,discount_line_count,0.026337717962150342
+CatBoost,main_category_Bakery,0.02623689958914273
+CatBoost,time_preference_dinner,0.024642870109954553
+CatBoost,time_preference_lunch,0.024504391049939823
+CatBoost,day_preference_weekend,0.021347822940170496
+CatBoost,is_lunch,0.02123684052734566
+CatBoost,price_tier_mid,0.020925179208716276
+CatBoost,main_category_Appetizer,0.0203237051358954
+CatBoost,payment_method_card,0.019708799999740362
+CatBoost,time_preference_flexible,0.019167719507067686
+CatBoost,archetype_regular,0.019053986425631414
+CatBoost,restaurant_type_Mexican,0.017971563984043624
+CatBoost,archetype_infrequent,0.01693267494932189
+CatBoost,restaurant_type_Italian,0.016364045461734842
+CatBoost,restaurant_type_American,0.01627798915552937
+CatBoost,price_tier_budget,0.015925764179356247
+CatBoost,main_category_Alcohol,0.015636289091852835
+CatBoost,main_category_Food,0.013479224008286682
+CatBoost,restaurant_type_Steakhouse,0.012404619239147716
+CatBoost,restaurant_type_Japanese,0.011929909374832156
+CatBoost,main_category_Beverage,0.011404357835850412
+CatBoost,restaurant_type_Cafe,0.011177247940446134
+CatBoost,time_preference_morning,0.008864645912575417
+CatBoost,archetype_one_timer,0.006973577318990841
+CatBoost,basket_size_bias_small,0.006260375288007132
+CatBoost,main_category_Side,0.005473870162762081
+CatBoost,payment_method_mobile,0.004618038830206593
+CatBoost,payment_method_cash,0.004578898102998284
+CatBoost,cashier_shift_evening,0.004203574720292692
+CatBoost,restaurant_type_Healthy_Vegan,0.002297311195702122
+CatBoost,main_category_Dessert,0.0017023261012887652
+CatBoost,main_category_Main,0.0
+CatBoost,is_morning,0.0
+CatBoost,is_weekend,0.0
+CatBoost,basket_size_bias_medium,0.0

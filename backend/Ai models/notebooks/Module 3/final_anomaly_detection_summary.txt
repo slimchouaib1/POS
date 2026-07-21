@@ -1,0 +1,20 @@
+
+Final Anomaly Detection Module Summary
+-------------------------------------
+Selected final model: Random Forest
+Model family: Supervised classification
+Decision threshold: 0.2545
+Critical alert threshold: 0.9724
+
+Final test performance:
+- Precision: 0.9649
+- Recall: 0.9375
+- F1-score: 0.9510
+- PR-AUC: 0.9770
+- False alerts: 6
+- Missed anomalies: 11
+
+Conclusion:
+The supervised model outperformed the unsupervised anomaly detection approaches.
+The selected final model provides the best operational balance between detecting suspicious POS transactions and limiting false alerts.
+The final alerts table is ready for dashboard integration with risk levels and explanation fields.

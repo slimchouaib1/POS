@@ -1,0 +1,26 @@
+{
+  "kmeans_name_map": {
+    "0": "High-Value Inactive Large-Basket",
+    "1": "High-Value Frequent Discount-Sensitive",
+    "2": "Low-Value Frequent Weekend-Oriented",
+    "3": "Mid-Value Occasional Discount-Sensitive",
+    "4": "Low-Value Inactive Standard"
+  },
+  "hybrid_segments": [
+    "High-Value | High-Value Frequent Discount-Sensitive",
+    "High-Value | High-Value Inactive Large-Basket",
+    "High-Value | Low-Value Frequent Weekend-Oriented",
+    "High-Value | Low-Value Inactive Standard",
+    "High-Value | Mid-Value Occasional Discount-Sensitive",
+    "Low-Value | High-Value Frequent Discount-Sensitive",
+    "Low-Value | High-Value Inactive Large-Basket",
+    "Low-Value | Low-Value Frequent Weekend-Oriented",
+    "Low-Value | Low-Value Inactive Standard",
+    "Low-Value | Mid-Value Occasional Discount-Sensitive",
+    "Mid-Value | High-Value Frequent Discount-Sensitive",
+    "Mid-Value | High-Value Inactive Large-Basket",
+    "Mid-Value | Low-Value Frequent Weekend-Oriented",
+    "Mid-Value | Low-Value Inactive Standard",
+    "Mid-Value | Mid-Value Occasional Discount-Sensitive"
+  ]
+}

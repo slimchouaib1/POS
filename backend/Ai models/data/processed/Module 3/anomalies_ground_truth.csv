@@ -1,0 +1,1111 @@
+order_id,anomaly_type,description
+147479,void_after_payment,Paid order voided with weak reason
+121532,void_after_payment,Paid order voided with weak reason
+141042,void_after_payment,Paid order voided with weak reason
+109389,void_after_payment,Paid order voided with weak reason
+157293,void_after_payment,Paid order voided with weak reason
+129018,void_after_payment,Paid order voided with weak reason
+100041,void_after_payment,Paid order voided with weak reason
+113596,void_after_payment,Paid order voided with weak reason
+110027,void_after_payment,Paid order voided with weak reason
+148543,void_after_payment,Paid order voided with weak reason
+134688,void_after_payment,Paid order voided with weak reason
+122792,void_after_payment,Paid order voided with weak reason
+152073,void_after_payment,Paid order voided with weak reason
+133883,void_after_payment,Paid order voided with weak reason
+152305,void_after_payment,Paid order voided with weak reason
+101526,void_after_payment,Paid order voided with weak reason
+128221,void_after_payment,Paid order voided with weak reason
+119909,void_after_payment,Paid order voided with weak reason
+105732,void_after_payment,Paid order voided with weak reason
+119474,void_after_payment,Paid order voided with weak reason
+157384,void_after_payment,Paid order voided with weak reason
+161682,void_after_payment,Paid order voided with weak reason
+131737,void_after_payment,Paid order voided with weak reason
+117026,void_after_payment,Paid order voided with weak reason
+147354,void_after_payment,Paid order voided with weak reason
+135005,void_after_payment,Paid order voided with weak reason
+160172,void_after_payment,Paid order voided with weak reason
+127209,void_after_payment,Paid order voided with weak reason
+126010,void_after_payment,Paid order voided with weak reason
+115326,void_after_payment,Paid order voided with weak reason
+148423,void_after_payment,Paid order voided with weak reason
+144096,void_after_payment,Paid order voided with weak reason
+139329,void_after_payment,Paid order voided with weak reason
+152579,void_after_payment,Paid order voided with weak reason
+127579,void_after_payment,Paid order voided with weak reason
+128285,void_after_payment,Paid order voided with weak reason
+145363,void_after_payment,Paid order voided with weak reason
+136367,void_after_payment,Paid order voided with weak reason
+159318,void_after_payment,Paid order voided with weak reason
+150184,void_after_payment,Paid order voided with weak reason
+124356,void_after_payment,Paid order voided with weak reason
+133235,void_after_payment,Paid order voided with weak reason
+106413,void_after_payment,Paid order voided with weak reason
+162096,void_after_payment,Paid order voided with weak reason
+161512,void_after_payment,Paid order voided with weak reason
+125206,void_after_payment,Paid order voided with weak reason
+116514,void_after_payment,Paid order voided with weak reason
+153208,void_after_payment,Paid order voided with weak reason
+149624,void_after_payment,Paid order voided with weak reason
+144438,void_after_payment,Paid order voided with weak reason
+102993,void_after_payment,Paid order voided with weak reason
+150360,void_after_payment,Paid order voided with weak reason
+138118,void_after_payment,Paid order voided with weak reason
+131702,void_after_payment,Paid order voided with weak reason
+140552,void_after_payment,Paid order voided with weak reason
+150241,void_after_payment,Paid order voided with weak reason
+115850,void_after_payment,Paid order voided with weak reason
+103068,void_after_payment,Paid order voided with weak reason
+147364,void_after_payment,Paid order voided with weak reason
+102617,void_after_payment,Paid order voided with weak reason
+119541,void_after_payment,Paid order voided with weak reason
+153158,void_after_payment,Paid order voided with weak reason
+137721,void_after_payment,Paid order voided with weak reason
+133675,void_after_payment,Paid order voided with weak reason
+154459,void_after_payment,Paid order voided with weak reason
+141404,void_after_payment,Paid order voided with weak reason
+125627,void_after_payment,Paid order voided with weak reason
+153654,void_after_payment,Paid order voided with weak reason
+151662,void_after_payment,Paid order voided with weak reason
+101726,void_after_payment,Paid order voided with weak reason
+103983,void_after_payment,Paid order voided with weak reason
+103845,void_after_payment,Paid order voided with weak reason
+158204,void_after_payment,Paid order voided with weak reason
+147609,void_after_payment,Paid order voided with weak reason
+159058,void_after_payment,Paid order voided with weak reason
+152193,void_after_payment,Paid order voided with weak reason
+118674,void_after_payment,Paid order voided with weak reason
+110918,void_after_payment,Paid order voided with weak reason
+120349,void_after_payment,Paid order voided with weak reason
+118742,void_after_payment,Paid order voided with weak reason
+105412,void_after_payment,Paid order voided with weak reason
+146757,void_after_payment,Paid order voided with weak reason
+111774,void_after_payment,Paid order voided with weak reason
+162338,void_after_payment,Paid order voided with weak reason
+132271,void_after_payment,Paid order voided with weak reason
+125521,void_after_payment,Paid order voided with weak reason
+110182,void_after_payment,Paid order voided with weak reason
+132508,void_after_payment,Paid order voided with weak reason
+154008,void_after_payment,Paid order voided with weak reason
+123008,void_after_payment,Paid order voided with weak reason
+108940,void_after_payment,Paid order voided with weak reason
+148296,void_after_payment,Paid order voided with weak reason
+127252,void_after_payment,Paid order voided with weak reason
+123510,void_after_payment,Paid order voided with weak reason
+113291,suspicious_discount,Discount 85.0% (>70% threshold)
+161778,suspicious_discount,Discount 90.0% (>70% threshold)
+105901,suspicious_discount,Discount 85.0% (>70% threshold)
+162482,suspicious_discount,Discount 95.0% (>70% threshold)
+128188,suspicious_discount,Discount 75.0% (>70% threshold)
+138907,suspicious_discount,Discount 75.0% (>70% threshold)
+161539,suspicious_discount,Discount 90.0% (>70% threshold)
+103503,suspicious_discount,Discount 95.0% (>70% threshold)
+118519,suspicious_discount,Discount 80.0% (>70% threshold)
+109956,suspicious_discount,Discount 90.0% (>70% threshold)
+140386,suspicious_discount,Discount 75.0% (>70% threshold)
+118755,suspicious_discount,Discount 75.0% (>70% threshold)
+154025,suspicious_discount,Discount 80.0% (>70% threshold)
+106043,suspicious_discount,Discount 75.0% (>70% threshold)
+150426,suspicious_discount,Discount 95.0% (>70% threshold)
+101207,suspicious_discount,Discount 80.0% (>70% threshold)
+133234,suspicious_discount,Discount 75.0% (>70% threshold)
+151237,suspicious_discount,Discount 75.0% (>70% threshold)
+109220,suspicious_discount,Discount 95.0% (>70% threshold)
+151147,suspicious_discount,Discount 75.0% (>70% threshold)
+108743,suspicious_discount,Discount 75.0% (>70% threshold)
+114460,suspicious_discount,Discount 85.0% (>70% threshold)
+127122,suspicious_discount,Discount 80.0% (>70% threshold)
+127927,suspicious_discount,Discount 75.0% (>70% threshold)
+107435,suspicious_discount,Discount 95.0% (>70% threshold)
+148759,suspicious_discount,Discount 95.0% (>70% threshold)
+111678,suspicious_discount,Discount 95.0% (>70% threshold)
+119337,suspicious_discount,Discount 90.0% (>70% threshold)
+119365,suspicious_discount,Discount 85.0% (>70% threshold)
+127717,suspicious_discount,Discount 80.0% (>70% threshold)
+120508,suspicious_discount,Discount 85.0% (>70% threshold)
+143903,suspicious_discount,Discount 75.0% (>70% threshold)
+130578,suspicious_discount,Discount 85.0% (>70% threshold)
+107805,suspicious_discount,Discount 85.0% (>70% threshold)
+114184,suspicious_discount,Discount 85.0% (>70% threshold)
+160495,suspicious_discount,Discount 95.0% (>70% threshold)
+125630,suspicious_discount,Discount 85.0% (>70% threshold)
+119827,suspicious_discount,Discount 90.0% (>70% threshold)
+108027,suspicious_discount,Discount 95.0% (>70% threshold)
+140326,suspicious_discount,Discount 95.0% (>70% threshold)
+114598,suspicious_discount,Discount 85.0% (>70% threshold)
+121689,suspicious_discount,Discount 90.0% (>70% threshold)
+145026,suspicious_discount,Discount 85.0% (>70% threshold)
+104525,suspicious_discount,Discount 80.0% (>70% threshold)
+151727,suspicious_discount,Discount 80.0% (>70% threshold)
+113354,suspicious_discount,Discount 85.0% (>70% threshold)
+100870,suspicious_discount,Discount 90.0% (>70% threshold)
+108233,suspicious_discount,Discount 85.0% (>70% threshold)
+111647,suspicious_discount,Discount 75.0% (>70% threshold)
+153848,suspicious_discount,Discount 90.0% (>70% threshold)
+142583,suspicious_discount,Discount 80.0% (>70% threshold)
+156479,suspicious_discount,Discount 90.0% (>70% threshold)
+151864,suspicious_discount,Discount 75.0% (>70% threshold)
+140324,suspicious_discount,Discount 80.0% (>70% threshold)
+103264,suspicious_discount,Discount 95.0% (>70% threshold)
+120370,suspicious_discount,Discount 80.0% (>70% threshold)
+133838,suspicious_discount,Discount 85.0% (>70% threshold)
+158459,suspicious_discount,Discount 80.0% (>70% threshold)
+113859,suspicious_discount,Discount 85.0% (>70% threshold)
+120446,suspicious_discount,Discount 75.0% (>70% threshold)
+112928,suspicious_discount,Discount 90.0% (>70% threshold)
+133079,suspicious_discount,Discount 90.0% (>70% threshold)
+104080,suspicious_discount,Discount 90.0% (>70% threshold)
+126633,suspicious_discount,Discount 90.0% (>70% threshold)
+151205,suspicious_discount,Discount 75.0% (>70% threshold)
+141592,suspicious_discount,Discount 90.0% (>70% threshold)
+130404,suspicious_discount,Discount 75.0% (>70% threshold)
+142791,suspicious_discount,Discount 95.0% (>70% threshold)
+147735,suspicious_discount,Discount 80.0% (>70% threshold)
+124451,suspicious_discount,Discount 85.0% (>70% threshold)
+123412,suspicious_discount,Discount 80.0% (>70% threshold)
+107311,suspicious_discount,Discount 85.0% (>70% threshold)
+106746,suspicious_discount,Discount 95.0% (>70% threshold)
+101031,suspicious_discount,Discount 75.0% (>70% threshold)
+131598,suspicious_discount,Discount 80.0% (>70% threshold)
+152646,suspicious_discount,Discount 95.0% (>70% threshold)
+150979,suspicious_discount,Discount 90.0% (>70% threshold)
+137566,suspicious_discount,Discount 75.0% (>70% threshold)
+136130,suspicious_discount,Discount 75.0% (>70% threshold)
+161104,suspicious_discount,Discount 75.0% (>70% threshold)
+153402,suspicious_discount,Discount 85.0% (>70% threshold)
+109192,suspicious_discount,Discount 85.0% (>70% threshold)
+112866,suspicious_discount,Discount 75.0% (>70% threshold)
+103465,suspicious_discount,Discount 95.0% (>70% threshold)
+153008,suspicious_discount,Discount 90.0% (>70% threshold)
+144640,suspicious_discount,Discount 80.0% (>70% threshold)
+127776,suspicious_discount,Discount 80.0% (>70% threshold)
+129964,suspicious_discount,Discount 90.0% (>70% threshold)
+100633,suspicious_discount,Discount 75.0% (>70% threshold)
+105090,suspicious_discount,Discount 85.0% (>70% threshold)
+141944,suspicious_discount,Discount 75.0% (>70% threshold)
+144863,suspicious_discount,Discount 80.0% (>70% threshold)
+154876,suspicious_discount,Discount 80.0% (>70% threshold)
+104774,suspicious_discount,Discount 80.0% (>70% threshold)
+141465,suspicious_discount,Discount 90.0% (>70% threshold)
+100266,suspicious_discount,Discount 75.0% (>70% threshold)
+103814,suspicious_discount,Discount 95.0% (>70% threshold)
+101126,suspicious_discount,Discount 85.0% (>70% threshold)
+107719,suspicious_discount,Discount 95.0% (>70% threshold)
+140984,suspicious_discount,Discount 90.0% (>70% threshold)
+131613,suspicious_discount,Discount 75.0% (>70% threshold)
+152941,suspicious_discount,Discount 80.0% (>70% threshold)
+122165,suspicious_discount,Discount 95.0% (>70% threshold)
+155144,suspicious_discount,Discount 95.0% (>70% threshold)
+116382,suspicious_discount,Discount 80.0% (>70% threshold)
+147923,suspicious_discount,Discount 80.0% (>70% threshold)
+104013,suspicious_discount,Discount 80.0% (>70% threshold)
+121149,suspicious_discount,Discount 90.0% (>70% threshold)
+104973,suspicious_discount,Discount 85.0% (>70% threshold)
+122008,suspicious_discount,Discount 90.0% (>70% threshold)
+125348,suspicious_discount,Discount 80.0% (>70% threshold)
+154242,suspicious_discount,Discount 75.0% (>70% threshold)
+102591,suspicious_discount,Discount 95.0% (>70% threshold)
+107475,suspicious_discount,Discount 90.0% (>70% threshold)
+138327,suspicious_discount,Discount 80.0% (>70% threshold)
+116054,suspicious_discount,Discount 80.0% (>70% threshold)
+133275,suspicious_discount,Discount 95.0% (>70% threshold)
+127947,suspicious_discount,Discount 75.0% (>70% threshold)
+108555,suspicious_discount,Discount 90.0% (>70% threshold)
+129593,suspicious_discount,Discount 75.0% (>70% threshold)
+153063,suspicious_discount,Discount 75.0% (>70% threshold)
+124003,suspicious_discount,Discount 95.0% (>70% threshold)
+105561,suspicious_discount,Discount 95.0% (>70% threshold)
+116141,suspicious_discount,Discount 75.0% (>70% threshold)
+159989,suspicious_discount,Discount 85.0% (>70% threshold)
+135521,price_tampering,Line item price 13.0 → 4.52
+106819,price_tampering,Line item price 11.0 → 4.19
+115006,price_tampering,Line item price 15.5 → 6.39
+125676,price_tampering,Line item price 10.5 → 4.2
+120223,price_tampering,Line item price 16.0 → 7.88
+155311,price_tampering,Line item price 6.0 → 1.87
+103319,price_tampering,Line item price 12.0 → 4.84
+150312,price_tampering,Line item price 16.0 → 6.57
+159354,price_tampering,Line item price 12.0 → 3.82
+107832,price_tampering,Line item price 4.75 → 1.74
+140249,price_tampering,Line item price 15.0 → 6.26
+139295,price_tampering,Line item price 4.0 → 1.73
+150712,price_tampering,Line item price 2.5 → 0.9
+100079,price_tampering,Line item price 15.0 → 6.28
+111321,price_tampering,Line item price 17.0 → 6.66
+129671,price_tampering,Line item price 5.5 → 2.7
+151115,price_tampering,Line item price 3.75 → 1.78
+137591,price_tampering,Line item price 22.0 → 9.59
+141744,price_tampering,Line item price 17.0 → 7.58
+161181,price_tampering,Line item price 8.5 → 2.9
+160196,price_tampering,Line item price 35.0 → 14.57
+101114,price_tampering,Line item price 10.5 → 4.55
+160067,price_tampering,Line item price 15.5 → 6.86
+121209,price_tampering,Line item price 3.5 → 1.17
+147147,price_tampering,Line item price 13.0 → 5.62
+112988,price_tampering,Line item price 12.5 → 5.14
+144537,price_tampering,Line item price 7.0 → 3.07
+162122,price_tampering,Line item price 26.0 → 9.4
+107861,price_tampering,Line item price 4.5 → 1.42
+146763,price_tampering,Line item price 11.0 → 4.12
+155491,price_tampering,Line item price 35.0 → 15.44
+117967,price_tampering,Line item price 12.0 → 3.64
+113254,price_tampering,Line item price 16.0 → 7.65
+144209,price_tampering,Line item price 13.0 → 6.16
+141708,price_tampering,Line item price 4.0 → 1.25
+150931,price_tampering,Line item price 15.0 → 6.52
+148079,price_tampering,Line item price 10.0 → 3.76
+162164,price_tampering,Line item price 11.5 → 4.07
+160450,price_tampering,Line item price 12.5 → 5.75
+118649,price_tampering,Line item price 9.5 → 3.45
+100453,price_tampering,Line item price 9.0 → 3.97
+136735,price_tampering,Line item price 17.0 → 7.67
+153159,price_tampering,Line item price 4.5 → 1.87
+110485,price_tampering,Line item price 5.25 → 2.36
+123060,price_tampering,Line item price 10.5 → 4.8
+112153,price_tampering,Line item price 8.0 → 2.85
+110671,price_tampering,Line item price 6.5 → 2.56
+153341,price_tampering,Line item price 9.5 → 4.04
+104079,price_tampering,Line item price 35.0 → 12.47
+104127,price_tampering,Line item price 5.0 → 2.39
+129400,price_tampering,Line item price 14.0 → 6.68
+116119,price_tampering,Line item price 4.5 → 1.78
+161246,price_tampering,Line item price 6.0 → 2.3
+117959,price_tampering,Line item price 14.0 → 6.05
+157310,price_tampering,Line item price 7.0 → 2.42
+135060,price_tampering,Line item price 10.5 → 4.58
+148502,price_tampering,Line item price 7.0 → 2.26
+144823,price_tampering,Line item price 14.0 → 5.55
+123927,price_tampering,Line item price 10.0 → 3.19
+156639,price_tampering,Line item price 4.5 → 1.54
+157377,price_tampering,Line item price 11.5 → 5.0
+153057,price_tampering,Line item price 3.75 → 1.68
+153675,odd_hour,Transaction logged outside operating hours
+118671,odd_hour,Transaction logged outside operating hours
+161862,odd_hour,Transaction logged outside operating hours
+143388,odd_hour,Transaction logged outside operating hours
+139714,odd_hour,Transaction logged outside operating hours
+113228,odd_hour,Transaction logged outside operating hours
+144453,odd_hour,Transaction logged outside operating hours
+131819,odd_hour,Transaction logged outside operating hours
+125900,odd_hour,Transaction logged outside operating hours
+114789,odd_hour,Transaction logged outside operating hours
+149250,odd_hour,Transaction logged outside operating hours
+106154,odd_hour,Transaction logged outside operating hours
+155102,odd_hour,Transaction logged outside operating hours
+159293,odd_hour,Transaction logged outside operating hours
+135776,odd_hour,Transaction logged outside operating hours
+124514,odd_hour,Transaction logged outside operating hours
+143429,odd_hour,Transaction logged outside operating hours
+117782,odd_hour,Transaction logged outside operating hours
+154310,odd_hour,Transaction logged outside operating hours
+146711,odd_hour,Transaction logged outside operating hours
+110569,odd_hour,Transaction logged outside operating hours
+153562,odd_hour,Transaction logged outside operating hours
+131622,odd_hour,Transaction logged outside operating hours
+116710,odd_hour,Transaction logged outside operating hours
+156805,odd_hour,Transaction logged outside operating hours
+132557,odd_hour,Transaction logged outside operating hours
+151821,odd_hour,Transaction logged outside operating hours
+145194,odd_hour,Transaction logged outside operating hours
+125077,odd_hour,Transaction logged outside operating hours
+156449,odd_hour,Transaction logged outside operating hours
+143082,odd_hour,Transaction logged outside operating hours
+115912,odd_hour,Transaction logged outside operating hours
+105869,odd_hour,Transaction logged outside operating hours
+104335,odd_hour,Transaction logged outside operating hours
+114678,odd_hour,Transaction logged outside operating hours
+140951,odd_hour,Transaction logged outside operating hours
+146185,odd_hour,Transaction logged outside operating hours
+122750,odd_hour,Transaction logged outside operating hours
+154436,odd_hour,Transaction logged outside operating hours
+106891,odd_hour,Transaction logged outside operating hours
+135460,odd_hour,Transaction logged outside operating hours
+151426,odd_hour,Transaction logged outside operating hours
+121014,odd_hour,Transaction logged outside operating hours
+134111,odd_hour,Transaction logged outside operating hours
+115148,odd_hour,Transaction logged outside operating hours
+135273,odd_hour,Transaction logged outside operating hours
+121153,odd_hour,Transaction logged outside operating hours
+145618,odd_hour,Transaction logged outside operating hours
+101807,odd_hour,Transaction logged outside operating hours
+157041,odd_hour,Transaction logged outside operating hours
+128614,odd_hour,Transaction logged outside operating hours
+126127,odd_hour,Transaction logged outside operating hours
+133334,odd_hour,Transaction logged outside operating hours
+140679,odd_hour,Transaction logged outside operating hours
+146444,odd_hour,Transaction logged outside operating hours
+121234,odd_hour,Transaction logged outside operating hours
+112841,odd_hour,Transaction logged outside operating hours
+132843,odd_hour,Transaction logged outside operating hours
+153661,odd_hour,Transaction logged outside operating hours
+105249,odd_hour,Transaction logged outside operating hours
+153971,odd_hour,Transaction logged outside operating hours
+139561,odd_hour,Transaction logged outside operating hours
+162955,basket_size_outlier,Basket of 18 items
+162956,basket_size_outlier,Basket of 20 items
+162957,basket_size_outlier,Basket of 19 items
+162958,basket_size_outlier,Basket of 15 items
+162959,basket_size_outlier,Basket of 22 items
+162960,basket_size_outlier,Basket of 20 items
+162961,basket_size_outlier,Basket of 15 items
+162962,basket_size_outlier,Basket of 15 items
+162963,basket_size_outlier,Basket of 20 items
+162964,basket_size_outlier,Basket of 18 items
+162965,basket_size_outlier,Basket of 22 items
+162966,basket_size_outlier,Basket of 17 items
+162967,basket_size_outlier,Basket of 15 items
+162968,basket_size_outlier,Basket of 17 items
+162969,basket_size_outlier,Basket of 21 items
+162970,basket_size_outlier,Basket of 15 items
+162971,basket_size_outlier,Basket of 20 items
+162972,basket_size_outlier,Basket of 16 items
+162973,basket_size_outlier,Basket of 21 items
+162974,basket_size_outlier,Basket of 15 items
+162975,basket_size_outlier,Basket of 21 items
+162976,basket_size_outlier,Basket of 18 items
+162977,basket_size_outlier,Basket of 18 items
+162978,basket_size_outlier,Basket of 21 items
+162979,basket_size_outlier,Basket of 15 items
+162980,basket_size_outlier,Basket of 21 items
+162981,basket_size_outlier,Basket of 17 items
+162982,basket_size_outlier,Basket of 18 items
+162983,basket_size_outlier,Basket of 15 items
+162984,basket_size_outlier,Basket of 20 items
+162985,basket_size_outlier,Basket of 17 items
+162986,basket_size_outlier,Basket of 22 items
+162987,basket_size_outlier,Basket of 20 items
+162988,basket_size_outlier,Basket of 16 items
+162989,basket_size_outlier,Basket of 17 items
+162990,basket_size_outlier,Basket of 16 items
+162991,basket_size_outlier,Basket of 16 items
+162992,basket_size_outlier,Basket of 20 items
+162993,basket_size_outlier,Basket of 15 items
+162994,basket_size_outlier,Basket of 21 items
+162995,basket_size_outlier,Basket of 19 items
+162996,basket_size_outlier,Basket of 20 items
+162997,basket_size_outlier,Basket of 20 items
+162998,basket_size_outlier,Basket of 18 items
+162999,basket_size_outlier,Basket of 18 items
+163000,basket_size_outlier,Basket of 19 items
+163001,basket_size_outlier,Basket of 15 items
+163002,basket_size_outlier,Basket of 18 items
+163003,basket_size_outlier,Basket of 15 items
+163004,basket_size_outlier,Basket of 21 items
+163005,basket_size_outlier,Basket of 19 items
+163006,basket_size_outlier,Basket of 17 items
+163007,basket_size_outlier,Basket of 16 items
+163008,basket_size_outlier,Basket of 17 items
+163009,basket_size_outlier,Basket of 15 items
+163010,basket_size_outlier,Basket of 17 items
+163011,basket_size_outlier,Basket of 19 items
+163012,basket_size_outlier,Basket of 20 items
+163013,basket_size_outlier,Basket of 15 items
+163014,basket_size_outlier,Basket of 15 items
+163015,basket_size_outlier,Basket of 16 items
+163016,basket_size_outlier,Basket of 21 items
+163017,basket_size_outlier,Basket of 22 items
+163018,basket_size_outlier,Basket of 17 items
+163019,basket_size_outlier,Basket of 17 items
+163020,basket_size_outlier,Basket of 20 items
+163021,basket_size_outlier,Basket of 18 items
+163022,basket_size_outlier,Basket of 22 items
+163023,basket_size_outlier,Basket of 18 items
+163024,basket_size_outlier,Basket of 19 items
+163025,basket_size_outlier,Basket of 15 items
+163026,basket_size_outlier,Basket of 18 items
+163027,basket_size_outlier,Basket of 16 items
+163028,basket_size_outlier,Basket of 15 items
+163029,basket_size_outlier,Basket of 18 items
+163030,basket_size_outlier,Basket of 18 items
+163031,basket_size_outlier,Basket of 22 items
+163032,basket_size_outlier,Basket of 15 items
+163033,basket_size_outlier,Basket of 21 items
+163034,basket_size_outlier,Basket of 21 items
+163035,basket_size_outlier,Basket of 22 items
+163036,basket_size_outlier,Basket of 19 items
+163037,basket_size_outlier,Basket of 20 items
+163038,basket_size_outlier,Basket of 16 items
+163039,basket_size_outlier,Basket of 16 items
+163040,basket_size_outlier,Basket of 16 items
+163041,basket_size_outlier,Basket of 17 items
+163042,basket_size_outlier,Basket of 21 items
+163043,basket_size_outlier,Basket of 19 items
+163044,basket_size_outlier,Basket of 16 items
+163045,basket_size_outlier,Basket of 19 items
+163046,basket_size_outlier,Basket of 16 items
+163047,basket_size_outlier,Basket of 22 items
+163048,basket_size_outlier,Basket of 20 items
+108399,shift_end_void_cluster,Part of cluster of end-of-shift voids
+121032,shift_end_void_cluster,Part of cluster of end-of-shift voids
+144811,shift_end_void_cluster,Part of cluster of end-of-shift voids
+131422,shift_end_void_cluster,Part of cluster of end-of-shift voids
+120038,shift_end_void_cluster,Part of cluster of end-of-shift voids
+159948,shift_end_void_cluster,Part of cluster of end-of-shift voids
+121863,shift_end_void_cluster,Part of cluster of end-of-shift voids
+125811,shift_end_void_cluster,Part of cluster of end-of-shift voids
+156772,shift_end_void_cluster,Part of cluster of end-of-shift voids
+109338,shift_end_void_cluster,Part of cluster of end-of-shift voids
+110109,shift_end_void_cluster,Part of cluster of end-of-shift voids
+121356,shift_end_void_cluster,Part of cluster of end-of-shift voids
+117042,shift_end_void_cluster,Part of cluster of end-of-shift voids
+162241,shift_end_void_cluster,Part of cluster of end-of-shift voids
+132700,shift_end_void_cluster,Part of cluster of end-of-shift voids
+145051,shift_end_void_cluster,Part of cluster of end-of-shift voids
+137661,shift_end_void_cluster,Part of cluster of end-of-shift voids
+125681,shift_end_void_cluster,Part of cluster of end-of-shift voids
+112263,shift_end_void_cluster,Part of cluster of end-of-shift voids
+132015,shift_end_void_cluster,Part of cluster of end-of-shift voids
+104179,shift_end_void_cluster,Part of cluster of end-of-shift voids
+102965,shift_end_void_cluster,Part of cluster of end-of-shift voids
+123503,shift_end_void_cluster,Part of cluster of end-of-shift voids
+130763,shift_end_void_cluster,Part of cluster of end-of-shift voids
+145357,shift_end_void_cluster,Part of cluster of end-of-shift voids
+143469,shift_end_void_cluster,Part of cluster of end-of-shift voids
+113599,shift_end_void_cluster,Part of cluster of end-of-shift voids
+104563,shift_end_void_cluster,Part of cluster of end-of-shift voids
+120156,shift_end_void_cluster,Part of cluster of end-of-shift voids
+127269,shift_end_void_cluster,Part of cluster of end-of-shift voids
+100868,shift_end_void_cluster,Part of cluster of end-of-shift voids
+108644,suspicious_discount,Injected module3-only suspicious_discount anomaly
+152775,suspicious_discount,Injected module3-only suspicious_discount anomaly
+105533,suspicious_discount,Injected module3-only suspicious_discount anomaly
+145407,suspicious_discount,Injected module3-only suspicious_discount anomaly
+113451,suspicious_discount,Injected module3-only suspicious_discount anomaly
+140248,suspicious_discount,Injected module3-only suspicious_discount anomaly
+148537,suspicious_discount,Injected module3-only suspicious_discount anomaly
+110654,suspicious_discount,Injected module3-only suspicious_discount anomaly
+115442,suspicious_discount,Injected module3-only suspicious_discount anomaly
+128804,suspicious_discount,Injected module3-only suspicious_discount anomaly
+160204,suspicious_discount,Injected module3-only suspicious_discount anomaly
+160361,suspicious_discount,Injected module3-only suspicious_discount anomaly
+120333,suspicious_discount,Injected module3-only suspicious_discount anomaly
+107237,suspicious_discount,Injected module3-only suspicious_discount anomaly
+156988,suspicious_discount,Injected module3-only suspicious_discount anomaly
+149929,suspicious_discount,Injected module3-only suspicious_discount anomaly
+150807,suspicious_discount,Injected module3-only suspicious_discount anomaly
+126949,suspicious_discount,Injected module3-only suspicious_discount anomaly
+118118,suspicious_discount,Injected module3-only suspicious_discount anomaly
+159441,suspicious_discount,Injected module3-only suspicious_discount anomaly
+147521,suspicious_discount,Injected module3-only suspicious_discount anomaly
+109839,suspicious_discount,Injected module3-only suspicious_discount anomaly
+133255,suspicious_discount,Injected module3-only suspicious_discount anomaly
+121810,suspicious_discount,Injected module3-only suspicious_discount anomaly
+131331,suspicious_discount,Injected module3-only suspicious_discount anomaly
+137720,suspicious_discount,Injected module3-only suspicious_discount anomaly
+145296,suspicious_discount,Injected module3-only suspicious_discount anomaly
+125010,suspicious_discount,Injected module3-only suspicious_discount anomaly
+162217,suspicious_discount,Injected module3-only suspicious_discount anomaly
+144233,suspicious_discount,Injected module3-only suspicious_discount anomaly
+137256,suspicious_discount,Injected module3-only suspicious_discount anomaly
+101179,suspicious_discount,Injected module3-only suspicious_discount anomaly
+158296,suspicious_discount,Injected module3-only suspicious_discount anomaly
+102634,suspicious_discount,Injected module3-only suspicious_discount anomaly
+109371,suspicious_discount,Injected module3-only suspicious_discount anomaly
+121993,suspicious_discount,Injected module3-only suspicious_discount anomaly
+103558,suspicious_discount,Injected module3-only suspicious_discount anomaly
+105556,suspicious_discount,Injected module3-only suspicious_discount anomaly
+112221,suspicious_discount,Injected module3-only suspicious_discount anomaly
+136002,suspicious_discount,Injected module3-only suspicious_discount anomaly
+106102,suspicious_discount,Injected module3-only suspicious_discount anomaly
+142950,suspicious_discount,Injected module3-only suspicious_discount anomaly
+158448,suspicious_discount,Injected module3-only suspicious_discount anomaly
+120352,suspicious_discount,Injected module3-only suspicious_discount anomaly
+136829,suspicious_discount,Injected module3-only suspicious_discount anomaly
+117801,suspicious_discount,Injected module3-only suspicious_discount anomaly
+127142,suspicious_discount,Injected module3-only suspicious_discount anomaly
+108561,suspicious_discount,Injected module3-only suspicious_discount anomaly
+133212,suspicious_discount,Injected module3-only suspicious_discount anomaly
+142211,suspicious_discount,Injected module3-only suspicious_discount anomaly
+101375,suspicious_discount,Injected module3-only suspicious_discount anomaly
+153651,suspicious_discount,Injected module3-only suspicious_discount anomaly
+100501,suspicious_discount,Injected module3-only suspicious_discount anomaly
+108095,suspicious_discount,Injected module3-only suspicious_discount anomaly
+159256,suspicious_discount,Injected module3-only suspicious_discount anomaly
+128323,suspicious_discount,Injected module3-only suspicious_discount anomaly
+104453,suspicious_discount,Injected module3-only suspicious_discount anomaly
+161100,suspicious_discount,Injected module3-only suspicious_discount anomaly
+152368,suspicious_discount,Injected module3-only suspicious_discount anomaly
+154041,suspicious_discount,Injected module3-only suspicious_discount anomaly
+118356,suspicious_discount,Injected module3-only suspicious_discount anomaly
+113882,suspicious_discount,Injected module3-only suspicious_discount anomaly
+123139,suspicious_discount,Injected module3-only suspicious_discount anomaly
+160651,suspicious_discount,Injected module3-only suspicious_discount anomaly
+154500,suspicious_discount,Injected module3-only suspicious_discount anomaly
+108335,suspicious_discount,Injected module3-only suspicious_discount anomaly
+109824,suspicious_discount,Injected module3-only suspicious_discount anomaly
+136088,suspicious_discount,Injected module3-only suspicious_discount anomaly
+149811,suspicious_discount,Injected module3-only suspicious_discount anomaly
+144062,suspicious_discount,Injected module3-only suspicious_discount anomaly
+128906,suspicious_discount,Injected module3-only suspicious_discount anomaly
+132734,suspicious_discount,Injected module3-only suspicious_discount anomaly
+142307,suspicious_discount,Injected module3-only suspicious_discount anomaly
+141478,suspicious_discount,Injected module3-only suspicious_discount anomaly
+156765,suspicious_discount,Injected module3-only suspicious_discount anomaly
+154359,suspicious_discount,Injected module3-only suspicious_discount anomaly
+112393,suspicious_discount,Injected module3-only suspicious_discount anomaly
+125948,suspicious_discount,Injected module3-only suspicious_discount anomaly
+159221,suspicious_discount,Injected module3-only suspicious_discount anomaly
+157463,suspicious_discount,Injected module3-only suspicious_discount anomaly
+127687,suspicious_discount,Injected module3-only suspicious_discount anomaly
+157522,suspicious_discount,Injected module3-only suspicious_discount anomaly
+151155,suspicious_discount,Injected module3-only suspicious_discount anomaly
+158166,suspicious_discount,Injected module3-only suspicious_discount anomaly
+104622,suspicious_discount,Injected module3-only suspicious_discount anomaly
+122082,suspicious_discount,Injected module3-only suspicious_discount anomaly
+140948,suspicious_discount,Injected module3-only suspicious_discount anomaly
+143349,suspicious_discount,Injected module3-only suspicious_discount anomaly
+130424,suspicious_discount,Injected module3-only suspicious_discount anomaly
+107557,suspicious_discount,Injected module3-only suspicious_discount anomaly
+138485,suspicious_discount,Injected module3-only suspicious_discount anomaly
+160818,suspicious_discount,Injected module3-only suspicious_discount anomaly
+106286,suspicious_discount,Injected module3-only suspicious_discount anomaly
+118280,suspicious_discount,Injected module3-only suspicious_discount anomaly
+129337,suspicious_discount,Injected module3-only suspicious_discount anomaly
+148823,suspicious_discount,Injected module3-only suspicious_discount anomaly
+160432,suspicious_discount,Injected module3-only suspicious_discount anomaly
+114950,suspicious_discount,Injected module3-only suspicious_discount anomaly
+114142,suspicious_discount,Injected module3-only suspicious_discount anomaly
+148092,suspicious_discount,Injected module3-only suspicious_discount anomaly
+162099,suspicious_discount,Injected module3-only suspicious_discount anomaly
+109152,suspicious_discount,Injected module3-only suspicious_discount anomaly
+153375,suspicious_discount,Injected module3-only suspicious_discount anomaly
+120043,suspicious_discount,Injected module3-only suspicious_discount anomaly
+141454,suspicious_discount,Injected module3-only suspicious_discount anomaly
+124774,suspicious_discount,Injected module3-only suspicious_discount anomaly
+159996,suspicious_discount,Injected module3-only suspicious_discount anomaly
+111913,suspicious_discount,Injected module3-only suspicious_discount anomaly
+151602,suspicious_discount,Injected module3-only suspicious_discount anomaly
+140820,suspicious_discount,Injected module3-only suspicious_discount anomaly
+157992,suspicious_discount,Injected module3-only suspicious_discount anomaly
+154042,suspicious_discount,Injected module3-only suspicious_discount anomaly
+121653,suspicious_discount,Injected module3-only suspicious_discount anomaly
+102100,suspicious_discount,Injected module3-only suspicious_discount anomaly
+131881,suspicious_discount,Injected module3-only suspicious_discount anomaly
+101195,void_after_payment,Injected module3-only void_after_payment anomaly
+127089,void_after_payment,Injected module3-only void_after_payment anomaly
+160858,void_after_payment,Injected module3-only void_after_payment anomaly
+115172,void_after_payment,Injected module3-only void_after_payment anomaly
+158140,void_after_payment,Injected module3-only void_after_payment anomaly
+122824,void_after_payment,Injected module3-only void_after_payment anomaly
+137741,void_after_payment,Injected module3-only void_after_payment anomaly
+159931,void_after_payment,Injected module3-only void_after_payment anomaly
+150563,void_after_payment,Injected module3-only void_after_payment anomaly
+128601,void_after_payment,Injected module3-only void_after_payment anomaly
+102614,void_after_payment,Injected module3-only void_after_payment anomaly
+160362,void_after_payment,Injected module3-only void_after_payment anomaly
+126778,void_after_payment,Injected module3-only void_after_payment anomaly
+119515,void_after_payment,Injected module3-only void_after_payment anomaly
+114810,void_after_payment,Injected module3-only void_after_payment anomaly
+135627,void_after_payment,Injected module3-only void_after_payment anomaly
+157287,void_after_payment,Injected module3-only void_after_payment anomaly
+100930,void_after_payment,Injected module3-only void_after_payment anomaly
+154338,void_after_payment,Injected module3-only void_after_payment anomaly
+150358,void_after_payment,Injected module3-only void_after_payment anomaly
+151188,void_after_payment,Injected module3-only void_after_payment anomaly
+121066,void_after_payment,Injected module3-only void_after_payment anomaly
+160900,void_after_payment,Injected module3-only void_after_payment anomaly
+112618,void_after_payment,Injected module3-only void_after_payment anomaly
+148574,void_after_payment,Injected module3-only void_after_payment anomaly
+121411,void_after_payment,Injected module3-only void_after_payment anomaly
+162319,void_after_payment,Injected module3-only void_after_payment anomaly
+120135,void_after_payment,Injected module3-only void_after_payment anomaly
+143314,void_after_payment,Injected module3-only void_after_payment anomaly
+120220,void_after_payment,Injected module3-only void_after_payment anomaly
+125375,void_after_payment,Injected module3-only void_after_payment anomaly
+113680,void_after_payment,Injected module3-only void_after_payment anomaly
+152167,void_after_payment,Injected module3-only void_after_payment anomaly
+160933,void_after_payment,Injected module3-only void_after_payment anomaly
+116801,void_after_payment,Injected module3-only void_after_payment anomaly
+149781,void_after_payment,Injected module3-only void_after_payment anomaly
+142979,void_after_payment,Injected module3-only void_after_payment anomaly
+150889,void_after_payment,Injected module3-only void_after_payment anomaly
+100706,void_after_payment,Injected module3-only void_after_payment anomaly
+112909,void_after_payment,Injected module3-only void_after_payment anomaly
+124317,void_after_payment,Injected module3-only void_after_payment anomaly
+103738,void_after_payment,Injected module3-only void_after_payment anomaly
+156203,void_after_payment,Injected module3-only void_after_payment anomaly
+118599,void_after_payment,Injected module3-only void_after_payment anomaly
+118771,void_after_payment,Injected module3-only void_after_payment anomaly
+103922,void_after_payment,Injected module3-only void_after_payment anomaly
+153268,void_after_payment,Injected module3-only void_after_payment anomaly
+100313,void_after_payment,Injected module3-only void_after_payment anomaly
+122303,void_after_payment,Injected module3-only void_after_payment anomaly
+137199,void_after_payment,Injected module3-only void_after_payment anomaly
+112306,void_after_payment,Injected module3-only void_after_payment anomaly
+143209,void_after_payment,Injected module3-only void_after_payment anomaly
+134624,void_after_payment,Injected module3-only void_after_payment anomaly
+122055,void_after_payment,Injected module3-only void_after_payment anomaly
+146989,void_after_payment,Injected module3-only void_after_payment anomaly
+131651,void_after_payment,Injected module3-only void_after_payment anomaly
+123799,void_after_payment,Injected module3-only void_after_payment anomaly
+145232,void_after_payment,Injected module3-only void_after_payment anomaly
+121371,void_after_payment,Injected module3-only void_after_payment anomaly
+127353,void_after_payment,Injected module3-only void_after_payment anomaly
+142569,void_after_payment,Injected module3-only void_after_payment anomaly
+156595,void_after_payment,Injected module3-only void_after_payment anomaly
+151621,void_after_payment,Injected module3-only void_after_payment anomaly
+115051,void_after_payment,Injected module3-only void_after_payment anomaly
+124797,void_after_payment,Injected module3-only void_after_payment anomaly
+148944,void_after_payment,Injected module3-only void_after_payment anomaly
+162021,void_after_payment,Injected module3-only void_after_payment anomaly
+128457,void_after_payment,Injected module3-only void_after_payment anomaly
+138117,void_after_payment,Injected module3-only void_after_payment anomaly
+100188,void_after_payment,Injected module3-only void_after_payment anomaly
+101656,void_after_payment,Injected module3-only void_after_payment anomaly
+156349,void_after_payment,Injected module3-only void_after_payment anomaly
+139036,void_after_payment,Injected module3-only void_after_payment anomaly
+154198,void_after_payment,Injected module3-only void_after_payment anomaly
+102918,void_after_payment,Injected module3-only void_after_payment anomaly
+150819,void_after_payment,Injected module3-only void_after_payment anomaly
+129938,void_after_payment,Injected module3-only void_after_payment anomaly
+133678,void_after_payment,Injected module3-only void_after_payment anomaly
+114098,void_after_payment,Injected module3-only void_after_payment anomaly
+123622,void_after_payment,Injected module3-only void_after_payment anomaly
+151550,void_after_payment,Injected module3-only void_after_payment anomaly
+155907,void_after_payment,Injected module3-only void_after_payment anomaly
+117704,void_after_payment,Injected module3-only void_after_payment anomaly
+154186,void_after_payment,Injected module3-only void_after_payment anomaly
+120185,void_after_payment,Injected module3-only void_after_payment anomaly
+136438,void_after_payment,Injected module3-only void_after_payment anomaly
+114675,void_after_payment,Injected module3-only void_after_payment anomaly
+108130,void_after_payment,Injected module3-only void_after_payment anomaly
+129666,void_after_payment,Injected module3-only void_after_payment anomaly
+156161,void_after_payment,Injected module3-only void_after_payment anomaly
+134964,void_after_payment,Injected module3-only void_after_payment anomaly
+161801,void_after_payment,Injected module3-only void_after_payment anomaly
+121076,void_after_payment,Injected module3-only void_after_payment anomaly
+112583,void_after_payment,Injected module3-only void_after_payment anomaly
+128742,void_after_payment,Injected module3-only void_after_payment anomaly
+111494,void_after_payment,Injected module3-only void_after_payment anomaly
+155188,void_after_payment,Injected module3-only void_after_payment anomaly
+104846,void_after_payment,Injected module3-only void_after_payment anomaly
+139071,void_after_payment,Injected module3-only void_after_payment anomaly
+146276,void_after_payment,Injected module3-only void_after_payment anomaly
+140423,void_after_payment,Injected module3-only void_after_payment anomaly
+141698,void_after_payment,Injected module3-only void_after_payment anomaly
+111077,void_after_payment,Injected module3-only void_after_payment anomaly
+134247,void_after_payment,Injected module3-only void_after_payment anomaly
+162674,void_after_payment,Injected module3-only void_after_payment anomaly
+155712,void_after_payment,Injected module3-only void_after_payment anomaly
+140198,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+133743,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+160941,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+145120,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+122821,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+136605,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+126848,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+148927,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+147986,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+105666,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+120238,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+113165,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+155664,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+141318,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+106991,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+115788,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+109228,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+107950,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+101552,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+127063,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+129888,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+153426,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+117341,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+157448,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+134309,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+135555,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+123590,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+110369,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+110543,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+151072,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+148753,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+154628,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+105179,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+159341,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+133137,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+145075,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+147933,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+121505,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+141652,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+161522,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+123551,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+101798,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+135257,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+100560,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+124330,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+100037,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+143026,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+135945,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+129660,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+100852,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+112679,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+133268,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+105984,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+162684,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+146014,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+105672,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+100013,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+139155,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+159966,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+125747,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+156712,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+144342,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+129828,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+106623,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+115207,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+145573,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+128167,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+129529,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+136376,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+104193,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+144515,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+105429,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+144234,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+116880,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+126469,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+121139,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+141641,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+145829,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+113132,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+138645,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+117771,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+101581,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+153201,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+107993,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+148345,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+147342,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+123219,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+160212,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+122782,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+122396,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+102837,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+121878,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+119329,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+130239,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+100503,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+132855,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+156662,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+110836,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+136691,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+161690,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+158853,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+155138,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+105067,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+134783,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+105754,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+141274,basket_size_outlier,Injected module3-only basket_size_outlier anomaly
+150897,price_tampering,Injected module3-only price_tampering anomaly
+114069,price_tampering,Injected module3-only price_tampering anomaly
+110332,price_tampering,Injected module3-only price_tampering anomaly
+145534,price_tampering,Injected module3-only price_tampering anomaly
+131317,price_tampering,Injected module3-only price_tampering anomaly
+118487,price_tampering,Injected module3-only price_tampering anomaly
+160705,price_tampering,Injected module3-only price_tampering anomaly
+135378,price_tampering,Injected module3-only price_tampering anomaly
+151043,price_tampering,Injected module3-only price_tampering anomaly
+108245,price_tampering,Injected module3-only price_tampering anomaly
+137238,price_tampering,Injected module3-only price_tampering anomaly
+126991,price_tampering,Injected module3-only price_tampering anomaly
+113503,price_tampering,Injected module3-only price_tampering anomaly
+114698,price_tampering,Injected module3-only price_tampering anomaly
+109830,price_tampering,Injected module3-only price_tampering anomaly
+105727,price_tampering,Injected module3-only price_tampering anomaly
+126571,price_tampering,Injected module3-only price_tampering anomaly
+162744,price_tampering,Injected module3-only price_tampering anomaly
+131180,price_tampering,Injected module3-only price_tampering anomaly
+105631,price_tampering,Injected module3-only price_tampering anomaly
+131269,price_tampering,Injected module3-only price_tampering anomaly
+146267,price_tampering,Injected module3-only price_tampering anomaly
+103849,price_tampering,Injected module3-only price_tampering anomaly
+108327,price_tampering,Injected module3-only price_tampering anomaly
+112336,price_tampering,Injected module3-only price_tampering anomaly
+126057,price_tampering,Injected module3-only price_tampering anomaly
+158529,price_tampering,Injected module3-only price_tampering anomaly
+142087,price_tampering,Injected module3-only price_tampering anomaly
+147744,price_tampering,Injected module3-only price_tampering anomaly
+133093,price_tampering,Injected module3-only price_tampering anomaly
+137009,price_tampering,Injected module3-only price_tampering anomaly
+142295,price_tampering,Injected module3-only price_tampering anomaly
+149975,price_tampering,Injected module3-only price_tampering anomaly
+109721,price_tampering,Injected module3-only price_tampering anomaly
+152500,price_tampering,Injected module3-only price_tampering anomaly
+134259,price_tampering,Injected module3-only price_tampering anomaly
+149521,price_tampering,Injected module3-only price_tampering anomaly
+119723,price_tampering,Injected module3-only price_tampering anomaly
+116651,price_tampering,Injected module3-only price_tampering anomaly
+118045,price_tampering,Injected module3-only price_tampering anomaly
+124934,price_tampering,Injected module3-only price_tampering anomaly
+142391,price_tampering,Injected module3-only price_tampering anomaly
+115952,price_tampering,Injected module3-only price_tampering anomaly
+136414,price_tampering,Injected module3-only price_tampering anomaly
+135925,price_tampering,Injected module3-only price_tampering anomaly
+154685,price_tampering,Injected module3-only price_tampering anomaly
+148157,price_tampering,Injected module3-only price_tampering anomaly
+134011,price_tampering,Injected module3-only price_tampering anomaly
+126865,price_tampering,Injected module3-only price_tampering anomaly
+123312,price_tampering,Injected module3-only price_tampering anomaly
+150956,price_tampering,Injected module3-only price_tampering anomaly
+130707,price_tampering,Injected module3-only price_tampering anomaly
+123351,price_tampering,Injected module3-only price_tampering anomaly
+112793,price_tampering,Injected module3-only price_tampering anomaly
+137196,price_tampering,Injected module3-only price_tampering anomaly
+107880,price_tampering,Injected module3-only price_tampering anomaly
+160575,price_tampering,Injected module3-only price_tampering anomaly
+115486,price_tampering,Injected module3-only price_tampering anomaly
+143743,price_tampering,Injected module3-only price_tampering anomaly
+107878,price_tampering,Injected module3-only price_tampering anomaly
+133783,price_tampering,Injected module3-only price_tampering anomaly
+131780,price_tampering,Injected module3-only price_tampering anomaly
+113363,price_tampering,Injected module3-only price_tampering anomaly
+115690,price_tampering,Injected module3-only price_tampering anomaly
+111098,price_tampering,Injected module3-only price_tampering anomaly
+132880,price_tampering,Injected module3-only price_tampering anomaly
+152443,price_tampering,Injected module3-only price_tampering anomaly
+160522,price_tampering,Injected module3-only price_tampering anomaly
+146735,price_tampering,Injected module3-only price_tampering anomaly
+122684,price_tampering,Injected module3-only price_tampering anomaly
+112020,price_tampering,Injected module3-only price_tampering anomaly
+147428,price_tampering,Injected module3-only price_tampering anomaly
+108912,price_tampering,Injected module3-only price_tampering anomaly
+152937,price_tampering,Injected module3-only price_tampering anomaly
+108037,price_tampering,Injected module3-only price_tampering anomaly
+130926,price_tampering,Injected module3-only price_tampering anomaly
+101396,price_tampering,Injected module3-only price_tampering anomaly
+161020,price_tampering,Injected module3-only price_tampering anomaly
+124588,price_tampering,Injected module3-only price_tampering anomaly
+139297,price_tampering,Injected module3-only price_tampering anomaly
+144251,price_tampering,Injected module3-only price_tampering anomaly
+156645,price_tampering,Injected module3-only price_tampering anomaly
+153924,price_tampering,Injected module3-only price_tampering anomaly
+129949,price_tampering,Injected module3-only price_tampering anomaly
+150596,price_tampering,Injected module3-only price_tampering anomaly
+141427,price_tampering,Injected module3-only price_tampering anomaly
+158949,price_tampering,Injected module3-only price_tampering anomaly
+151271,price_tampering,Injected module3-only price_tampering anomaly
+137953,price_tampering,Injected module3-only price_tampering anomaly
+143260,price_tampering,Injected module3-only price_tampering anomaly
+148736,price_tampering,Injected module3-only price_tampering anomaly
+112046,price_tampering,Injected module3-only price_tampering anomaly
+117289,price_tampering,Injected module3-only price_tampering anomaly
+143433,price_tampering,Injected module3-only price_tampering anomaly
+146380,price_tampering,Injected module3-only price_tampering anomaly
+120688,price_tampering,Injected module3-only price_tampering anomaly
+110273,price_tampering,Injected module3-only price_tampering anomaly
+132945,price_tampering,Injected module3-only price_tampering anomaly
+128027,price_tampering,Injected module3-only price_tampering anomaly
+156891,price_tampering,Injected module3-only price_tampering anomaly
+114232,price_tampering,Injected module3-only price_tampering anomaly
+110089,price_tampering,Injected module3-only price_tampering anomaly
+112300,price_tampering,Injected module3-only price_tampering anomaly
+113039,price_tampering,Injected module3-only price_tampering anomaly
+137606,price_tampering,Injected module3-only price_tampering anomaly
+107425,price_tampering,Injected module3-only price_tampering anomaly
+143142,price_tampering,Injected module3-only price_tampering anomaly
+122716,price_tampering,Injected module3-only price_tampering anomaly
+144092,price_tampering,Injected module3-only price_tampering anomaly
+107218,price_tampering,Injected module3-only price_tampering anomaly
+130048,price_tampering,Injected module3-only price_tampering anomaly
+108645,price_tampering,Injected module3-only price_tampering anomaly
+120117,price_tampering,Injected module3-only price_tampering anomaly
+161447,price_tampering,Injected module3-only price_tampering anomaly
+140047,price_tampering,Injected module3-only price_tampering anomaly
+145751,price_tampering,Injected module3-only price_tampering anomaly
+156882,price_tampering,Injected module3-only price_tampering anomaly
+158111,price_tampering,Injected module3-only price_tampering anomaly
+147063,odd_hour,Injected module3-only odd_hour anomaly
+160962,odd_hour,Injected module3-only odd_hour anomaly
+105960,odd_hour,Injected module3-only odd_hour anomaly
+112310,odd_hour,Injected module3-only odd_hour anomaly
+103255,odd_hour,Injected module3-only odd_hour anomaly
+150196,odd_hour,Injected module3-only odd_hour anomaly
+110689,odd_hour,Injected module3-only odd_hour anomaly
+109041,odd_hour,Injected module3-only odd_hour anomaly
+148094,odd_hour,Injected module3-only odd_hour anomaly
+107097,odd_hour,Injected module3-only odd_hour anomaly
+161377,odd_hour,Injected module3-only odd_hour anomaly
+161758,odd_hour,Injected module3-only odd_hour anomaly
+126390,odd_hour,Injected module3-only odd_hour anomaly
+131565,odd_hour,Injected module3-only odd_hour anomaly
+142498,odd_hour,Injected module3-only odd_hour anomaly
+115663,odd_hour,Injected module3-only odd_hour anomaly
+119826,odd_hour,Injected module3-only odd_hour anomaly
+154846,odd_hour,Injected module3-only odd_hour anomaly
+135552,odd_hour,Injected module3-only odd_hour anomaly
+118564,odd_hour,Injected module3-only odd_hour anomaly
+128865,odd_hour,Injected module3-only odd_hour anomaly
+139636,odd_hour,Injected module3-only odd_hour anomaly
+161742,odd_hour,Injected module3-only odd_hour anomaly
+140724,odd_hour,Injected module3-only odd_hour anomaly
+134381,odd_hour,Injected module3-only odd_hour anomaly
+161896,odd_hour,Injected module3-only odd_hour anomaly
+141537,odd_hour,Injected module3-only odd_hour anomaly
+136443,odd_hour,Injected module3-only odd_hour anomaly
+121803,odd_hour,Injected module3-only odd_hour anomaly
+120569,odd_hour,Injected module3-only odd_hour anomaly
+122746,odd_hour,Injected module3-only odd_hour anomaly
+115507,odd_hour,Injected module3-only odd_hour anomaly
+156764,odd_hour,Injected module3-only odd_hour anomaly
+119897,odd_hour,Injected module3-only odd_hour anomaly
+147901,odd_hour,Injected module3-only odd_hour anomaly
+132938,odd_hour,Injected module3-only odd_hour anomaly
+137213,odd_hour,Injected module3-only odd_hour anomaly
+156139,odd_hour,Injected module3-only odd_hour anomaly
+121557,odd_hour,Injected module3-only odd_hour anomaly
+128444,odd_hour,Injected module3-only odd_hour anomaly
+139803,odd_hour,Injected module3-only odd_hour anomaly
+128156,odd_hour,Injected module3-only odd_hour anomaly
+106619,odd_hour,Injected module3-only odd_hour anomaly
+148856,odd_hour,Injected module3-only odd_hour anomaly
+112343,odd_hour,Injected module3-only odd_hour anomaly
+112365,odd_hour,Injected module3-only odd_hour anomaly
+158896,odd_hour,Injected module3-only odd_hour anomaly
+101287,odd_hour,Injected module3-only odd_hour anomaly
+134985,odd_hour,Injected module3-only odd_hour anomaly
+143785,odd_hour,Injected module3-only odd_hour anomaly
+111259,odd_hour,Injected module3-only odd_hour anomaly
+155866,odd_hour,Injected module3-only odd_hour anomaly
+150841,odd_hour,Injected module3-only odd_hour anomaly
+153191,odd_hour,Injected module3-only odd_hour anomaly
+139371,odd_hour,Injected module3-only odd_hour anomaly
+152999,odd_hour,Injected module3-only odd_hour anomaly
+132398,odd_hour,Injected module3-only odd_hour anomaly
+148595,odd_hour,Injected module3-only odd_hour anomaly
+127713,odd_hour,Injected module3-only odd_hour anomaly
+106229,odd_hour,Injected module3-only odd_hour anomaly
+147541,odd_hour,Injected module3-only odd_hour anomaly
+142685,odd_hour,Injected module3-only odd_hour anomaly
+107270,odd_hour,Injected module3-only odd_hour anomaly
+154065,odd_hour,Injected module3-only odd_hour anomaly
+100882,odd_hour,Injected module3-only odd_hour anomaly
+160740,odd_hour,Injected module3-only odd_hour anomaly
+146625,odd_hour,Injected module3-only odd_hour anomaly
+115112,odd_hour,Injected module3-only odd_hour anomaly
+103518,odd_hour,Injected module3-only odd_hour anomaly
+123593,odd_hour,Injected module3-only odd_hour anomaly
+139856,odd_hour,Injected module3-only odd_hour anomaly
+147130,odd_hour,Injected module3-only odd_hour anomaly
+152165,odd_hour,Injected module3-only odd_hour anomaly
+147398,odd_hour,Injected module3-only odd_hour anomaly
+108128,odd_hour,Injected module3-only odd_hour anomaly
+118735,odd_hour,Injected module3-only odd_hour anomaly
+162858,odd_hour,Injected module3-only odd_hour anomaly
+129376,odd_hour,Injected module3-only odd_hour anomaly
+161386,odd_hour,Injected module3-only odd_hour anomaly
+136811,odd_hour,Injected module3-only odd_hour anomaly
+105201,odd_hour,Injected module3-only odd_hour anomaly
+108684,odd_hour,Injected module3-only odd_hour anomaly
+113708,odd_hour,Injected module3-only odd_hour anomaly
+162857,odd_hour,Injected module3-only odd_hour anomaly
+111313,odd_hour,Injected module3-only odd_hour anomaly
+131859,odd_hour,Injected module3-only odd_hour anomaly
+155315,odd_hour,Injected module3-only odd_hour anomaly
+141309,odd_hour,Injected module3-only odd_hour anomaly
+134965,odd_hour,Injected module3-only odd_hour anomaly
+146211,odd_hour,Injected module3-only odd_hour anomaly
+108019,odd_hour,Injected module3-only odd_hour anomaly
+151732,odd_hour,Injected module3-only odd_hour anomaly
+159983,odd_hour,Injected module3-only odd_hour anomaly
+159676,odd_hour,Injected module3-only odd_hour anomaly
+111291,odd_hour,Injected module3-only odd_hour anomaly
+142316,odd_hour,Injected module3-only odd_hour anomaly
+108055,odd_hour,Injected module3-only odd_hour anomaly
+110241,odd_hour,Injected module3-only odd_hour anomaly
+161852,odd_hour,Injected module3-only odd_hour anomaly
+118502,odd_hour,Injected module3-only odd_hour anomaly
+133219,odd_hour,Injected module3-only odd_hour anomaly
+107976,odd_hour,Injected module3-only odd_hour anomaly
+118101,odd_hour,Injected module3-only odd_hour anomaly
+130277,odd_hour,Injected module3-only odd_hour anomaly
+158828,odd_hour,Injected module3-only odd_hour anomaly
+125116,odd_hour,Injected module3-only odd_hour anomaly
+104070,odd_hour,Injected module3-only odd_hour anomaly
+123770,odd_hour,Injected module3-only odd_hour anomaly
+153260,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+108603,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+110403,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+128730,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+120759,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+140756,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+132264,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+131230,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+103176,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+157493,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+157606,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+103360,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+143204,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+162009,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+125277,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+110250,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+120835,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+147151,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+140841,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+143620,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+111416,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+106907,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+114881,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+148398,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+133443,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+113497,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+108067,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+123270,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+144480,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+140610,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+138660,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+101996,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+157801,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+125772,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+117405,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+110757,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+115856,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+162125,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+126560,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+127430,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+143093,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+141456,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+150612,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+150704,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+104516,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+120953,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+120567,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+159743,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+110547,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+127700,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+140882,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+116882,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+119734,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+161454,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+121673,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+124162,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+160126,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+149512,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+115453,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+141199,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+125339,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+108081,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+147604,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+152312,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+160623,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+153910,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+157116,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+115252,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+156486,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+100646,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+153114,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+129850,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+120851,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+135875,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+144686,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+124697,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+116328,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+108670,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+106905,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+125770,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+112933,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+112717,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+153290,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+139738,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+115988,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+143738,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+105604,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+140435,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly
+149865,shift_end_void_cluster,Injected module3-only shift_end_void_cluster anomaly

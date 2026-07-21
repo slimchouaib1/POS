@@ -1,0 +1,17 @@
+{
+  "total_customers": 10001,
+  "total_revenue": 1601881.79,
+  "rfm_segments": 9,
+  "kmeans_segments": 5,
+  "hybrid_segments": 15,
+  "top_rfm_segment_by_revenue": "Champions",
+  "top_kmeans_segment_by_revenue": "High-Value Frequent Discount-Sensitive",
+  "top_hybrid_segment_by_revenue": "High-Value | High-Value Frequent Discount-Sensitive",
+  "top_recommended_action_by_revenue": "VIP loyalty program and premium personalization",
+  "outputs": {
+    "customer_segments_final": "../Module 4\\customer_segments_final.csv",
+    "segment_profiles_xlsx": "../Module 4\\segment_profiles.xlsx",
+    "targeting_playbook": "../Module 4\\targeting_playbook.md",
+    "figures_dir": "../Module 4/figures_notebook3"
+  }
+}

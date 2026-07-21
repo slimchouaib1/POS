@@ -1,0 +1,7 @@
+anomaly_type,count,anomaly_rate_orders
+suspicious_discount,240,0.003806563149296579
+void_after_payment,200,0.003172135957747149
+basket_size_outlier,200,0.003172135957747149
+price_tampering,180,0.002854922361972434
+odd_hour,170,0.0026963155640850767
+shift_end_void_cluster,120,0.0019032815746482894

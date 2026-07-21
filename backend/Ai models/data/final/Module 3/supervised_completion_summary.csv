@@ -1,0 +1,2 @@
+status,n_required_models,n_trained_models,best_model,best_precision,best_recall,best_f1,best_pr_auc
+completed,7,7,Random Forest,0.9649122807017544,0.9375,0.9510086455331412,0.9769731898177996

@@ -1,0 +1,172 @@
+order_id,order_datetime,cashier_id,customer_id,total_amount,risk_level,anomaly_score,predicted_is_anomaly,is_anomaly,anomaly_type,alert_explanation,threshold,threshold_mode,model
+162982,2025-08-13 08:00:00,C02,0,149.5,CRITIQUE,1.0,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+163029,2025-09-15 20:00:00,C11,0,127.0,CRITIQUE,1.0,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+156712,2025-09-20 10:00:00,C03,4205,77.01,CRITIQUE,1.0,1,1,basket_size_outlier,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+162985,2025-12-09 10:00:00,C01,0,130.5,CRITIQUE,1.0,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+159341,2025-11-02 19:30:00,C05,3225,249.5,CRITIQUE,0.9975,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+161539,2025-12-11 08:00:00,C07,1281,1.22,CRITIQUE,0.997358854019091,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+163043,2025-10-08 19:00:00,C06,0,155.0,CRITIQUE,0.9972945892752076,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+162962,2025-11-05 19:00:00,C08,0,108.0,CRITIQUE,0.9972174277240397,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+156662,2025-09-19 20:00:00,C09,419,104.78,CRITIQUE,0.995,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+159966,2025-11-14 09:00:00,C03,3561,66.96,CRITIQUE,0.995,1,1,basket_size_outlier,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+154628,2025-08-19 21:00:00,C10,706,138.44,CRITIQUE,0.9948803961568834,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+154025,2025-08-11 08:00:00,C07,1422,4.15,CRITIQUE,0.9947868839378669,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+160941,2025-11-30 19:30:00,C05,7559,265.35,CRITIQUE,0.994749503557114,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+160212,2025-11-18 20:00:00,C09,662,138.81,CRITIQUE,0.9925,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+158459,2025-10-18 09:00:00,C07,787,2.4000000000000004,CRITIQUE,0.9923272873521548,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161020,2025-12-02 20:00:00,C11,1562,18.23,CRITIQUE,0.99,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+161778,2025-12-14 20:30:00,C07,606,1.65,CRITIQUE,0.989953720487606,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161522,2025-12-11 11:00:00,C01,964,64.57,CRITIQUE,0.9899151372059872,1,1,basket_size_outlier,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+159256,2025-11-01 19:00:00,C11,966,5.0,CRITIQUE,0.9896908072532296,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+156479,2025-09-16 08:00:00,C03,68,1.5,CRITIQUE,0.9874222911822892,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+155144,2025-08-27 19:00:00,C09,4199,0.89,CRITIQUE,0.9872903960609248,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+157463,2025-10-02 08:00:00,C07,6354,1.14,CRITIQUE,0.9870954211731628,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162217,2025-12-21 08:30:00,C01,3729,2.2,CRITIQUE,0.9870635924806844,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+160361,2025-11-21 12:30:00,C02,5987,1.26,CRITIQUE,0.9870629909395492,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+161104,2025-12-04 20:00:00,C07,2644,4.62,CRITIQUE,0.9870523658026652,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162482,2025-12-25 19:00:00,C10,87,1.6,CRITIQUE,0.9846867621082128,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+162099,2025-12-19 19:00:00,C11,1015,5.300000000000001,CRITIQUE,0.9845759046845756,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+162684,2025-12-28 20:00:00,C12,665,84.78,CRITIQUE,0.9825,1,1,basket_size_outlier,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+156988,2025-09-24 18:00:00,C08,73,0.95,CRITIQUE,0.9822967148017578,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+157493,2025-10-02 21:00:00,C07,1139,40.5,CRITIQUE,0.9817397600094656,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+156882,2025-09-22 19:30:00,C08,511,14.39,CRITIQUE,0.9774580822041964,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+153651,2025-08-05 19:30:00,C12,1592,4.050000000000001,CRITIQUE,0.9774347435980276,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+159441,2025-11-04 12:00:00,C06,1813,1.08,CRITIQUE,0.9773686953369284,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+159989,2025-11-14 20:00:00,C10,3084,4.05,CRITIQUE,0.9773681855258984,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+154876,2025-08-23 07:00:00,C07,604,2.0,CRITIQUE,0.976982365039939,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+158448,2025-10-17 19:00:00,C07,232,8.4,CRITIQUE,0.9768048454535088,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+154685,2025-08-20 20:00:00,C09,482,19.97,CRITIQUE,0.975,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+161181,2025-12-05 20:00:00,C09,2750,11.9,CRITIQUE,0.975,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+161690,2025-12-13 20:00:00,C09,6301,90.82,CRITIQUE,0.975,1,1,basket_size_outlier,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+157448,2025-10-01 19:30:00,C10,1323,109.46,CRITIQUE,0.9749340611480488,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+160495,2025-11-23 19:00:00,C07,208,1.31,CRITIQUE,0.9749303645511388,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+163021,2025-12-18 20:30:00,C11,0,83.5,CRITIQUE,0.9746911582677198,1,1,basket_size_outlier,unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+158949,2025-10-26 20:00:00,C11,606,3.94,CRITIQUE,0.9725,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+162991,2025-09-12 20:00:00,C09,0,108.0,ALERTE,0.9723953134516562,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+160204,2025-11-18 09:00:00,C03,954,3.0900000000000003,ALERTE,0.9721969836097484,1,1,suspicious_discount,high discount; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+154359,2025-08-16 09:00:00,C07,1496,4.43,ALERTE,0.9721373041903442,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162977,2025-11-03 20:00:00,C10,0,90.5,ALERTE,0.969748851333326,1,1,basket_size_outlier,unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+162994,2025-10-10 20:30:00,C09,0,93.0,ALERTE,0.9695341146301084,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+159743,2025-11-09 20:30:00,C07,3852,22.5,ALERTE,0.9682766166673544,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+159354,2025-11-02 20:00:00,C09,2757,16.82,ALERTE,0.9675,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+161447,2025-12-09 19:00:00,C06,177,12.47,ALERTE,0.9675,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+162164,2025-12-20 18:00:00,C05,5580,29.07,ALERTE,0.9675,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+159221,2025-10-31 19:00:00,C08,1101,6.62,ALERTE,0.964728683086116,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+163015,2025-10-19 08:00:00,C02,0,135.0,ALERTE,0.9646647895344316,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+160126,2025-11-16 20:30:00,C07,3545,64.0,ALERTE,0.9627730270454607,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+160450,2025-11-22 20:00:00,C12,1178,19.58,ALERTE,0.9625,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+160705,2025-11-27 21:00:00,C12,576,25.27,ALERTE,0.9625,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+154242,2025-08-14 18:00:00,C07,2358,10.24,ALERTE,0.9620072928218636,1,1,suspicious_discount,high discount; unusual basket size; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+156891,2025-09-22 12:00:00,C02,2358,20.28,ALERTE,0.96,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+158111,2025-10-12 11:30:00,C02,2628,12.51,ALERTE,0.9599583654325464,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+160900,2025-11-30 20:30:00,C07,3285,31.05,ALERTE,0.9599254844601672,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+160818,2025-11-29 19:00:00,C05,842,0.51,ALERTE,0.9598143057937756,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+162990,2025-10-08 20:00:00,C11,0,324.0,ALERTE,0.9573090794943137,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+163003,2025-12-13 20:30:00,C11,0,90.0,ALERTE,0.9572413712299852,1,1,basket_size_outlier,unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+160432,2025-11-22 19:00:00,C06,2085,1.25,ALERTE,0.9570668765708076,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+162096,2025-12-19 20:00:00,C07,637,34.5,ALERTE,0.956288593496924,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+153924,2025-08-09 18:00:00,C10,1141,4.14,ALERTE,0.955,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+160196,2025-11-17 20:30:00,C10,1665,39.21,ALERTE,0.955,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+158296,2025-10-15 19:00:00,C08,1156,0.35,ALERTE,0.9542159558806212,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+160067,2025-11-15 19:30:00,C05,15,42.86,ALERTE,0.9525,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+162744,2025-12-29 11:00:00,C03,2083,22.94,ALERTE,0.9522429380798632,1,1,price_tampering,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+157377,2025-09-30 11:30:00,C01,922,14.5,ALERTE,0.95,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+161246,2025-12-06 18:00:00,C11,287,13.8,ALERTE,0.95,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+162122,2025-12-19 19:30:00,C08,14,9.4,ALERTE,0.95,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+160962,2025-12-01 03:30:00,C09,3033,38.0,ALERTE,0.9499787774921452,1,1,odd_hour,odd-hour transaction; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+155664,2025-09-03 12:30:00,C07,5203,146.5,ALERTE,0.9496304167331512,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+155491,2025-08-31 20:30:00,C09,45,36.44,ALERTE,0.9475,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+154186,2025-08-13 20:30:00,C07,2055,17.0,ALERTE,0.9449103722849932,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+153848,2025-08-08 21:00:00,C10,8464,7.7,ALERTE,0.9440624157420782,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+161386,2025-12-08 03:00:00,C09,660,14.5,ALERTE,0.9425,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+159676,2025-11-08 03:30:00,C11,3581,31.0,ALERTE,0.9424175469091232,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+160575,2025-11-24 11:30:00,C03,1037,24.62,ALERTE,0.94,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+156139,2025-09-10 00:30:00,C11,1107,27.0,ALERTE,0.935,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+161862,2025-12-16 03:00:00,C10,555,14.5,ALERTE,0.935,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+156805,2025-09-21 03:30:00,C11,850,25.5,ALERTE,0.9349580255585264,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+155138,2025-08-26 20:30:00,C10,2299,305.58,ALERTE,0.9349559698936946,1,1,basket_size_outlier,price deviation; unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+155311,2025-08-29 20:30:00,C11,3649,41.370000000000005,ALERTE,0.934838651038852,1,1,price_tampering,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+154042,2025-08-11 12:30:00,C03,36,6.4,ALERTE,0.9344792132219284,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+162955,2025-09-15 21:00:00,C09,0,379.0,ALERTE,0.9321988014349766,1,1,basket_size_outlier,unusual basket size; high transaction amount,0.2545094002249068,balanced_f1,Random Forest
+153971,2025-08-10 03:00:00,C11,1164,40.5,ALERTE,0.93,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+160522,2025-11-23 19:00:00,C08,7840,43.22,ALERTE,0.93,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+155866,2025-09-06 03:30:00,C09,4457,52.5,ALERTE,0.9299560429600762,1,1,odd_hour,odd-hour transaction; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+157801,2025-10-07 20:00:00,C07,178,27.0,ALERTE,0.9285050633379524,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+158853,2025-10-25 07:30:00,C02,1428,67.91,ALERTE,0.927455646440386,1,1,basket_size_outlier,price deviation; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+157522,2025-10-03 08:00:00,C01,2064,8.4,ALERTE,0.9268745631515553,1,1,suspicious_discount,high discount; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+155315,2025-08-29 04:00:00,C11,19,21.0,ALERTE,0.925,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+161758,2025-12-14 03:00:00,C09,4341,13.5,ALERTE,0.925,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+160858,2025-11-29 20:30:00,C07,4353,17.0,ALERTE,0.9214163589106824,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+154310,2025-08-15 00:30:00,C12,1390,22.5,ALERTE,0.92,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+156449,2025-09-15 03:00:00,C11,26,12.5,ALERTE,0.92,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+157041,2025-09-25 03:00:00,C10,279,43.5,ALERTE,0.9148909413695766,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+162241,2025-12-21 20:30:00,C07,1379,28.5,ALERTE,0.9148566206885737,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+156765,2025-09-20 12:30:00,C02,4800,7.75,ALERTE,0.9144926876077544,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+154041,2025-08-11 20:00:00,C07,669,7.1,ALERTE,0.9124771633378682,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+157992,2025-10-10 12:30:00,C07,1305,6.1,ALERTE,0.9121108370587272,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+158529,2025-10-19 13:00:00,C04,452,6.01,ALERTE,0.9075,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+158896,2025-10-25 00:30:00,C11,698,13.0,ALERTE,0.9075,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+160740,2025-11-28 00:30:00,C03,3012,10.25,ALERTE,0.9075,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+159948,2025-11-13 20:30:00,C07,708,18.0,ALERTE,0.9049781676496254,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+156486,2025-09-16 20:00:00,C07,2690,15.5,ALERTE,0.9002725233123848,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+159996,2025-11-14 20:00:00,C07,251,11.1,ALERTE,0.8993375350588326,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161454,2025-12-09 20:00:00,C07,6507,19.95,ALERTE,0.8977474084185763,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161377,2025-12-08 04:00:00,C09,3192,20.4,ALERTE,0.89733109379075,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+156764,2025-09-20 03:30:00,C08,2869,17.0,ALERTE,0.895,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+156639,2025-09-19 07:30:00,C01,3067,4.04,ALERTE,0.8943033903202049,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+160623,2025-11-25 21:00:00,C07,1255,17.0,ALERTE,0.8935882384716034,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+153910,2025-08-09 20:00:00,C07,219,28.0,ALERTE,0.8904971893110843,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+156772,2025-09-20 20:00:00,C07,775,82.0,ALERTE,0.8900516254208577,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161896,2025-12-16 04:00:00,C03,85,30.6,ALERTE,0.89,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+159983,2025-11-14 04:00:00,C01,1293,19.5,ALERTE,0.8899328026407383,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+153675,2025-08-06 04:00:00,C04,2722,26.25,ALERTE,0.8799580255585263,1,1,odd_hour,odd-hour transaction; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+159293,2025-11-01 00:30:00,C12,374,37.05,ALERTE,0.8798361176099118,1,1,odd_hour,odd-hour transaction; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+156645,2025-09-19 08:30:00,C04,7585,5.0,ALERTE,0.8766944237352229,1,1,price_tampering,price deviation,0.2545094002249068,balanced_f1,Random Forest
+161100,2025-12-04 19:00:00,C05,660,1.8,ALERTE,0.8731345189248689,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+162125,2025-12-19 20:30:00,C07,1107,26.1,ALERTE,0.8715180904642863,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+160651,2025-11-26 19:00:00,C07,274,9.0,ALERTE,0.8644839800008435,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+154846,2025-08-22 03:00:00,C10,1444,6.0,ALERTE,0.8599585920152264,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+155102,2025-08-26 03:30:00,C06,1165,17.5,ALERTE,0.8574571192278063,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+155188,2025-08-28 09:00:00,C07,1297,17.5,ALERTE,0.847739604050146,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+153654,2025-08-05 19:00:00,C07,4469,13.0,ALERTE,0.8400619117902584,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162319,2025-12-22 20:00:00,C07,2194,27.0,ALERTE,0.8350701121847098,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+155808,2025-09-06 12:00:00,C07,2829,23.5,ALERTE,0.8330217019436493,1,0,normal,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162338,2025-12-23 19:00:00,C07,2206,7.5,ALERTE,0.8323300785929739,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+157606,2025-10-04 20:00:00,C07,598,31.35,ALERTE,0.8311931210348144,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162984,2025-11-26 12:00:00,C07,0,126.0,ALERTE,0.8284820760561012,1,1,basket_size_outlier,unusual basket size; high transaction amount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+158166,2025-10-13 18:30:00,C10,1229,10.0,ALERTE,0.8242411268776283,1,1,suspicious_discount,high discount,0.2545094002249068,balanced_f1,Random Forest
+162999,2025-12-23 18:30:00,C07,0,192.0,ALERTE,0.8139019649253514,1,1,basket_size_outlier,unusual basket size; high transaction amount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+157310,2025-09-28 18:00:00,C07,43,12.92,ALERTE,0.8123627579197583,1,1,price_tampering,price deviation; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+154065,2025-08-11 23:30:00,C09,197,41.0,ALERTE,0.81,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+162857,2025-12-31 00:30:00,C03,526,11.25,ALERTE,0.81,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+154436,2025-08-16 00:30:00,C11,3119,6.0,ALERTE,0.8073157522003924,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+154500,2025-08-17 19:00:00,C07,2744,3.75,ALERTE,0.7966288509987847,1,1,suspicious_discount,high discount; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+160933,2025-11-30 18:00:00,C07,649,14.0,ALERTE,0.7909709688071124,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+159058,2025-10-28 13:00:00,C07,462,31.5,ALERTE,0.7858643667640389,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161031,2025-12-02 18:00:00,C07,1237,17.5,ALERTE,0.7833298177545395,1,0,normal,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+160362,2025-11-21 20:00:00,C07,1487,9.5,ALERTE,0.7818896226669012,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162027,2025-12-18 18:00:00,C07,3584,13.95,ALERTE,0.7808158837104762,1,0,normal,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+159931,2025-11-13 19:00:00,C07,4923,9.78,ALERTE,0.7774148467582749,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+157116,2025-09-26 20:30:00,C07,500,55.0,ALERTE,0.775315105718495,1,1,shift_end_void_cluster,voided order; unusual basket size; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+157384,2025-09-30 13:00:00,C07,5080,16.5,ALERTE,0.7693875976418666,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+155712,2025-09-04 20:00:00,C07,6065,10.0,ALERTE,0.7466742128253051,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+153562,2025-08-03 23:30:00,C01,1151,22.5,ALERTE,0.74,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+162974,2025-12-09 19:30:00,C07,0,72.0,ALERTE,0.7264442603583682,1,1,basket_size_outlier,unusual basket size; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+154459,2025-08-17 08:00:00,C07,8752,18.0,ALERTE,0.7195722432240838,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161512,2025-12-10 19:30:00,C07,3464,21.0,ALERTE,0.712022653401663,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+153661,2025-08-05 00:30:00,C07,1293,18.5,ALERTE,0.6974781147859477,1,1,odd_hour,odd-hour transaction; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+158204,2025-10-14 12:00:00,C07,1559,33.5,ALERTE,0.6782099193089846,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162199,2025-12-20 19:30:00,C07,827,29.5,ALERTE,0.6771579649187075,1,0,normal,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162021,2025-12-18 19:00:00,C07,1478,59.5,ALERTE,0.6722905205598273,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+154338,2025-08-15 19:30:00,C07,1165,35.5,ALERTE,0.6711723220541248,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161682,2025-12-13 19:00:00,C07,827,13.95,ALERTE,0.659810319869581,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+157293,2025-09-28 20:00:00,C07,969,44.0,ALERTE,0.6468798319617735,1,1,void_after_payment,voided order; unusual basket size; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162009,2025-12-18 13:00:00,C07,858,5.0,ALERTE,0.60715563934376,1,1,shift_end_void_cluster,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+154198,2025-08-13 18:00:00,C07,3156,20.3,ALERTE,0.5855753781757742,1,1,void_after_payment,voided order; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+158828,2025-10-24 23:30:00,C07,1399,20.5,ALERTE,0.57,1,1,odd_hour,odd-hour transaction; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+162858,2025-12-31 23:30:00,C02,385,5.5,ALERTE,0.5599358928356356,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+158140,2025-10-12 12:30:00,C07,697,48.5,ALERTE,0.5037252188102052,1,1,void_after_payment,voided order; unusual basket size; high-risk cashier pattern,0.2545094002249068,balanced_f1,Random Forest
+161852,2025-12-16 23:30:00,C04,869,5.4,ALERTE,0.4799020237380796,1,1,odd_hour,odd-hour transaction,0.2545094002249068,balanced_f1,Random Forest
+161742,2025-12-14 03:30:00,C01,1991,15.57,ALERTE,0.3188781949340262,1,1,odd_hour,voided order; odd-hour transaction; unusual basket size,0.2545094002249068,balanced_f1,Random Forest
+160843,2025-11-29 19:00:00,C11,2198,33.0,ALERTE,0.3038367200661772,1,0,normal,voided order,0.2545094002249068,balanced_f1,Random Forest
+158008,2025-10-11 09:00:00,C04,3085,11.25,ALERTE,0.254511088856665,1,0,normal,voided order,0.2545094002249068,balanced_f1,Random Forest

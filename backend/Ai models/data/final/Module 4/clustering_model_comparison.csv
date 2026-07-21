@@ -1,0 +1,3 @@
+model,k,silhouette,davies_bouldin,calinski_harabasz,bic,aic,assignment_type,business_interpretability
+K-Means,5,0.10001366810230347,2.628738050721393,874.2480814374387,,,Hard assignment,High
+GMM,5,0.0011434024968865189,5.891667515859823,265.3439880727731,-35042743.406224646,-35082501.774408154,Probabilistic assignment,Medium

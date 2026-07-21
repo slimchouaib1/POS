@@ -1,0 +1,132 @@
+{
+  "phase": "machine_learning",
+  "models_compared": [
+    "xgboost",
+    "lightgbm"
+  ],
+  "overall_metrics": {
+    "xgboost": {
+      "val": {
+        "mae": 2.3756363590307825,
+        "rmse": 3.06430931226695,
+        "mape": 0.5285882114660894,
+        "smape": 0.37398511250335575,
+        "wape": 0.30732131039337857,
+        "mase": NaN,
+        "r2": 0.6579300855186572,
+        "bias": -0.48428648928224965
+      },
+      "test": {
+        "mae": 2.672296455448643,
+        "rmse": 3.4844710023434313,
+        "mape": 0.37776848812899794,
+        "smape": 0.30631038235646674,
+        "wape": 0.2613683584809884,
+        "mase": NaN,
+        "r2": 0.6707313253656252,
+        "bias": 0.2637441796182133
+      }
+    },
+    "lightgbm": {
+      "val": {
+        "mae": 2.3660418631404694,
+        "rmse": 3.048674724341844,
+        "mape": 0.509801781499829,
+        "smape": 0.37438433772566837,
+        "wape": 0.3060801300930493,
+        "mase": NaN,
+        "r2": 0.6614117697292345,
+        "bias": -0.3489970030770533
+      },
+      "test": {
+        "mae": 2.675506362838588,
+        "rmse": 3.498326884255931,
+        "mape": 0.3732208487370362,
+        "smape": 0.3059456704595613,
+        "wape": 0.26168230876284254,
+        "mase": NaN,
+        "r2": 0.6681074672235086,
+        "bias": 0.28040295464317916
+      }
+    }
+  },
+  "wilcoxon": [
+    {
+      "Split": "val",
+      "n_items": 122,
+      "XGB wins": 55,
+      "LGB wins": 67,
+      "mean_diff": 0.003018608256248501,
+      "p_value": 0.16185498957538158,
+      "verdict": "Not significant"
+    },
+    {
+      "Split": "test",
+      "n_items": 122,
+      "XGB wins": 57,
+      "LGB wins": 65,
+      "mean_diff": 0.0007543058324488456,
+      "p_value": 0.4517828205618689,
+      "verdict": "Not significant"
+    }
+  ],
+  "head_to_head": [
+    {
+      "Split": "val",
+      "Metric": "wape",
+      "XGBoost wins": 55,
+      "LightGBM wins": 67,
+      "Ties": 0,
+      "XGB win %": "45.1%"
+    },
+    {
+      "Split": "val",
+      "Metric": "mae",
+      "XGBoost wins": 55,
+      "LightGBM wins": 67,
+      "Ties": 0,
+      "XGB win %": "45.1%"
+    },
+    {
+      "Split": "val",
+      "Metric": "r2",
+      "XGBoost wins": 50,
+      "LightGBM wins": 72,
+      "Ties": 0,
+      "XGB win %": "41.0%"
+    },
+    {
+      "Split": "test",
+      "Metric": "wape",
+      "XGBoost wins": 57,
+      "LightGBM wins": 65,
+      "Ties": 0,
+      "XGB win %": "46.7%"
+    },
+    {
+      "Split": "test",
+      "Metric": "mae",
+      "XGBoost wins": 57,
+      "LightGBM wins": 65,
+      "Ties": 0,
+      "XGB win %": "46.7%"
+    },
+    {
+      "Split": "test",
+      "Metric": "r2",
+      "XGBoost wins": 64,
+      "LightGBM wins": 58,
+      "Ties": 0,
+      "XGB win %": "52.5%"
+    }
+  ],
+  "winner": "LightGBM",
+  "votes": {
+    "xgboost": 0,
+    "lightgbm": 3
+  },
+  "beats_prophet_baseline": {
+    "xgboost": true,
+    "lightgbm": true
+  }
+}
