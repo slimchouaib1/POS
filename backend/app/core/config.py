@@ -53,7 +53,7 @@ class Settings(BaseSettings):
             "change-me",
             "change-me-in-production",
         }
-        old_committed_secret_hash = "89915c0b773e0ab0a2258c01ef82e6a42e149d9696795d683071734f732f98a0"
+        old_committed_secret_hash = "89915c0b773e0ab0a2258c01ef82e6a42e149d9696795d683071734f732f98a0"  # nosec B105
         if (
             value.lower() in weak_values
             or hashlib.sha256(value.encode("utf-8")).hexdigest() == old_committed_secret_hash

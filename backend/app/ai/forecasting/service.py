@@ -131,7 +131,7 @@ def get_item_forecast(db: Session, item_name: str = None, section: str = None, h
     forecast_weeks = []
     for w in range(1, horizon_weeks + 1):
         # Apply a small random variation per week (simulating seasonal drift)
-        variation = random.uniform(-0.12, 0.12)
+        variation = random.uniform(-0.12, 0.12)  # nosec B311
         weekly_pred = max(1, int(round(base_pred * (1 + variation * (w / horizon_weeks)))))
         conf_upper = int(round(weekly_pred * 1.20))
         conf_lower = max(0, int(round(weekly_pred * 0.80)))

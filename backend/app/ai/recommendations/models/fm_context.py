@@ -19,7 +19,8 @@ Architecture (from notebook):
   Dimensions:       9991      122       4         7        1            1      7                8  = 10141
 """
 import numpy as np
-import pickle
+# Trusted local model artifacts are loaded from the app bundle.
+import pickle  # nosec B403
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -145,9 +146,9 @@ class FMEngine:
         self._w = params["w"]
         self._V = params["V"]
 
-        # Load encoders
+        # Load trusted encoders packaged with the trained model.
         with open(str(encoders_path), "rb") as f:
-            self._encoders = pickle.load(f)
+            self._encoders = pickle.load(f)  # nosec B301
 
         # Extract dimensions from encoders
         self._n_users = len(self._encoders["user"].classes_)
