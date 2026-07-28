@@ -12,6 +12,30 @@ _full_df = None
 _metadata = None
 
 
+def _candidate_export_paths(filename: str) -> list[Path]:
+    configured = Path(settings.NOTEBOOKS_PATH)
+    bundled = Path("Ai models")
+    roots = [configured]
+    if configured != bundled:
+        roots.append(bundled)
+
+    candidates = []
+    for root in roots:
+        candidates.extend([
+            root / "Module 3" / "Final" / "exports" / filename,
+            root / "data" / "processed" / "Module 3" / filename,
+            root / "data" / "final" / "Module 3" / filename,
+        ])
+    return candidates
+
+
+def _first_existing_export(filename: str) -> Path | None:
+    for path in _candidate_export_paths(filename):
+        if path.exists():
+            return path
+    return None
+
+
 def _load_data():
     global _alerts_df, _full_df, _metadata
 
@@ -19,22 +43,22 @@ def _load_data():
         return
 
     # Load alerts (dashboard summary)
-    alerts_path = Path(settings.NOTEBOOKS_PATH) / "Module 3" / "Final" / "exports" / "final_anomaly_alerts_dashboard.csv"
-    if alerts_path.exists():
+    alerts_path = _first_existing_export("final_anomaly_alerts_dashboard.csv")
+    if alerts_path and alerts_path.exists():
         _alerts_df = pd.read_csv(alerts_path)
     else:
         _alerts_df = pd.DataFrame()
 
     # Load full alerts (with all features for order details)
-    full_path = Path(settings.NOTEBOOKS_PATH) / "Module 3" / "Final" / "exports" / "final_anomaly_alerts_full.csv"
-    if full_path.exists():
+    full_path = _first_existing_export("final_anomaly_alerts_full.csv")
+    if full_path and full_path.exists():
         _full_df = pd.read_csv(full_path)
     else:
         _full_df = pd.DataFrame()
 
     # Load metadata
-    meta_path = Path(settings.NOTEBOOKS_PATH) / "Module 3" / "Final" / "exports" / "final_anomaly_module_metadata.json"
-    if meta_path.exists():
+    meta_path = _first_existing_export("final_anomaly_module_metadata.json")
+    if meta_path and meta_path.exists():
         with open(meta_path, "r") as f:
             _metadata = json.load(f)
     else:

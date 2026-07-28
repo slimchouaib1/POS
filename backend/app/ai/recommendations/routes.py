@@ -43,6 +43,9 @@ def recommend(
     return get_frequently_bought_together(
         basket_items=data.basket_items,
         customer_id=data.customer_id,
+        hour=data.hour,
+        restaurant_type=data.restaurant_type,
+        top_n=data.top_n,
         db=db,
     )
 

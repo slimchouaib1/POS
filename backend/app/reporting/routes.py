@@ -14,16 +14,33 @@ from app.customers.models import Customer
 router = APIRouter(prefix="/api/reports", tags=["Reporting"])
 
 
+def _range_start(date_range: str | None, fallback_days: int = 30) -> datetime:
+    days_by_range = {
+        "last_week": 7,
+        "last_month": 30,
+        "last_year": 365,
+    }
+    return datetime.utcnow() - timedelta(days=days_by_range.get(date_range or "", fallback_days))
+
+
 @router.get("/dashboard")
 def dashboard_kpis(
+    date_range: Optional[str] = Query(
+        "last_week",
+        alias="range",
+        pattern="^(last_week|last_month|last_year)$",
+    ),
     db: Session = Depends(get_db),
     _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
 ):
     today = datetime.utcnow().date()
+    since = _range_start(date_range)
 
-    # Total orders & revenue
-    total_orders = db.query(Order).filter(Order.status == "paid").count()
-    total_revenue = db.query(sqlfunc.sum(Order.total_amount)).filter(Order.status == "paid").scalar() or 0
+    paid_order_filters = [Order.status == "paid", Order.created_at >= since]
+
+    # Total orders & revenue for selected range
+    total_orders = db.query(Order).filter(*paid_order_filters).count()
+    total_revenue = db.query(sqlfunc.sum(Order.total_amount)).filter(*paid_order_filters).scalar() or 0
 
     # Today's metrics
     today_orders = db.query(Order).filter(
@@ -38,10 +55,6 @@ def dashboard_kpis(
     # Average basket
     avg_basket = round(total_revenue / max(total_orders, 1), 2)
 
-    # Profit estimations (Prototype placeholders based on 60% gross and 36% net margins)
-    gross_profit = total_revenue * 0.60
-    net_profit = total_revenue * 0.36
-
     # Total customers
     customer_count = db.query(Customer).count()
 
@@ -53,7 +66,7 @@ def dashboard_kpis(
             sqlfunc.sum(OrderItem.subtotal).label("total_revenue"),
         )
         .join(Order)
-        .filter(Order.status == "paid")
+        .filter(*paid_order_filters)
         .group_by(OrderItem.product_name)
         .order_by(sqlfunc.sum(OrderItem.quantity).desc())
         .limit(10)
@@ -77,16 +90,16 @@ def dashboard_kpis(
             sqlfunc.count(Payment.id).label("count"),
             sqlfunc.sum(Payment.amount).label("total"),
         )
-        .filter(Payment.status == "completed")
+        .join(Order)
+        .filter(Payment.status == "completed", Order.created_at >= since)
         .group_by(Payment.method)
         .all()
     )
 
     return {
+        "range": date_range,
         "total_orders": total_orders,
         "total_revenue": round(total_revenue, 2),
-        "gross_profit": round(gross_profit, 2),
-        "net_profit": round(net_profit, 2),
         "customer_count": customer_count,
         "today_orders": today_orders,
         "today_revenue": round(today_revenue, 2),
@@ -108,10 +121,15 @@ def dashboard_kpis(
 def sales_report(
     period: str = Query("daily", pattern="^(daily|weekly|monthly)$"),
     days: int = Query(30, ge=1, le=365),
+    date_range: Optional[str] = Query(
+        None,
+        alias="range",
+        pattern="^(last_week|last_month|last_year)$",
+    ),
     db: Session = Depends(get_db),
     _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
 ):
-    since = datetime.utcnow() - timedelta(days=days)
+    since = _range_start(date_range, days)
     orders = (
         db.query(Order)
         .filter(Order.status == "paid", Order.created_at >= since)

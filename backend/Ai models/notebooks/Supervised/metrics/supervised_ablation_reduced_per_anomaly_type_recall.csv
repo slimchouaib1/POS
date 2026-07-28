@@ -1,0 +1,43 @@
+model,anomaly_type,n_cases,recall
+LightGBM,basket_size_outlier,30,0.8666666666666667
+LightGBM,odd_hour,32,0.90625
+LightGBM,price_tampering,27,0.07407407407407407
+LightGBM,shift_end_void_cluster,15,0.06666666666666667
+LightGBM,suspicious_discount,38,0.47368421052631576
+LightGBM,void_after_payment,34,0.058823529411764705
+XGBoost,basket_size_outlier,30,0.8666666666666667
+XGBoost,odd_hour,32,0.6875
+XGBoost,price_tampering,27,0.0
+XGBoost,shift_end_void_cluster,15,0.2
+XGBoost,suspicious_discount,38,0.4473684210526316
+XGBoost,void_after_payment,34,0.11764705882352941
+CatBoost,basket_size_outlier,30,0.7666666666666667
+CatBoost,odd_hour,32,0.71875
+CatBoost,price_tampering,27,0.0
+CatBoost,shift_end_void_cluster,15,0.06666666666666667
+CatBoost,suspicious_discount,38,0.42105263157894735
+CatBoost,void_after_payment,34,0.058823529411764705
+Logistic Regression,basket_size_outlier,30,0.6666666666666666
+Logistic Regression,odd_hour,32,1.0
+Logistic Regression,price_tampering,27,0.0
+Logistic Regression,shift_end_void_cluster,15,0.06666666666666667
+Logistic Regression,suspicious_discount,38,0.21052631578947367
+Logistic Regression,void_after_payment,34,0.08823529411764706
+Random Forest,basket_size_outlier,30,0.8666666666666667
+Random Forest,odd_hour,32,0.59375
+Random Forest,price_tampering,27,0.0
+Random Forest,shift_end_void_cluster,15,0.0
+Random Forest,suspicious_discount,38,0.2894736842105263
+Random Forest,void_after_payment,34,0.058823529411764705
+Extra Trees,basket_size_outlier,30,0.7333333333333333
+Extra Trees,odd_hour,32,0.78125
+Extra Trees,price_tampering,27,0.0
+Extra Trees,shift_end_void_cluster,15,0.26666666666666666
+Extra Trees,suspicious_discount,38,0.23684210526315788
+Extra Trees,void_after_payment,34,0.08823529411764706
+HistGradientBoosting,basket_size_outlier,30,0.8666666666666667
+HistGradientBoosting,odd_hour,32,0.4375
+HistGradientBoosting,price_tampering,27,0.037037037037037035
+HistGradientBoosting,shift_end_void_cluster,15,0.06666666666666667
+HistGradientBoosting,suspicious_discount,38,0.39473684210526316
+HistGradientBoosting,void_after_payment,34,0.0

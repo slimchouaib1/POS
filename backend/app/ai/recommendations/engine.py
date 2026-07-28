@@ -73,7 +73,9 @@ class HybridEngine:
     ) -> list[RecommendationResult]:
         """
         Get hybrid recommendations for a given basket and context.
-        If customer_history has >= 5 items, activate the SVD personalized layer.
+        FP-Growth contributes explicit basket association rules when present.
+        SVD contributes item-item similarity from the basket, optionally enriched
+        with customer history. FM contributes context-aware reranking.
         """
         if not self._loaded:
             logger.warning("HybridEngine not loaded. Returning empty recommendations.")
@@ -81,16 +83,14 @@ class HybridEngine:
 
         # 1. Get base recommendations from FP-Growth and SVD
         fp_recs = self.fp_growth.recommend(basket_items, top_n=20)
-        
-        # Cold-start guard: only run SVD if we have sufficient customer history
+
+        svd_items = list(basket_items)
         if customer_history and len(set(customer_history)) >= 5:
-            # Combine current basket with past history to find similar items
-            combined_items = list(set(basket_items + customer_history))
-            svd_recs = self.svd.recommend(combined_items, top_n=20)
-            logger.debug(f"SVD enabled. customer_history size: {len(set(customer_history))}")
-        else:
-            svd_recs = []
-            logger.debug("SVD disabled (cold-start or no customer).")
+            svd_items = list(set(svd_items + customer_history))
+            logger.debug("SVD enriched with customer history size: %s", len(set(customer_history)))
+
+        svd_recs = self.svd.recommend(svd_items, top_n=20) if svd_items else []
+        logger.debug("SVD used %s context items -> %s recommendations", len(svd_items), len(svd_recs))
 
         # Merge results keyed by lowercase item name
         merged: dict[str, dict] = {}
@@ -163,9 +163,9 @@ class HybridEngine:
             multiplier = fm_multipliers.get(key, 1.0)
             final_score = base_score * multiplier
             
-            # Add FM to sources if it modulated the score at all
+            # Add FM to sources when the candidate was evaluated by the context model.
             sources = data["sources"]
-            if multiplier != 1.0:
+            if key in fm_multipliers:
                 sources.append("FM Context")
                 if multiplier > 1.2:
                     data["explanation_parts"].append("Highly popular at this time of day.")
@@ -181,7 +181,7 @@ class HybridEngine:
                 fm_multiplier=round(multiplier, 2),
                 confidence=data["confidence"],
                 lift=data["lift"],
-                source_models=sources,
+                source_models=list(dict.fromkeys(sources)),
                 explanation=explanation
             ))
 

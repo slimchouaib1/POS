@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './AuthContext';
 import DashboardLayout from './layouts/DashboardLayout';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import CustomerInsightsPage from './pages/CustomerInsightsPage';
 import POSPage from './pages/POSPage';
 import PaymentPage from './pages/PaymentPage';
 import ReceiptPage from './pages/ReceiptPage';
@@ -84,7 +85,7 @@ function AppRoutes() {
         {/* Admin/Manager Analytics */}
         <Route path="dashboard" element={<RoleRoute allowedRoles={['admin', 'manager']}><DashboardPage /></RoleRoute>} />
         <Route path="sales-reports" element={<RoleRoute allowedRoles={['admin', 'manager']}><SalesReportsPage /></RoleRoute>} />
-        <Route path="customer-insights" element={<RoleRoute allowedRoles={['admin', 'manager']}><DashboardPage /></RoleRoute>} />
+        <Route path="customer-insights" element={<RoleRoute allowedRoles={['admin', 'manager']}><CustomerInsightsPage /></RoleRoute>} />
         <Route path="orders" element={<RoleRoute allowedRoles={['admin', 'manager', 'cashier', 'stock_manager']}><OrdersPage /></RoleRoute>} />
 
         {/* AI Modules */}

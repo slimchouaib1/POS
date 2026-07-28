@@ -17,38 +17,60 @@ _rfm_summary = None
 _kmeans_profiles = None
 
 
+def _candidate_module4_paths(filename: str) -> list[Path]:
+    configured = Path(settings.NOTEBOOKS_PATH)
+    bundled = Path("Ai models")
+    roots = [configured]
+    if configured != bundled:
+        roots.append(bundled)
+
+    candidates = []
+    for root in roots:
+        candidates.extend([
+            root / "Module 4" / filename,
+            root / "data" / "processed" / "Module 4" / filename,
+            root / "data" / "final" / "Module 4" / filename,
+        ])
+    return candidates
+
+
+def _first_existing_module4(filename: str) -> Path | None:
+    for path in _candidate_module4_paths(filename):
+        if path.exists():
+            return path
+    return None
+
+
 def _load_data():
     global _segments_df, _hybrid_profiles, _rfm_summary, _kmeans_profiles
 
     if _segments_df is not None:
         return
 
-    base = Path(settings.NOTEBOOKS_PATH) / "Module 4"
-
     # Customer segments final (10,001 customers)
-    path = base / "customer_segments_final.csv"
-    if path.exists():
+    path = _first_existing_module4("customer_segments_final.csv")
+    if path and path.exists():
         _segments_df = pd.read_csv(path)
     else:
         _segments_df = pd.DataFrame()
 
     # Hybrid segment profiles
-    path = base / "hybrid_segment_profiles.csv"
-    if path.exists():
+    path = _first_existing_module4("hybrid_segment_profiles.csv")
+    if path and path.exists():
         _hybrid_profiles = pd.read_csv(path)
     else:
         _hybrid_profiles = pd.DataFrame()
 
     # RFM segment summary
-    path = base / "rfm_segment_summary.csv"
-    if path.exists():
+    path = _first_existing_module4("rfm_segment_summary.csv")
+    if path and path.exists():
         _rfm_summary = pd.read_csv(path)
     else:
         _rfm_summary = pd.DataFrame()
 
     # KMeans cluster profiles
-    path = base / "kmeans_cluster_profiles.csv"
-    if path.exists():
+    path = _first_existing_module4("kmeans_cluster_profiles.csv")
+    if path and path.exists():
         _kmeans_profiles = pd.read_csv(path)
     else:
         _kmeans_profiles = pd.DataFrame()

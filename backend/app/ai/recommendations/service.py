@@ -26,6 +26,9 @@ def load_association_rules(model_path: str = "Ai models") -> None:
 def get_frequently_bought_together(
     basket_items: list[str],
     customer_id: Optional[int] = None,
+    hour: Optional[int] = None,
+    restaurant_type: str = "Cafe",
+    top_n: int = 5,
     db: Optional[Session] = None
 ) -> list[dict]:
     """
@@ -49,11 +52,12 @@ def get_frequently_bought_together(
         except Exception as e:
             logger.error(f"Error fetching customer history for recommendations: {e}")
 
-    # For now we use default context (current time, "Cafe" restaurant)
     results = hybrid_engine.recommend(
         basket_items=basket_items,
         customer_history=customer_history,
-        top_n=5
+        hour=hour,
+        restaurant_type=restaurant_type,
+        top_n=top_n,
     )
     
     return [

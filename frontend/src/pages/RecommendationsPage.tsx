@@ -15,7 +15,12 @@ export default function RecommendationsPage() {
     if (basketItems.length === 0) return;
     setLoading(true);
     try {
-      const res = await api.post('/api/ai/recommendations', { basket_items: basketItems, top_n: 8 });
+      const res = await api.post('/api/ai/recommendations', {
+        basket_items: basketItems,
+        hour: new Date().getHours(),
+        restaurant_type: 'Cafe',
+        top_n: 8,
+      });
       setResults(res.data);
     } catch (e) { console.error(e); }
     setLoading(false);
@@ -33,6 +38,12 @@ export default function RecommendationsPage() {
   };
 
   useEffect(() => { loadData(); }, []);
+
+  const formatModelScore = (score: number) => (
+    Number.isFinite(score) ? score.toFixed(2) : 'N/A'
+  );
+  const hasConfidence = (confidence: number) => Number.isFinite(confidence) && confidence > 0;
+  const hasLift = (lift: number) => Number.isFinite(lift) && lift > 0;
 
   return (
     <div className="animate-fadeIn">
@@ -132,18 +143,20 @@ export default function RecommendationsPage() {
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)' }}>
-                      {r.confidence}%
+                      {hasConfidence(r.confidence) ? `${r.confidence}%` : formatModelScore(r.score)}
                     </div>
-                    <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>confiance</div>
+                    <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>
+                      {hasConfidence(r.confidence) ? 'confiance' : 'score modele'}
+                    </div>
                   </div>
                 </div>
                 <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginBottom: '0.75rem', lineHeight: 1.5 }}>
                   💡 {r.explanation}
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <span className="badge badge-info">Lift: {r.lift}x</span>
-                  <span className="badge badge-success">Support: {r.support}%</span>
-                  <span className="badge badge-warning">Score: {r.score}</span>
+                  {hasLift(r.lift) && <span className="badge badge-info">Lift: {r.lift.toFixed(2)}x</span>}
+                  <span className="badge badge-warning">Score: {formatModelScore(r.score)}</span>
+                  <span className="badge badge-success">{r.source?.length || 1} model{(r.source?.length || 1) > 1 ? 's' : ''}</span>
                 </div>
               </div>
             ))}

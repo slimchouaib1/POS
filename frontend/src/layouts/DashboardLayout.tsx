@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import {
-  LayoutDashboard, Package, Users,
+  LayoutDashboard, Package, Users, UserRoundCheck,
   TrendingUp, ShieldAlert,
   LogOut, Activity, ClipboardList, ChefHat,
   FileText, PieChart, Boxes, ArrowLeftRight, Truck, Lightbulb
@@ -12,6 +12,7 @@ const adminNav = [
   { section: 'ANALYTICS', items: [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/sales-reports', icon: FileText, label: 'Sales Reports' },
+    { to: '/customer-insights', icon: UserRoundCheck, label: 'Customer Insights' },
   ]},
   { section: 'AI & INTELLIGENCE', items: [
     { to: '/ai/recommendations', icon: Lightbulb, label: 'Recommendations' },

@@ -5,5 +5,26 @@ __pycache__
 venv
 pos.db
 *.pyc
-Ai models/data
+Ai models/data/**
+!Ai models/data/
+!Ai models/data/raw/
+!Ai models/data/raw/customers.csv
+!Ai models/data/raw/enterprise_pos_dataset.csv
+!Ai models/data/final/
+!Ai models/data/final/Module 1/
+!Ai models/data/final/Module 1/association_rules.csv
+!Ai models/data/final/Module 1/svd_item_similarity_matrix.csv
+!Ai models/data/final/Module 4/
+!Ai models/data/final/Module 4/rfm_segment_summary.csv
+!Ai models/data/processed/
+!Ai models/data/processed/forecasting_features_weekly.csv
+!Ai models/data/processed/
+!Ai models/data/processed/Module 3/
+!Ai models/data/processed/Module 3/final_anomaly_alerts_dashboard.csv
+!Ai models/data/processed/Module 3/final_anomaly_alerts_full.csv
+!Ai models/data/processed/Module 3/final_anomaly_module_metadata.json
+!Ai models/data/processed/Module 4/
+!Ai models/data/processed/Module 4/customer_segments_final.csv
+!Ai models/data/processed/Module 4/hybrid_segment_profiles.csv
+!Ai models/data/processed/Module 4/kmeans_cluster_profiles.csv
 Ai models/notebooks

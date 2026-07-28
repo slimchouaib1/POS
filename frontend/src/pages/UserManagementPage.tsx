@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
-import { Search, Plus, Shield, ShieldCheck, Edit, Trash2, X } from 'lucide-react';
+import { Search, Plus, Edit, Trash2, X } from 'lucide-react';
 import CustomSelect from '../components/CustomSelect';
 
 interface UserRow {
@@ -10,8 +10,6 @@ interface UserRow {
   email: string;
   role: string;
   is_active: boolean;
-  last_login?: string;
-  branch?: string;
 }
 
 export default function UserManagementPage() {
@@ -26,16 +24,7 @@ export default function UserManagementPage() {
   const [loading, setLoading] = useState(false);
 
   const loadUsers = () => {
-    api.get('/api/users').then(r => setUsers(r.data)).catch(() => {
-      setUsers([
-        { id: 1, username: 'admin', full_name: 'Sarah Johnson', email: 'sarah.johnson@restaurant.com', role: 'admin', is_active: true, branch: 'Downtown' },
-        { id: 2, username: 'manager', full_name: 'Michael Chen', email: 'michael.chen@restaurant.com', role: 'manager', is_active: true, branch: 'Westside' },
-        { id: 3, username: 'cashier1', full_name: 'Emily Rodriguez', email: 'emily.rodriguez@restaurant.com', role: 'cashier', is_active: true, branch: 'Downtown' },
-        { id: 4, username: 'stock', full_name: 'David Kim', email: 'david.kim@restaurant.com', role: 'stock_manager', is_active: true, branch: 'Airport' },
-        { id: 5, username: 'cashier2', full_name: 'Jessica Brown', email: 'jessica.brown@restaurant.com', role: 'cashier', is_active: false, branch: 'Westside' },
-        { id: 6, username: 'manager2', full_name: 'Robert Taylor', email: 'robert.taylor@restaurant.com', role: 'manager', is_active: false, branch: 'Downtown' },
-      ]);
-    });
+    api.get('/api/users').then(r => setUsers(r.data)).catch(console.error);
   };
 
   useEffect(() => {
@@ -92,8 +81,6 @@ export default function UserManagementPage() {
     return true;
   });
 
-  const activeCount = users.filter(u => u.is_active).length;
-
   return (
     <div className="animate-fadeIn">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
@@ -108,46 +95,6 @@ export default function UserManagementPage() {
         }}>
           <Plus size={16} /> Add User
         </button>
-      </div>
-
-      {/* KPI strip */}
-      <div className="grid-4" style={{ marginBottom: '1.5rem' }}>
-        <div className="kpi-card">
-          <div>
-            <div className="kpi-label">Strong Passwords</div>
-            <div className="kpi-value">50%</div>
-            <div style={{ height: 6, borderRadius: 3, background: '#E5E7EB', marginTop: '0.5rem' }}>
-              <div style={{ height: '100%', width: '50%', borderRadius: 3, background: '#3B82F6' }} />
-            </div>
-          </div>
-          <div className="kpi-icon" style={{ background: '#EBF5FF', color: '#3B82F6' }}><Shield size={18} /></div>
-        </div>
-        <div className="kpi-card">
-          <div>
-            <div className="kpi-label">2FA Enabled</div>
-            <div className="kpi-value">50%</div>
-            <div style={{ height: 6, borderRadius: 3, background: '#E5E7EB', marginTop: '0.5rem' }}>
-              <div style={{ height: '100%', width: '50%', borderRadius: 3, background: '#F59E0B' }} />
-            </div>
-          </div>
-          <div className="kpi-icon" style={{ background: '#FFF8E1', color: '#F59E0B' }}><ShieldCheck size={18} /></div>
-        </div>
-        <div className="kpi-card">
-          <div>
-            <div className="kpi-label">Failed Login Attempts</div>
-            <div className="kpi-value">3</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>Last 24 hours</div>
-          </div>
-          <div className="kpi-icon" style={{ background: '#FFEBEE', color: '#DC3545' }}><Shield size={18} /></div>
-        </div>
-        <div className="kpi-card">
-          <div>
-            <div className="kpi-label">Total Users</div>
-            <div className="kpi-value">{users.length}</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>Active accounts: {activeCount}</div>
-          </div>
-          <div className="kpi-icon" style={{ background: '#E8F5E9', color: '#28A745' }}><Shield size={18} /></div>
-        </div>
       </div>
 
       {/* Search & Filters */}
@@ -189,8 +136,6 @@ export default function UserManagementPage() {
             <tr>
               <th>User</th>
               <th>Role</th>
-              <th>Branch</th>
-              <th>Last Login</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -214,10 +159,6 @@ export default function UserManagementPage() {
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: roleColors[u.role] }} />
                     {roleLabels[u.role] || u.role}
                   </span>
-                </td>
-                <td>{u.branch || 'Downtown'}</td>
-                <td style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)' }}>
-                  Feb {10 + i}, 2026 - {Math.floor(Math.random() * 12 + 1)}:{String(Math.floor(Math.random() * 60)).padStart(2, '0')} PM
                 </td>
                 <td>
                   <span className={`badge ${u.is_active ? 'badge-success' : 'badge-danger'}`}>

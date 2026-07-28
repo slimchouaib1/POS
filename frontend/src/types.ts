@@ -115,9 +115,7 @@ export interface Recommendation {
   score: number;
   confidence: number;
   lift: number;
-  support: number;
   source: string[];
-  antecedents: string[];
   explanation: string;
 }
 

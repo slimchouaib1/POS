@@ -2,7 +2,7 @@ import os
 import shutil
 from pathlib import Path
 
-BASE_DIR = Path(r"c:\Users\slimc\Desktop\POS\backend\Ai models")
+BASE_DIR = Path(__file__).resolve().parent / "Ai models"
 
 DIRS = {
     "data_processed": BASE_DIR / "data" / "processed",

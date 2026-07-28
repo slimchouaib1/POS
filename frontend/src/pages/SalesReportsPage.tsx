@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Download, DollarSign, ArrowUp, ArrowDown } from 'lucide-react';
-import CustomSelect from '../components/CustomSelect';
+import { Download, DollarSign } from 'lucide-react';
 import api from '../api';
 
 interface Transaction {
@@ -10,7 +9,6 @@ interface Transaction {
   server: string;
   payment: string;
   subtotal: number;
-  tax: number;
   discount: number;
   total: number;
   status: string;
@@ -19,17 +17,13 @@ interface Transaction {
 export default function SalesReportsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [revenueByDay, setRevenueByDay] = useState<{ day: string; value: number }[]>([]);
-  const [kpisData, setKpisData] = useState({ gross: 0, net: 0, tax: 0 });
+  const [grossSales, setGrossSales] = useState(0);
 
   useEffect(() => {
     // Fetch KPIs
     api.get('/api/reports/dashboard').then((r) => {
       if (r.data) {
-        setKpisData({
-          gross: r.data.total_revenue,
-          net: r.data.total_revenue * 0.81, // approximate net for demo
-          tax: r.data.total_revenue * 0.19, // approximate tax for demo
-        });
+        setGrossSales(r.data.total_revenue);
       }
     }).catch(console.error);
 
@@ -55,7 +49,6 @@ export default function SalesReportsPage() {
             server: o.cashier_name || 'System',
             payment: o.status === 'paid' ? 'Paid' : 'Pending',
             subtotal: subtotal,
-            tax: subtotal * 0.1,
             discount: o.discount_amount || 0,
             total: o.total_amount || 0,
             status: o.status === 'paid' ? 'Completed' : o.status
@@ -68,9 +61,7 @@ export default function SalesReportsPage() {
   const maxRevDay = revenueByDay.length > 0 ? Math.max(...revenueByDay.map(d => d.value)) : 1;
 
   const kpis = [
-    { label: 'Gross Sales', value: `${kpisData.gross.toLocaleString()} DT`, change: '', up: true, icon: <DollarSign size={18} />, color: '#DC3545', bg: '#FFF5F5' },
-    { label: 'Net Sales', value: `${kpisData.net.toLocaleString()} DT`, change: '', up: true, icon: <DollarSign size={18} />, color: '#28A745', bg: '#E8F5E9' },
-    { label: 'Taxes', value: `${kpisData.tax.toLocaleString()} DT`, change: '', up: true, icon: <DollarSign size={18} />, color: '#DC3545', bg: '#FFEBEE' },
+    { label: 'Gross Sales', value: `${grossSales.toLocaleString()} DT`, icon: <DollarSign size={18} />, color: '#DC3545', bg: '#FFF5F5' },
   ];
 
   return (
@@ -78,27 +69,17 @@ export default function SalesReportsPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Sales Reports</h2>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button className="btn btn-outline btn-sm">Last 30 Days</button>
-          <CustomSelect options={[{ value: '', label: 'All Payment Methods' }]} value="" onChange={() => {}} style={{ width: 160 }} />
-          <CustomSelect options={[{ value: '', label: 'All Order Types' }]} value="" onChange={() => {}} style={{ width: 140 }} />
-          <CustomSelect options={[{ value: '', label: 'All Servers' }]} value="" onChange={() => {}} style={{ width: 130 }} />
           <button className="btn btn-primary btn-sm"><Download size={14} /> Export</button>
         </div>
       </div>
 
       {/* KPIs */}
-      <div className="grid-5" style={{ marginBottom: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 320px)', gap: '1rem', marginBottom: '1.5rem' }}>
         {kpis.map((k, i) => (
           <div key={i} className="kpi-card">
             <div>
               <div className="kpi-label">{k.label}</div>
               <div className="kpi-value" style={{ fontSize: '1.5rem' }}>{k.value}</div>
-              {k.change && (
-                <div className={`kpi-change ${k.up ? 'up' : 'down'}`}>
-                  {k.up ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
-                  {k.change} vs last period
-                </div>
-              )}
             </div>
             <div className="kpi-icon" style={{ background: k.bg, color: k.color }}>{k.icon}</div>
           </div>
@@ -137,7 +118,6 @@ export default function SalesReportsPage() {
               <th>Server</th>
               <th>Payment</th>
               <th>Subtotal</th>
-              <th>Tax</th>
               <th>Discount</th>
               <th>Total</th>
               <th>Status</th>
@@ -152,13 +132,12 @@ export default function SalesReportsPage() {
                 <td>{t.server}</td>
                 <td>{t.payment}</td>
                 <td>{t.subtotal.toFixed(2)} DT</td>
-                <td>{t.tax.toFixed(2)} DT</td>
                 <td style={{ color: t.discount < 0 ? 'var(--color-success)' : '' }}>{t.discount !== 0 ? t.discount.toFixed(2) + ' DT' : '0.00 DT'}</td>
                 <td style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{t.total.toFixed(2)} DT</td>
                 <td><span className="badge badge-success">{t.status}</span></td>
               </tr>
             )) : (
-              <tr><td colSpan={10} style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>No recent transactions</td></tr>
+              <tr><td colSpan={9} style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>No recent transactions</td></tr>
             )}
           </tbody>
         </table>
