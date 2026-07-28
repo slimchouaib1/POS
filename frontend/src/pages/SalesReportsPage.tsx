@@ -14,21 +14,30 @@ interface Transaction {
   status: string;
 }
 
+type ReportRange = 'last_week' | 'last_month' | 'last_year';
+
+const reportRanges: { value: ReportRange; label: string }[] = [
+  { value: 'last_week', label: 'Last week' },
+  { value: 'last_month', label: 'Last month' },
+  { value: 'last_year', label: 'Last year' },
+];
+
 export default function SalesReportsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [revenueByDay, setRevenueByDay] = useState<{ day: string; value: number }[]>([]);
   const [grossSales, setGrossSales] = useState(0);
+  const [reportRange, setReportRange] = useState<ReportRange>('last_week');
+  const [exporting, setExporting] = useState<'excel' | 'pdf' | null>(null);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // Fetch KPIs
-    api.get('/api/reports/dashboard').then((r) => {
+    api.get(`/api/reports/dashboard?range=${reportRange}`).then((r) => {
       if (r.data) {
         setGrossSales(r.data.total_revenue);
       }
     }).catch(console.error);
 
-    // Fetch Daily Revenue
-    api.get('/api/reports/sales?period=daily&days=7').then((r) => {
+    api.get(`/api/reports/sales?period=daily&range=${reportRange}`).then((r) => {
       if (r.data && r.data.data) {
         setRevenueByDay(r.data.data.map((d: any) => ({
           day: new Date(d.date).toLocaleDateString('en-US', { weekday: 'short' }),
@@ -37,7 +46,6 @@ export default function SalesReportsPage() {
       }
     }).catch(console.error);
 
-    // Fetch Transactions
     api.get('/api/orders?status=paid&limit=50').then((r) => {
       if (r.data) {
         setTransactions(r.data.map((o: any) => {
@@ -56,7 +64,36 @@ export default function SalesReportsPage() {
         }));
       }
     }).catch(console.error);
-  }, []);
+  }, [reportRange]);
+
+  const downloadExport = async (format: 'excel' | 'pdf') => {
+    setExporting(format);
+    setMessage('');
+    try {
+      const extension = format === 'excel' ? 'xlsx' : 'pdf';
+      const response = await api.get(`/api/reports/sales/export/${format}?range=${reportRange}`, {
+        responseType: 'blob',
+      });
+      const blob = new Blob([response.data], {
+        type: format === 'excel'
+          ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          : 'application/pdf',
+      });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `sales_report_${reportRange}.${extension}`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+      setMessage(`Downloaded ${format === 'excel' ? 'Excel' : 'PDF'} export for ${reportRanges.find(r => r.value === reportRange)?.label}.`);
+    } catch (err: any) {
+      setMessage(err.response?.data?.detail || `Failed to download ${format} export.`);
+    } finally {
+      setExporting(null);
+    }
+  };
 
   const maxRevDay = revenueByDay.length > 0 ? Math.max(...revenueByDay.map(d => d.value)) : 1;
 
@@ -68,10 +105,34 @@ export default function SalesReportsPage() {
     <div className="animate-fadeIn">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Sales Reports</h2>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button className="btn btn-primary btn-sm"><Download size={14} /> Export</button>
+        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 4, padding: 4, background: '#FFFFFF', border: '1px solid var(--color-border-light)', borderRadius: 8 }}>
+            {reportRanges.map((range) => (
+              <button
+                key={range.value}
+                type="button"
+                onClick={() => setReportRange(range.value)}
+                className={`btn btn-sm ${reportRange === range.value ? 'btn-primary' : 'btn-ghost'}`}
+                style={{ minWidth: 88, justifyContent: 'center' }}
+              >
+                {range.label}
+              </button>
+            ))}
+          </div>
+          <button className="btn btn-outline btn-sm" onClick={() => downloadExport('excel')} disabled={exporting !== null}>
+            <Download size={14} /> {exporting === 'excel' ? 'Exporting...' : 'Excel'}
+          </button>
+          <button className="btn btn-primary btn-sm" onClick={() => downloadExport('pdf')} disabled={exporting !== null}>
+            <Download size={14} /> {exporting === 'pdf' ? 'Exporting...' : 'PDF'}
+          </button>
         </div>
       </div>
+
+      {message && (
+        <div className="card" style={{ padding: '0.75rem 1rem', marginBottom: '1rem', color: 'var(--color-text-secondary)' }}>
+          {message}
+        </div>
+      )}
 
       {/* KPIs */}
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 320px)', gap: '1rem', marginBottom: '1.5rem' }}>

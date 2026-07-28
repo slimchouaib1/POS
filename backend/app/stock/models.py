@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, Float, String, DateTime, ForeignKey, func, Text
+from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 
@@ -24,3 +25,18 @@ class IngredientStockMovement(Base):
     details = Column(Text, default="")
     triggered_by = Column(Integer, ForeignKey("users.id"), nullable=True)
     created_at = Column(DateTime, server_default=func.now())
+
+
+class PurchaseOrder(Base):
+    __tablename__ = "purchase_orders"
+
+    id = Column(Integer, primary_key=True, index=True)
+    ingredient_id = Column(Integer, ForeignKey("ingredients.id"), nullable=False, index=True)
+    quantity_ordered = Column(Float, nullable=False)
+    status = Column(String(20), nullable=False, default="pending", index=True)
+    created_at = Column(DateTime, server_default=func.now())
+    received_at = Column(DateTime, nullable=True)
+    created_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+
+    ingredient = relationship("Ingredient")
+    creator = relationship("User")

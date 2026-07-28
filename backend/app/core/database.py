@@ -27,6 +27,7 @@ def init_db():
     import app.orders.models  # noqa
     import app.payments.models  # noqa
     import app.stock.models  # noqa
+    import app.suppliers.models  # noqa
     import app.customers.models  # noqa
     import app.ai.anomalies.models  # noqa
     import app.audit.models  # noqa

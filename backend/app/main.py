@@ -16,6 +16,7 @@ from app.products.routes import router as products_router
 from app.orders.routes import router as orders_router
 from app.payments.routes import router as payments_router
 from app.stock.routes import router as stock_router
+from app.suppliers.routes import router as suppliers_router
 from app.customers.routes import router as customers_router
 from app.reporting.routes import router as reporting_router
 from app.users.routes import router as users_router
@@ -103,6 +104,7 @@ app.include_router(products_router)
 app.include_router(orders_router)
 app.include_router(payments_router)
 app.include_router(stock_router)
+app.include_router(suppliers_router)
 app.include_router(customers_router)
 app.include_router(reporting_router)
 app.include_router(users_router)

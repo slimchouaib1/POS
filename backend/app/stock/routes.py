@@ -6,7 +6,7 @@ from datetime import datetime
 
 from app.core.deps import get_db, get_current_user, require_role
 from app.core.config import settings
-from app.stock.models import StockMovement, IngredientStockMovement
+from app.stock.models import StockMovement, IngredientStockMovement, PurchaseOrder
 from app.products.models import Product, Ingredient
 from app.auth.models import User
 from app.audit.models import AuditLog
@@ -91,6 +91,57 @@ class IngredientStockMovementOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class PurchaseOrderCreate(BaseModel):
+    ingredient_id: int = Field(..., gt=0)
+    quantity_ordered: float = Field(..., gt=0, le=1_000_000)
+
+
+class PurchaseOrderOut(BaseModel):
+    id: int
+    ingredient_id: int
+    ingredient_name: str = ""
+    unit: str = ""
+    quantity_ordered: float
+    status: Literal["pending", "received", "cancelled"]
+    created_at: Optional[datetime] = None
+    received_at: Optional[datetime] = None
+    created_by: Optional[int]
+    created_by_name: str = ""
+
+    class Config:
+        from_attributes = True
+
+
+def _purchase_order_out(po: PurchaseOrder, db: Session) -> PurchaseOrderOut:
+    ingredient = db.query(Ingredient).filter(Ingredient.id == po.ingredient_id).first()
+    creator = db.query(User).filter(User.id == po.created_by).first() if po.created_by else None
+    out = PurchaseOrderOut.model_validate(po)
+    out.ingredient_name = ingredient.name if ingredient else ""
+    out.unit = ingredient.unit if ingredient else ""
+    out.created_by_name = creator.full_name if creator else ""
+    return out
+
+
+def _apply_ingredient_stock_change(
+    db: Session,
+    ingredient: Ingredient,
+    quantity_change: float,
+    reason: str,
+    details: str,
+    user: User,
+) -> IngredientStockMovement:
+    ingredient.current_stock = max(0, ingredient.current_stock + quantity_change)
+    movement = IngredientStockMovement(
+        ingredient_id=ingredient.id,
+        quantity_change=quantity_change,
+        reason=reason,
+        details=details,
+        triggered_by=user.id,
+    )
+    db.add(movement)
+    return movement
 
 
 @router.get("", response_model=list[StockOverviewItem])
@@ -239,16 +290,14 @@ def adjust_ingredient_stock(
         raise HTTPException(status_code=404, detail="Ingrédient introuvable")
 
     try:
-        ingredient.current_stock = max(0, ingredient.current_stock + data.quantity_change)
-
-        movement = IngredientStockMovement(
-            ingredient_id=data.ingredient_id,
+        movement = _apply_ingredient_stock_change(
+            db=db,
+            ingredient=ingredient,
             quantity_change=data.quantity_change,
             reason=data.reason,
             details=data.details,
-            triggered_by=current_user.id,
+            user=current_user,
         )
-        db.add(movement)
         db.add(AuditLog(
             user_id=current_user.id,
             action="adjust_ingredient_stock",
@@ -291,3 +340,138 @@ def list_ingredient_movements(
         out.triggered_by_name = user.full_name if user else ""
         result.append(out)
     return result
+
+
+@router.post("/purchase-orders", response_model=PurchaseOrderOut)
+def create_purchase_order(
+    data: PurchaseOrderCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(
+        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+    )),
+):
+    ingredient = db.query(Ingredient).filter(Ingredient.id == data.ingredient_id).first()
+    if not ingredient:
+        raise HTTPException(status_code=404, detail="Ingredient not found")
+
+    try:
+        po = PurchaseOrder(
+            ingredient_id=ingredient.id,
+            quantity_ordered=data.quantity_ordered,
+            status="pending",
+            created_by=current_user.id,
+        )
+        db.add(po)
+        db.flush()
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="create_purchase_order",
+            entity_type="purchase_order",
+            entity_id=po.id,
+            details=(
+                f"Created purchase order #{po.id} for {data.quantity_ordered} "
+                f"{ingredient.unit} of {ingredient.name}"
+            ),
+        ))
+        db.commit()
+        db.refresh(po)
+    except Exception:
+        db.rollback()
+        raise
+
+    return _purchase_order_out(po, db)
+
+
+@router.get("/purchase-orders", response_model=list[PurchaseOrderOut])
+def list_purchase_orders(
+    status: Optional[Literal["pending", "received", "cancelled"]] = Query(None),
+    limit: int = Query(100, ge=1, le=200),
+    db: Session = Depends(get_db),
+    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+):
+    q = db.query(PurchaseOrder)
+    if status:
+        q = q.filter(PurchaseOrder.status == status)
+    orders = q.order_by(PurchaseOrder.created_at.desc(), PurchaseOrder.id.desc()).limit(limit).all()
+    return [_purchase_order_out(po, db) for po in orders]
+
+
+@router.post("/purchase-orders/{purchase_order_id}/receive", response_model=PurchaseOrderOut)
+def receive_purchase_order(
+    purchase_order_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(
+        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+    )),
+):
+    po = db.query(PurchaseOrder).filter(PurchaseOrder.id == purchase_order_id).first()
+    if not po:
+        raise HTTPException(status_code=404, detail="Purchase order not found")
+    if po.status != "pending":
+        raise HTTPException(status_code=400, detail="Only pending purchase orders can be received")
+
+    ingredient = db.query(Ingredient).filter(Ingredient.id == po.ingredient_id).first()
+    if not ingredient:
+        raise HTTPException(status_code=404, detail="Ingredient not found")
+
+    try:
+        po.status = "received"
+        po.received_at = datetime.utcnow()
+        movement = _apply_ingredient_stock_change(
+            db=db,
+            ingredient=ingredient,
+            quantity_change=po.quantity_ordered,
+            reason="restock",
+            details=f"Purchase order #{po.id} received",
+            user=current_user,
+        )
+        db.flush()
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="receive_purchase_order",
+            entity_type="purchase_order",
+            entity_id=po.id,
+            details=(
+                f"Received purchase order #{po.id}; added {po.quantity_ordered} "
+                f"{ingredient.unit} to {ingredient.name}; movement_id={movement.id}"
+            ),
+        ))
+        db.commit()
+        db.refresh(po)
+    except Exception:
+        db.rollback()
+        raise
+
+    return _purchase_order_out(po, db)
+
+
+@router.post("/purchase-orders/{purchase_order_id}/cancel", response_model=PurchaseOrderOut)
+def cancel_purchase_order(
+    purchase_order_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(
+        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+    )),
+):
+    po = db.query(PurchaseOrder).filter(PurchaseOrder.id == purchase_order_id).first()
+    if not po:
+        raise HTTPException(status_code=404, detail="Purchase order not found")
+    if po.status != "pending":
+        raise HTTPException(status_code=400, detail="Only pending purchase orders can be cancelled")
+
+    try:
+        po.status = "cancelled"
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="cancel_purchase_order",
+            entity_type="purchase_order",
+            entity_id=po.id,
+            details=f"Cancelled purchase order #{po.id}",
+        ))
+        db.commit()
+        db.refresh(po)
+    except Exception:
+        db.rollback()
+        raise
+
+    return _purchase_order_out(po, db)

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import api from '../api';
 import {
   DollarSign, AlertTriangle, AlertOctagon, FileText,
-  TrendingUp, Sparkles, Package, ArrowUp, ArrowDown, ShoppingCart
+  TrendingUp, Sparkles, Package, ArrowUp, ArrowDown, ShoppingCart, CheckCircle2
 } from 'lucide-react';
 
 interface TopConsumed {
@@ -10,42 +10,104 @@ interface TopConsumed {
   amount: string;
 }
 
+interface IngredientForecast {
+  ingredient_id: number;
+  ingredient_name: string;
+  unit: string;
+  current_stock: number;
+  predicted_consumption: number;
+  shortage: number;
+  status: string;
+  top_consumers: string[];
+}
+
+interface PurchaseOrder {
+  id: number;
+  ingredient_id: number;
+  ingredient_name: string;
+  unit: string;
+  quantity_ordered: number;
+  status: 'pending' | 'received' | 'cancelled';
+  created_at: string | null;
+  received_at: string | null;
+  created_by_name: string;
+}
+
 export default function StockDashboardPage() {
-  const [ingredientForecasts, setIngredientForecasts] = useState<any[]>([]);
+  const [ingredientForecasts, setIngredientForecasts] = useState<IngredientForecast[]>([]);
+  const [pendingPurchaseOrders, setPendingPurchaseOrders] = useState<PurchaseOrder[]>([]);
   const [loading, setLoading] = useState(true);
   const [poProcessing, setPoProcessing] = useState(false);
+  const [receivingPoId, setReceivingPoId] = useState<number | null>(null);
+  const [poMessage, setPoMessage] = useState('');
 
-  const fetchForecasts = () => {
+  const fetchForecasts = useCallback(() => {
     setLoading(true);
     api.get('/api/ai/forecasting/ingredient-forecast')
       .then(res => setIngredientForecasts(res.data))
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
-  };
+  }, []);
+
+  const fetchPendingPurchaseOrders = useCallback(() => {
+    api.get('/api/stock/purchase-orders?status=pending')
+      .then(res => setPendingPurchaseOrders(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+  const refreshDashboard = useCallback(() => {
+    fetchForecasts();
+    fetchPendingPurchaseOrders();
+  }, [fetchForecasts, fetchPendingPurchaseOrders]);
 
   useEffect(() => {
-    fetchForecasts();
-  }, []);
+    refreshDashboard();
+  }, [refreshDashboard]);
 
   const handleCreatePO = async () => {
     const shortages = ingredientForecasts.filter(f => f.shortage > 0);
     if (shortages.length === 0) {
-      alert("All ingredients are optimally stocked! No Purchase Order needed.");
+      setPoMessage('All ingredients are optimally stocked. No purchase order is needed.');
+      return;
+    }
+
+    const pendingIngredientIds = new Set(pendingPurchaseOrders.map(po => po.ingredient_id));
+    const shortagesWithoutPendingPo = shortages.filter(f => !pendingIngredientIds.has(f.ingredient_id));
+    if (shortagesWithoutPendingPo.length === 0) {
+      setPoMessage('Every current shortage already has a pending purchase order.');
       return;
     }
     
     setPoProcessing(true);
+    setPoMessage('');
     try {
-      // For this demo, just simulate the PO processing
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      alert(`Purchase Order automatically generated and sent to suppliers for ${shortages.length} ingredients!`);
-      // Re-fetch to clear the alerts (in a real app this would adjust actual stock)
-      fetchForecasts();
-    } catch (e) {
+      await Promise.all(shortagesWithoutPendingPo.map(f => api.post('/api/stock/purchase-orders', {
+        ingredient_id: f.ingredient_id,
+        quantity_ordered: f.shortage,
+      })));
+      setPoMessage(`Created ${shortagesWithoutPendingPo.length} pending purchase order${shortagesWithoutPendingPo.length === 1 ? '' : 's'}.`);
+      refreshDashboard();
+    } catch (e: any) {
       console.error(e);
-      alert("Error creating Purchase Order");
+      setPoMessage(e.response?.data?.detail || 'Error creating purchase order.');
+    } finally {
+      setPoProcessing(false);
     }
-    setPoProcessing(false);
+  };
+
+  const handleReceivePO = async (purchaseOrderId: number) => {
+    setReceivingPoId(purchaseOrderId);
+    setPoMessage('');
+    try {
+      await api.post(`/api/stock/purchase-orders/${purchaseOrderId}/receive`);
+      setPoMessage(`Purchase order #${purchaseOrderId} received and stock updated.`);
+      refreshDashboard();
+    } catch (e: any) {
+      console.error(e);
+      setPoMessage(e.response?.data?.detail || 'Error receiving purchase order.');
+    } finally {
+      setReceivingPoId(null);
+    }
   };
 
   const [topConsumed] = useState<TopConsumed[]>([
@@ -65,7 +127,7 @@ export default function StockDashboardPage() {
     { label: 'Total Inventory Value', value: '14,455.75 DT', change: '+5.2%', up: true, icon: <DollarSign size={18} />, bg: '#E8F5E9', color: '#28A745' },
     { label: 'Low Stock Ingredients', value: ingredientForecasts.filter(f => f.status === 'LOW').length.toString(), change: null, up: false, icon: <AlertTriangle size={18} />, bg: '#FFF8E1', color: '#FFC107' },
     { label: 'Critical Ingredients', value: ingredientForecasts.filter(f => f.status === 'CRITICAL').length.toString(), change: null, up: false, icon: <AlertOctagon size={18} />, bg: '#FFEBEE', color: '#DC3545' },
-    { label: 'Pending Purchase Orders', value: '1', change: null, up: false, icon: <FileText size={18} />, bg: '#E8F5E9', color: '#28A745' },
+    { label: 'Pending Purchase Orders', value: pendingPurchaseOrders.length.toString(), change: null, up: false, icon: <FileText size={18} />, bg: '#E8F5E9', color: '#28A745' },
   ];
 
   return (
@@ -131,6 +193,12 @@ export default function StockDashboardPage() {
               </span>
             </div>
           ))}
+
+          {poMessage && (
+            <div style={{ marginTop: '1rem', fontSize: '0.8125rem', color: 'var(--color-text-secondary)' }}>
+              {poMessage}
+            </div>
+          )}
         </div>
 
         <div className="card">
@@ -145,6 +213,55 @@ export default function StockDashboardPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Pending Purchase Orders */}
+      <div className="card" style={{ marginBottom: '1.5rem', padding: 0, overflow: 'hidden' }}>
+        <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>Pending Purchase Orders</h3>
+          <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)' }}>Receive deliveries to increase ingredient stock.</p>
+        </div>
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Ingredient</th>
+              <th>Quantity</th>
+              <th>Created By</th>
+              <th>Created</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pendingPurchaseOrders.length > 0 ? pendingPurchaseOrders.map((po) => (
+              <tr key={po.id}>
+                <td style={{ fontWeight: 700 }}>PO-{po.id.toString().padStart(3, '0')}</td>
+                <td style={{ fontWeight: 600 }}>{po.ingredient_name}</td>
+                <td>{po.quantity_ordered.toLocaleString()} {po.unit}</td>
+                <td>{po.created_by_name || 'System'}</td>
+                <td>{po.created_at ? new Date(po.created_at).toLocaleString() : ''}</td>
+                <td><span className="badge badge-warning">Pending</span></td>
+                <td>
+                  <button
+                    className="btn btn-sm btn-primary"
+                    onClick={() => handleReceivePO(po.id)}
+                    disabled={receivingPoId === po.id}
+                  >
+                    <CheckCircle2 size={14} />
+                    {receivingPoId === po.id ? 'Receiving...' : 'Mark Received'}
+                  </button>
+                </td>
+              </tr>
+            )) : (
+              <tr>
+                <td colSpan={7} style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>
+                  No pending purchase orders.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
 
       {/* Stock Usage Trend */}

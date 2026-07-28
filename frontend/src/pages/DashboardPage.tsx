@@ -24,6 +24,28 @@ interface SalesPoint {
   revenue: number;
 }
 
+interface PeriodComparison {
+  has_comparison: boolean;
+  message: string;
+  current_period?: {
+    start: string;
+    end: string;
+    total_revenue: number;
+    total_orders: number;
+    avg_basket: number;
+    customer_count: number;
+  };
+  previous_period?: {
+    start: string;
+    end: string;
+    total_revenue: number;
+    total_orders: number;
+    avg_basket: number;
+    customer_count: number;
+  };
+  deltas?: Record<string, { absolute: number; percent: number | null }>;
+}
+
 type ReportRange = 'last_week' | 'last_month' | 'last_year';
 
 const reportRanges: { value: ReportRange; label: string }[] = [
@@ -49,6 +71,7 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<StatsData>(mockStats);
   const [revenueTrend, setRevenueTrend] = useState<SalesPoint[]>([]);
   const [reportRange, setReportRange] = useState<ReportRange>('last_week');
+  const [comparison, setComparison] = useState<PeriodComparison | null>(null);
 
   useEffect(() => {
     api.get(`/api/reports/dashboard?range=${reportRange}`).then((r) => {
@@ -62,6 +85,10 @@ export default function DashboardPage() {
 
     api.get<{ data: SalesPoint[] }>(`/api/reports/sales?period=daily&range=${reportRange}`).then((r) => {
       setRevenueTrend(r.data.data || []);
+    }).catch(console.error);
+
+    api.get<PeriodComparison>(`/api/reports/dashboard/comparison?range=${reportRange}`).then((r) => {
+      setComparison(r.data);
     }).catch(console.error);
   }, [reportRange]);
 
@@ -86,6 +113,13 @@ export default function DashboardPage() {
     i === Math.floor((revenueTrend.length - 1) / 2) ||
     i === revenueTrend.length - 1
   ));
+  const formatDate = (value?: string) => value ? new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+  const comparisonItems = [
+    { label: 'Revenue', key: 'total_revenue', suffix: ' DT' },
+    { label: 'Orders', key: 'total_orders', suffix: '' },
+    { label: 'Avg Order', key: 'avg_basket', suffix: ' DT' },
+    { label: 'Customers', key: 'customer_count', suffix: '' },
+  ];
 
   return (
     <div className="animate-fadeIn">
@@ -121,6 +155,40 @@ export default function DashboardPage() {
             <div className="kpi-icon" style={{ background: k.bg, color: k.color }}>{k.icon}</div>
           </div>
         ))}
+      </div>
+
+      {/* Period Comparison */}
+      <div className="card" style={{ marginBottom: '1.5rem' }}>
+        <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '0.5rem' }}>Period Comparison</h3>
+        {comparison?.has_comparison && comparison.current_period && comparison.previous_period && comparison.deltas ? (
+          <>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', marginBottom: '1rem' }}>
+              Current: {formatDate(comparison.current_period.start)} - {formatDate(comparison.current_period.end)} &nbsp;|&nbsp;
+              Previous: {formatDate(comparison.previous_period.start)} - {formatDate(comparison.previous_period.end)}
+            </p>
+            <div className="grid-4">
+              {comparisonItems.map((item) => {
+                const currentValue = comparison.current_period?.[item.key as keyof typeof comparison.current_period] as number;
+                const delta = comparison.deltas?.[item.key];
+                const isUp = (delta?.absolute || 0) >= 0;
+                return (
+                  <div key={item.key} style={{ border: '1px solid var(--color-border-light)', borderRadius: 8, padding: '1rem' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{item.label}</div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{currentValue.toLocaleString()}{item.suffix}</div>
+                    <div style={{ marginTop: '0.5rem', color: isUp ? 'var(--color-success)' : 'var(--color-danger)', fontSize: '0.8125rem', fontWeight: 600 }}>
+                      {isUp ? '+' : ''}{delta?.absolute.toLocaleString()}{item.suffix}
+                      {delta?.percent !== null && delta?.percent !== undefined ? ` (${isUp ? '+' : ''}${delta.percent.toFixed(1)}%)` : ' (no prior baseline)'}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div style={{ color: 'var(--color-text-muted)' }}>
+            {comparison?.message || 'Loading period comparison...'}
+          </div>
+        )}
       </div>
 
       {/* Revenue Trend */}

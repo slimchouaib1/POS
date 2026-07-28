@@ -25,7 +25,7 @@ const adminNav = [
   ]},
   { section: 'USER MANAGEMENT', items: [
     { to: '/users', icon: Users, label: 'Users' },
-    { to: '/activity-logs', icon: Activity, label: 'Activity Logs' },
+    { to: '/audit-logs', icon: Activity, label: 'Audit Logs' },
   ]},
 ];
 

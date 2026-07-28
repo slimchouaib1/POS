@@ -75,7 +75,6 @@ export default function LoginPage() {
             <div className="form-group">
               <div className="label-row">
                 <label htmlFor="login-password">Password</label>
-                <a href="#">Forgot password?</a>
               </div>
               <div className="input-with-icon">
                 <Lock size={18} />
@@ -112,11 +111,6 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-
-          {/* Footer */}
-          <p className="login-footer-text">
-            Don't have an account? <a href="#">Contact admin</a>
-          </p>
 
         </div>
       </div>

@@ -14,7 +14,7 @@ import AnomaliesPage from './pages/AnomaliesPage';
 import ForecastingPage from './pages/ForecastingPage';
 import SegmentsPage from './pages/SegmentsPage';
 import UserManagementPage from './pages/UserManagementPage';
-import ActivityLogsPage from './pages/ActivityLogsPage';
+import AuditLogsPage from './pages/AuditLogsPage';
 import StockDashboardPage from './pages/StockDashboardPage';
 import StockPage from './pages/StockPage';
 import StockMovementsPage from './pages/StockMovementsPage';
@@ -99,7 +99,7 @@ function AppRoutes() {
 
         {/* User Management */}
         <Route path="users" element={<RoleRoute allowedRoles={['admin']}><UserManagementPage /></RoleRoute>} />
-        <Route path="activity-logs" element={<RoleRoute allowedRoles={['admin', 'manager']}><ActivityLogsPage /></RoleRoute>} />
+        <Route path="audit-logs" element={<RoleRoute allowedRoles={['admin', 'manager']}><AuditLogsPage /></RoleRoute>} />
 
         {/* Stock Manager */}
         <Route path="stock/dashboard" element={<RoleRoute allowedRoles={['admin', 'manager', 'stock_manager']}><StockDashboardPage /></RoleRoute>} />
