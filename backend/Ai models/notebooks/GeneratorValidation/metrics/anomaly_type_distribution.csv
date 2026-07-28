@@ -1,0 +1,9 @@
+table,category,count
+anomaly_type_counts,suspicious_discount,125
+anomaly_type_counts,void_after_payment,94
+anomaly_type_counts,basket_size_outlier,94
+anomaly_type_counts,price_tampering,62
+anomaly_type_counts,odd_hour,62
+anomaly_type_counts,shift_end_void_cluster,31
+overall_rate,normal_orders,62581
+overall_rate,injected_anomaly_orders,468
