@@ -76,6 +76,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def debug_cors(request: Request, call_next):
+    print(f"[DEBUG CORS] Request Method: {request.method}, URL: {request.url}, Origin: {request.headers.get('origin')}")
+    response = await call_next(request)
+    return response
+
+
 
 @app.middleware("http")
 async def security_headers(request: Request, call_next):
