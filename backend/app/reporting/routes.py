@@ -11,6 +11,8 @@ from typing import Optional
 
 from app.core.deps import get_db, require_role
 from app.core.config import settings
+from app.audit.models import AuditLog
+from app.auth.models import User
 from app.orders.models import Order, OrderItem
 from app.payments.models import Payment
 from app.products.models import Product
@@ -404,7 +406,7 @@ def export_sales_excel(
     ),
     days: int = Query(30, ge=1, le=365),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
 ):
     payload = _sales_export_payload(db, date_range, days)
     summary_rows = [["Metric", "Value"]]
@@ -436,6 +438,14 @@ def export_sales_excel(
         ("Paid Orders", order_rows),
     ])
     filename = f"sales_report_{date_range or 'custom'}.xlsx"
+    db.add(AuditLog(
+        user_id=current_user.id,
+        action="report_exported",
+        entity_type="report",
+        entity_id=None,
+        details=f"Exported sales report as excel; range={date_range}; days={days}",
+    ))
+    db.commit()
     return StreamingResponse(
         output,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -452,7 +462,7 @@ def export_sales_pdf(
     ),
     days: int = Query(30, ge=1, le=365),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
 ):
     payload = _sales_export_payload(db, date_range, days)
     lines = [
@@ -474,6 +484,14 @@ def export_sales_pdf(
 
     output = _simple_pdf(lines)
     filename = f"sales_report_{date_range or 'custom'}.pdf"
+    db.add(AuditLog(
+        user_id=current_user.id,
+        action="report_exported",
+        entity_type="report",
+        entity_id=None,
+        details=f"Exported sales report as pdf; range={date_range}; days={days}",
+    ))
+    db.commit()
     return StreamingResponse(
         output,
         media_type="application/pdf",

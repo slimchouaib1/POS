@@ -41,15 +41,36 @@ def update_user(
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="Utilisateur introuvable")
-    for k, v in data.model_dump(exclude_unset=True).items():
+    old_role = user.role
+    was_active = user.is_active
+    updates = data.model_dump(exclude_unset=True)
+    for k, v in updates.items():
         setattr(user, k, v)
-    db.add(AuditLog(
-        user_id=current_user.id,
-        action="update_user",
-        entity_type="user",
-        entity_id=user.id,
-        details=f"Updated user {user.username}",
-    ))
+    if "role" in updates and updates["role"] != old_role:
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="user_role_changed",
+            entity_type="user",
+            entity_id=user.id,
+            details=f"Changed user {user.username} role from {old_role} to {user.role}",
+        ))
+    if "is_active" in updates and was_active and user.is_active is False:
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="user_deactivated",
+            entity_type="user",
+            entity_id=user.id,
+            details=f"Deactivated user {user.username}",
+        ))
+    other_fields = sorted(set(updates) - {"role", "is_active"})
+    if other_fields or not updates:
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="user_updated",
+            entity_type="user",
+            entity_id=user.id,
+            details=f"Updated user {user.username}; fields={','.join(other_fields) if other_fields else 'none'}",
+        ))
     db.commit()
     db.refresh(user)
     return UserOut.model_validate(user)
@@ -67,7 +88,7 @@ def deactivate_user(
     user.is_active = False
     db.add(AuditLog(
         user_id=current_user.id,
-        action="deactivate_user",
+        action="user_deactivated",
         entity_type="user",
         entity_id=user.id,
         details=f"Deactivated user {user.username}",

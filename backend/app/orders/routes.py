@@ -15,6 +15,7 @@ from app.stock.models import IngredientStockMovement
 from app.audit.models import AuditLog
 
 router = APIRouter(prefix="/api", tags=["Orders & Tables"])
+HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT = 70.0
 
 
 # ─── Tables ─────────────────────────────────────────
@@ -39,7 +40,7 @@ def update_table_status(
     table.status = status
     db.add(AuditLog(
         user_id=current_user.id,
-        action="update_table_status",
+        action="table_status_updated",
         entity_type="table",
         entity_id=table.id,
         details=f"Table {table.number} status set to {status}",
@@ -78,6 +79,11 @@ def _recalculate_order(order: Order):
     subtotal = sum(item.subtotal for item in order.items)
     order.discount_amount = round(subtotal * (order.discount_pct / 100), 2)
     order.total_amount = round(subtotal - order.discount_amount, 2)
+
+
+def _max_discount_pct(order: Order) -> float:
+    item_discounts = [item.discount_pct or 0 for item in order.items]
+    return max([order.discount_pct or 0, *item_discounts])
 
 
 @router.get("/orders", response_model=list[OrderOut])
@@ -151,9 +157,18 @@ def create_order(
             table.status = "occupied"
 
     db.add(AuditLog(
-        user_id=current_user.id, action="create_order", entity_type="order",
+        user_id=current_user.id, action="order_created", entity_type="order",
         entity_id=order.id, details=f"Created order #{order.id} with {len(data.items)} items, total {order.total_amount} DT",
     ))
+    max_discount = _max_discount_pct(order)
+    if max_discount >= HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT:
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="high_discount_applied",
+            entity_type="order",
+            entity_id=order.id,
+            details=f"Order #{order.id} has discount {max_discount}% (threshold {HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT}%)",
+        ))
     db.commit()
     db.refresh(order)
     return _build_order_out(order, db)
@@ -185,6 +200,8 @@ def update_order(
     ensure_order_access(current_user, order)
     if order.status in ("paid", "cancelled"):
         raise HTTPException(status_code=400, detail="Commande déjà finalisée")
+
+    old_max_discount = _max_discount_pct(order)
 
     if data.notes is not None:
         order.notes = data.notes
@@ -226,11 +243,20 @@ def update_order(
     _recalculate_order(order)
     db.add(AuditLog(
         user_id=current_user.id,
-        action="update_order",
+        action="order_updated",
         entity_type="order",
         entity_id=order.id,
         details=f"Updated order #{order.id}",
     ))
+    max_discount = _max_discount_pct(order)
+    if max_discount >= HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT and old_max_discount < HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT:
+        db.add(AuditLog(
+            user_id=current_user.id,
+            action="high_discount_applied",
+            entity_type="order",
+            entity_id=order.id,
+            details=f"Order #{order.id} has discount {max_discount}% (threshold {HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT}%)",
+        ))
     db.commit()
     db.refresh(order)
     return _build_order_out(order, db)

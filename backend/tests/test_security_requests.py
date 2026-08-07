@@ -159,7 +159,14 @@ def test_purchase_order_receive_increments_stock_and_audits():
                 .filter(AuditLog.entity_type == "purchase_order")
                 .all()
             }
-            assert {"create_purchase_order", "receive_purchase_order"} <= actions
+            assert {"po_created", "po_received"} <= actions
+            received_audit = db.query(AuditLog).filter(
+                AuditLog.entity_type == "purchase_order",
+                AuditLog.entity_id == purchase_order["id"],
+                AuditLog.action == "po_received",
+            ).one()
+            assert "stock incremented" in received_audit.details
+            assert "supplier=Test Supplier" in received_audit.details
         finally:
             db.close()
 

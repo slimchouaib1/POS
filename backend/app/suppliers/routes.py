@@ -141,7 +141,7 @@ def create_supplier(
         db.flush()
         db.add(AuditLog(
             user_id=current_user.id,
-            action="create_supplier",
+            action="supplier_created",
             entity_type="supplier",
             entity_id=supplier.id,
             details=f"Created supplier {supplier.name}",
@@ -172,15 +172,21 @@ def update_supplier(
             raise HTTPException(status_code=400, detail="Supplier with this name already exists")
     if "email" in updates:
         updates["email"] = str(updates["email"] or "")
+    was_active = supplier.is_active
     try:
         for key, value in updates.items():
             setattr(supplier, key, value)
+        action = "supplier_deactivated" if was_active and supplier.is_active is False else "supplier_updated"
         db.add(AuditLog(
             user_id=current_user.id,
-            action="update_supplier",
+            action=action,
             entity_type="supplier",
             entity_id=supplier.id,
-            details=f"Updated supplier {supplier.name}",
+            details=(
+                f"Deactivated supplier {supplier.name}"
+                if action == "supplier_deactivated"
+                else f"Updated supplier {supplier.name}"
+            ),
         ))
         db.commit()
         db.refresh(supplier)
@@ -203,10 +209,10 @@ def delete_supplier(
         supplier.is_active = False
         db.add(AuditLog(
             user_id=current_user.id,
-            action="delete_supplier",
+            action="supplier_deactivated",
             entity_type="supplier",
             entity_id=supplier.id,
-            details=f"Soft-deleted supplier {supplier.name}",
+            details=f"Deactivated supplier {supplier.name}",
         ))
         db.commit()
         db.refresh(supplier)

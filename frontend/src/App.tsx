@@ -20,6 +20,7 @@ import StockPage from './pages/StockPage';
 import StockMovementsPage from './pages/StockMovementsPage';
 import SuppliersPage from './pages/SuppliersPage';
 import RecommendationsPage from './pages/RecommendationsPage';
+import UnauthorizedPage from './pages/UnauthorizedPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -34,11 +35,7 @@ function RoleRoute({ children, allowedRoles }: { children: React.ReactNode, allo
   if (!user) return <Navigate to="/login" replace />;
   
   if (!allowedRoles.includes(user.role)) {
-    switch (user.role) {
-      case 'cashier': return <Navigate to="/pos" replace />;
-      case 'stock_manager': return <Navigate to="/stock/dashboard" replace />;
-      default: return <Navigate to="/dashboard" replace />;
-    }
+    return <Navigate to="/unauthorized" replace />;
   }
   return <>{children}</>;
 }
@@ -64,6 +61,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={user ? <RoleRedirect /> : <LoginPage />} />
+      <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
       {/* Cashier POS — full-screen, no sidebar */}
       <Route path="/pos" element={
@@ -102,10 +100,10 @@ function AppRoutes() {
         <Route path="audit-logs" element={<RoleRoute allowedRoles={['admin', 'manager']}><AuditLogsPage /></RoleRoute>} />
 
         {/* Stock Manager */}
-        <Route path="stock/dashboard" element={<RoleRoute allowedRoles={['admin', 'manager', 'stock_manager']}><StockDashboardPage /></RoleRoute>} />
-        <Route path="stock/inventory" element={<RoleRoute allowedRoles={['admin', 'manager', 'stock_manager']}><StockPage /></RoleRoute>} />
-        <Route path="stock/movements" element={<RoleRoute allowedRoles={['admin', 'manager', 'stock_manager']}><StockMovementsPage /></RoleRoute>} />
-        <Route path="stock/suppliers" element={<RoleRoute allowedRoles={['admin', 'manager', 'stock_manager']}><SuppliersPage /></RoleRoute>} />
+        <Route path="stock/dashboard" element={<RoleRoute allowedRoles={['stock_manager']}><StockDashboardPage /></RoleRoute>} />
+        <Route path="stock/inventory" element={<RoleRoute allowedRoles={['stock_manager']}><StockPage /></RoleRoute>} />
+        <Route path="stock/movements" element={<RoleRoute allowedRoles={['stock_manager']}><StockMovementsPage /></RoleRoute>} />
+        <Route path="stock/suppliers" element={<RoleRoute allowedRoles={['stock_manager']}><SuppliersPage /></RoleRoute>} />
       </Route>
 
       <Route path="*" element={<RoleRedirect />} />

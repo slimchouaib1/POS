@@ -62,7 +62,7 @@ def _run_regeneration_bg(user_id: int):
 
         db.add(AuditLog(
             user_id=user_id,
-            action="regenerate_segments",
+            action="segments_regenerated",
             entity_type="segmentation",
             entity_id=None,
             details=(

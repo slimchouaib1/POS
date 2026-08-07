@@ -136,12 +136,6 @@ def refresh_token(request: Request, response: Response, db: Session = Depends(ge
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Refresh token invalid")
 
     user, new_refresh_token = rotated
-    db.add(AuditLog(
-        user_id=user.id,
-        action="refresh_token",
-        entity_type="auth",
-        details="Refresh token rotated",
-    ))
     access_token = create_access_token(data={"sub": str(user.id), "role": user.role})
     db.commit()
     _set_refresh_cookie(response, new_refresh_token)
@@ -176,7 +170,7 @@ def register(
     user = create_user(db, data.username, data.full_name, data.email, data.password, data.role)
     db.add(AuditLog(
         user_id=current_user.id,
-        action="create_user",
+        action="user_created",
         entity_type="user",
         entity_id=user.id,
         details=f"Created user {user.full_name} with role {user.role}",

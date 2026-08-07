@@ -36,7 +36,7 @@ def list_audit_logs(
     db: Session = Depends(get_db),
     _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
 ):
-    q = db.query(AuditLog)
+    q = db.query(AuditLog).filter(AuditLog.action != "refresh_token")
     if action:
         q = q.filter(AuditLog.action == action)
     if entity_type:

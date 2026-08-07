@@ -88,7 +88,7 @@ def process_payment(
 
         db.add(AuditLog(
             user_id=current_user.id,
-            action="payment",
+            action="payment_processed",
             entity_type="payment",
             entity_id=payment.id,
             details=f"Payment of {data.amount} DT via {data.method} for order #{order.id}",
@@ -152,7 +152,7 @@ def refund_payment(
 
         db.add(AuditLog(
             user_id=current_user.id,
-            action="refund",
+            action="payment_refunded",
             entity_type="payment",
             entity_id=payment.id,
             details=f"Refund of {payment.amount} DT for order #{order.id}",

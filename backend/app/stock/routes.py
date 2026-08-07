@@ -144,11 +144,19 @@ def _apply_ingredient_stock_change(
     return movement
 
 
+def _stock_audit_action(reason: str) -> str:
+    if reason == "restock":
+        return "stock_restocked"
+    if reason == "waste":
+        return "stock_wasted"
+    return "stock_adjusted"
+
+
 @router.get("", response_model=list[StockOverviewItem])
 def stock_overview(
     low_only: bool = Query(False),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(Product)
     products = q.order_by(Product.name).all()
@@ -172,7 +180,7 @@ def stock_overview(
 @router.get("/alerts", response_model=list[StockOverviewItem])
 def low_stock_alerts(
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
 ):
     products = db.query(Product).all()
     alerts = []
@@ -195,7 +203,7 @@ def list_movements(
     product_id: Optional[int] = Query(None, gt=0),
     limit: int = Query(50, ge=1, le=200),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(StockMovement)
     if product_id:
@@ -238,10 +246,10 @@ def adjust_stock(
     db.add(movement)
     db.add(AuditLog(
         user_id=current_user.id,
-        action="adjust_stock",
+        action=_stock_audit_action(data.reason),
         entity_type="product",
         entity_id=product.id,
-        details=f"Adjusted product stock by {data.quantity_change}; reason={data.reason}",
+        details=f"Product {product.name} stock changed by {data.quantity_change}; reason={data.reason}",
     ))
     db.commit()
     db.refresh(movement)
@@ -257,7 +265,7 @@ def adjust_stock(
 @router.get("/ingredients", response_model=list[IngredientStockOverviewItem])
 def ingredient_stock_overview(
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
 ):
     ingredients = db.query(Ingredient).order_by(Ingredient.name).all()
     result = []
@@ -300,10 +308,10 @@ def adjust_ingredient_stock(
         )
         db.add(AuditLog(
             user_id=current_user.id,
-            action="adjust_ingredient_stock",
+            action=_stock_audit_action(data.reason),
             entity_type="ingredient",
             entity_id=ingredient.id,
-            details=f"Adjusted ingredient stock by {data.quantity_change}; reason={data.reason}",
+            details=f"Ingredient {ingredient.name} stock changed by {data.quantity_change}; reason={data.reason}",
         ))
         db.commit()
         db.refresh(movement)
@@ -322,7 +330,7 @@ def list_ingredient_movements(
     ingredient_id: Optional[int] = Query(None, gt=0),
     limit: int = Query(50, ge=1, le=200),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(IngredientStockMovement)
     if ingredient_id:
@@ -365,12 +373,12 @@ def create_purchase_order(
         db.flush()
         db.add(AuditLog(
             user_id=current_user.id,
-            action="create_purchase_order",
+            action="po_created",
             entity_type="purchase_order",
             entity_id=po.id,
             details=(
                 f"Created purchase order #{po.id} for {data.quantity_ordered} "
-                f"{ingredient.unit} of {ingredient.name}"
+                f"{ingredient.unit} of {ingredient.name}; supplier={ingredient.supplier}"
             ),
         ))
         db.commit()
@@ -387,7 +395,7 @@ def list_purchase_orders(
     status: Optional[Literal["pending", "received", "cancelled"]] = Query(None),
     limit: int = Query(100, ge=1, le=200),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(PurchaseOrder)
     if status:
@@ -428,12 +436,13 @@ def receive_purchase_order(
         db.flush()
         db.add(AuditLog(
             user_id=current_user.id,
-            action="receive_purchase_order",
+            action="po_received",
             entity_type="purchase_order",
             entity_id=po.id,
             details=(
                 f"Received purchase order #{po.id}; added {po.quantity_ordered} "
-                f"{ingredient.unit} to {ingredient.name}; movement_id={movement.id}"
+                f"{ingredient.unit} to {ingredient.name}; supplier={ingredient.supplier}; "
+                f"stock incremented; movement_id={movement.id}"
             ),
         ))
         db.commit()
@@ -458,15 +467,16 @@ def cancel_purchase_order(
         raise HTTPException(status_code=404, detail="Purchase order not found")
     if po.status != "pending":
         raise HTTPException(status_code=400, detail="Only pending purchase orders can be cancelled")
+    ingredient = db.query(Ingredient).filter(Ingredient.id == po.ingredient_id).first()
 
     try:
         po.status = "cancelled"
         db.add(AuditLog(
             user_id=current_user.id,
-            action="cancel_purchase_order",
+            action="po_cancelled",
             entity_type="purchase_order",
             entity_id=po.id,
-            details=f"Cancelled purchase order #{po.id}",
+            details=f"Cancelled purchase order #{po.id}; supplier={ingredient.supplier if ingredient else ''}",
         ))
         db.commit()
         db.refresh(po)
