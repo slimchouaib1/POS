@@ -21,7 +21,7 @@ class ForecastRequest(BaseModel):
 @router.get("/next-week", response_model=List[Dict[str, Any]])
 def get_next_week_forecast(
     db: Session = Depends(get_db),
-    _=Depends(require_role("admin", "manager", "stock_manager"))
+    _=Depends(require_role("manager", "stock_manager"))
 ):
     """
     Returns the predicted weekly sales for all menu items,
@@ -39,7 +39,7 @@ def get_next_week_forecast(
 def predict_item_sales(
     req: ForecastRequest,
     db: Session = Depends(get_db),
-    _=Depends(require_role("admin", "manager", "stock_manager"))
+    _=Depends(require_role("manager", "stock_manager"))
 ):
     """
     Returns predicted weekly sales for a specific item or section,
@@ -56,7 +56,7 @@ def predict_item_sales(
 @router.get("/ingredient-forecast", response_model=List[Dict[str, Any]])
 def ingredient_level_forecast(
     db: Session = Depends(get_db),
-    _=Depends(require_role("admin", "manager", "stock_manager"))
+    _=Depends(require_role("manager", "stock_manager"))
 ):
     """
     Uses LightGBM menu-item sales predictions + recipe data to compute

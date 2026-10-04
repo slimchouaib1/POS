@@ -70,7 +70,7 @@ export default function SegmentsPage() {
     }
   };
 
-  const isAdminOrManager = user?.role === 'admin' || user?.role === 'manager';
+  const isManager = user?.role === 'manager';
 
   if (!data) return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh', color: 'var(--primary)', gap: '0.75rem', fontWeight: 600 }}>
@@ -91,7 +91,7 @@ export default function SegmentsPage() {
             </p>
           </div>
 
-          {isAdminOrManager && (
+          {isManager && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.375rem' }}>
               <button
                 className={`btn ${regenDone ? 'btn-outline' : 'btn-primary'}`}

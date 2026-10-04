@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from app.core.config import settings
 
@@ -33,3 +33,12 @@ def init_db():
     import app.audit.models  # noqa
 
     Base.metadata.create_all(bind=engine)
+
+    # Lightweight auto-migration for Table columns if using postgres
+    try:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE tables ADD COLUMN IF NOT EXISTS current_covers INTEGER DEFAULT 0;"))
+            conn.execute(text("ALTER TABLE tables ADD COLUMN IF NOT EXISTS reservation_time VARCHAR(50) DEFAULT '';"))
+    except Exception as e:
+        print(f"[DB] Migration note: {e}")
+

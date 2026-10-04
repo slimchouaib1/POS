@@ -64,10 +64,10 @@ export default function UserManagementPage() {
   };
 
   const roleColors: Record<string, string> = {
-    admin: '#DC3545', manager: '#F4845F', cashier: '#17A2B8', stock_manager: '#28A745',
+    manager: '#F4845F', cashier: '#17A2B8', stock_manager: '#28A745',
   };
   const roleLabels: Record<string, string> = {
-    admin: 'Admin', manager: 'Manager', cashier: 'Cashier', stock_manager: 'Stock Manager',
+    manager: 'Manager', cashier: 'Cashier', stock_manager: 'Stock Manager',
   };
 
   const getInitials = (name: string) => name.split(' ').map(n => n[0]).join('').slice(0, 2);
@@ -107,7 +107,6 @@ export default function UserManagementPage() {
           <CustomSelect
             options={[
               { value: '', label: 'All Roles' },
-              { value: 'admin', label: 'Admin' },
               { value: 'manager', label: 'Manager' },
               { value: 'cashier', label: 'Cashier' },
               { value: 'stock_manager', label: 'Stock Manager' },
@@ -225,7 +224,6 @@ export default function UserManagementPage() {
                 <label className="form-label" style={{ fontSize: '0.875rem', display: 'block', marginBottom: '0.25rem', fontWeight: 500 }}>Role</label>
                 <CustomSelect
                   options={[
-                    { value: 'admin', label: 'Admin' },
                     { value: 'manager', label: 'Manager' },
                     { value: 'cashier', label: 'Cashier' },
                     { value: 'stock_manager', label: 'Stock Manager' },

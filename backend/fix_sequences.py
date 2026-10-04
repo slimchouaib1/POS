@@ -5,7 +5,8 @@ from psycopg2 import sql
 
 database_url = os.environ.get("DATABASE_URL")
 if not database_url:
-    raise RuntimeError("DATABASE_URL is required")
+    from app.core.config import settings
+    database_url = settings.DATABASE_URL
 database_url = database_url.replace("postgresql+psycopg2://", "postgresql://", 1)
 
 conn = psycopg2.connect(database_url)

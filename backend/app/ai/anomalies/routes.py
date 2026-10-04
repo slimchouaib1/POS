@@ -65,7 +65,7 @@ def list_alerts(
     risk_level: Optional[RiskLevel] = Query(None),
     limit: int = Query(50, ge=1, le=200),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     q = db.query(AnomalyAlert)
     if status:
@@ -88,7 +88,7 @@ def list_alerts(
 def get_alert(
     alert_id: int,
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     alert = db.query(AnomalyAlert).filter(AnomalyAlert.id == alert_id).first()
     if not alert:
@@ -115,7 +115,7 @@ def update_alert_status(
     alert_id: int,
     status: AlertStatus = Query(...),
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     alert = db.query(AnomalyAlert).filter(AnomalyAlert.id == alert_id).first()
     if not alert:
@@ -151,7 +151,7 @@ def add_comment(
     alert_id: int,
     data: CommentCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     alert = db.query(AnomalyAlert).filter(AnomalyAlert.id == alert_id).first()
     if not alert:
@@ -187,7 +187,7 @@ def anomaly_metadata(_=Depends(get_current_user)):
 @router.get("/order-details/{order_id}")
 def order_details(
     order_id: str = Path(..., min_length=1, max_length=100),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     """Return full transaction details for an anomaly order from the notebook CSV."""
     details = get_order_details(order_id)

@@ -19,7 +19,7 @@ router = APIRouter(prefix="/api", tags=["Products & Categories"])
 @router.get("/categories", response_model=list[CategoryOut])
 def list_categories(
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
 ):
     cats = db.query(Category).order_by(Category.display_order).all()
     result = []
@@ -35,7 +35,7 @@ def list_categories(
 def create_category(
     data: CategoryCreate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     cat = Category(**data.model_dump())
     db.add(cat)
@@ -59,7 +59,7 @@ def update_category(
     cat_id: int,
     data: CategoryCreate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     cat = db.query(Category).filter(Category.id == cat_id).first()
     if not cat:
@@ -89,7 +89,7 @@ def list_products(
     search: Optional[str] = Query(None, max_length=100),
     available_only: bool = Query(False),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(Product)
     if category_id:
@@ -113,7 +113,7 @@ def list_products(
 def create_product(
     data: ProductCreate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     if not db.query(Category).filter(Category.id == data.category_id).first():
         raise HTTPException(status_code=404, detail="Catégorie introuvable")
@@ -139,7 +139,7 @@ def update_product(
     product_id: int,
     data: ProductUpdate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
@@ -166,7 +166,7 @@ def update_product(
 def toggle_product(
     product_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
@@ -190,7 +190,7 @@ def toggle_product(
 def delete_product(
     product_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
@@ -212,7 +212,7 @@ def delete_product(
 @router.get("/ingredients", response_model=list[IngredientOut])
 def list_ingredients(
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
 ):
     return db.query(Ingredient).order_by(Ingredient.name).all()
 
@@ -221,7 +221,7 @@ def list_ingredients(
 def get_ingredient(
     ingredient_id: int,
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
 ):
     ing = db.query(Ingredient).filter(Ingredient.id == ingredient_id).first()
     if not ing:
@@ -233,7 +233,7 @@ def get_ingredient(
 def create_ingredient(
     data: IngredientCreate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
 ):
     existing = db.query(Ingredient).filter(Ingredient.name == data.name).first()
     if existing:
@@ -266,7 +266,7 @@ def update_ingredient(
     ingredient_id: int,
     data: IngredientUpdate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
 ):
     ing = db.query(Ingredient).filter(Ingredient.id == ingredient_id).first()
     if not ing:
@@ -303,7 +303,7 @@ def update_ingredient(
 def delete_ingredient(
     ingredient_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
 ):
     ing = db.query(Ingredient).filter(Ingredient.id == ingredient_id).first()
     if not ing:
@@ -347,7 +347,7 @@ def delete_ingredient(
 def get_product_recipe(
     product_id: int,
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER, settings.ROLE_STOCK_MANAGER)),
 ):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
@@ -371,7 +371,7 @@ def add_recipe_line(
     product_id: int,
     data: RecipeLineCreate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
@@ -427,7 +427,7 @@ def update_recipe_line(
     ingredient_id: int,
     data: RecipeLineUpdate,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     line = db.query(ProductIngredient).filter(
         ProductIngredient.product_id == product_id,
@@ -469,7 +469,7 @@ def delete_recipe_line(
     product_id: int,
     ingredient_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     line = db.query(ProductIngredient).filter(
         ProductIngredient.product_id == product_id,

@@ -209,7 +209,7 @@
 * **Order.status:** draft, in_progress, served, paid, cancelled
 * **Payment.method:** cash, card, mobile
 * **Payment.status:** completed, refunded
-* **User.role:** admin, manager, cashier, stock_manager
+* **User.role:** manager, cashier, stock_manager
 * **AuditLog.action:** login, create_order, update_product, etc.
 * **AuditLog.entity_type:** order, product, user, etc.
 * **AnomalyAlert.risk_level:** NORMAL, ALERTE, CRITIQUE

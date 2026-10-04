@@ -38,7 +38,7 @@ class RecommendationItem(BaseModel):
 def recommend(
     data: RecommendationRequest,
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     return get_frequently_bought_together(
         basket_items=data.basket_items,
@@ -51,14 +51,14 @@ def recommend(
 
 
 @router.get("/summary")
-def rules_summary(_=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER))):
+def rules_summary(_=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER))):
     return get_recommendation_summary()
 
 
 @router.post("/reload")
 def reload_rules(
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     load_association_rules()
     db.add(AuditLog(

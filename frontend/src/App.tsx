@@ -21,6 +21,7 @@ import StockMovementsPage from './pages/StockMovementsPage';
 import SuppliersPage from './pages/SuppliersPage';
 import RecommendationsPage from './pages/RecommendationsPage';
 import UnauthorizedPage from './pages/UnauthorizedPage';
+import { getHomePathForRole } from './rbac';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -44,14 +45,7 @@ function RoleRedirect() {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
 
-  switch (user.role) {
-    case 'cashier':
-      return <Navigate to="/pos" replace />;
-    case 'stock_manager':
-      return <Navigate to="/stock/dashboard" replace />;
-    default:
-      return <Navigate to="/dashboard" replace />;
-  }
+  return <Navigate to={getHomePathForRole(user.role)} replace />;
 }
 
 function AppRoutes() {
@@ -65,39 +59,39 @@ function AppRoutes() {
 
       {/* Cashier POS — full-screen, no sidebar */}
       <Route path="/pos" element={
-        <RoleRoute allowedRoles={['admin', 'manager', 'cashier']}><POSPage /></RoleRoute>
+        <RoleRoute allowedRoles={['manager', 'cashier']}><POSPage /></RoleRoute>
       } />
       <Route path="/pos/payment" element={
-        <RoleRoute allowedRoles={['admin', 'manager', 'cashier']}><PaymentPage /></RoleRoute>
+        <RoleRoute allowedRoles={['manager', 'cashier']}><PaymentPage /></RoleRoute>
       } />
       <Route path="/pos/receipt" element={
-        <RoleRoute allowedRoles={['admin', 'manager', 'cashier']}><ReceiptPage /></RoleRoute>
+        <RoleRoute allowedRoles={['manager', 'cashier']}><ReceiptPage /></RoleRoute>
       } />
 
-      {/* Admin / Manager / Stock Manager — with sidebar */}
+      {/* Manager / Stock Manager — with sidebar */}
       <Route path="/" element={
         <ProtectedRoute><DashboardLayout /></ProtectedRoute>
       }>
         <Route index element={<RoleRedirect />} />
 
-        {/* Admin/Manager Analytics */}
-        <Route path="dashboard" element={<RoleRoute allowedRoles={['admin', 'manager']}><DashboardPage /></RoleRoute>} />
-        <Route path="sales-reports" element={<RoleRoute allowedRoles={['admin', 'manager']}><SalesReportsPage /></RoleRoute>} />
-        <Route path="customer-insights" element={<RoleRoute allowedRoles={['admin', 'manager']}><CustomerInsightsPage /></RoleRoute>} />
-        <Route path="orders" element={<RoleRoute allowedRoles={['admin', 'manager', 'cashier', 'stock_manager']}><OrdersPage /></RoleRoute>} />
+        {/* Manager Analytics */}
+        <Route path="dashboard" element={<RoleRoute allowedRoles={['manager']}><DashboardPage /></RoleRoute>} />
+        <Route path="sales-reports" element={<RoleRoute allowedRoles={['manager']}><SalesReportsPage /></RoleRoute>} />
+        <Route path="customer-insights" element={<RoleRoute allowedRoles={['manager']}><CustomerInsightsPage /></RoleRoute>} />
+        <Route path="orders" element={<RoleRoute allowedRoles={['manager', 'cashier', 'stock_manager']}><OrdersPage /></RoleRoute>} />
 
         {/* AI Modules */}
-        <Route path="ai/anomalies" element={<RoleRoute allowedRoles={['admin', 'manager']}><AnomaliesPage /></RoleRoute>} />
-        <Route path="ai/forecasting" element={<RoleRoute allowedRoles={['admin', 'manager', 'stock_manager']}><ForecastingPage /></RoleRoute>} />
-        <Route path="ai/segments" element={<RoleRoute allowedRoles={['admin', 'manager']}><SegmentsPage /></RoleRoute>} />
-        <Route path="ai/recommendations" element={<RoleRoute allowedRoles={['admin', 'manager']}><RecommendationsPage /></RoleRoute>} />
+        <Route path="ai/anomalies" element={<RoleRoute allowedRoles={['manager']}><AnomaliesPage /></RoleRoute>} />
+        <Route path="ai/forecasting" element={<RoleRoute allowedRoles={['manager', 'stock_manager']}><ForecastingPage /></RoleRoute>} />
+        <Route path="ai/segments" element={<RoleRoute allowedRoles={['manager']}><SegmentsPage /></RoleRoute>} />
+        <Route path="ai/recommendations" element={<RoleRoute allowedRoles={['manager']}><RecommendationsPage /></RoleRoute>} />
 
         {/* Management */}
-        <Route path="products" element={<RoleRoute allowedRoles={['admin', 'manager']}><ProductsPage /></RoleRoute>} />
+        <Route path="products" element={<RoleRoute allowedRoles={['manager']}><ProductsPage /></RoleRoute>} />
 
         {/* User Management */}
-        <Route path="users" element={<RoleRoute allowedRoles={['admin']}><UserManagementPage /></RoleRoute>} />
-        <Route path="audit-logs" element={<RoleRoute allowedRoles={['admin', 'manager']}><AuditLogsPage /></RoleRoute>} />
+        <Route path="users" element={<RoleRoute allowedRoles={['manager']}><UserManagementPage /></RoleRoute>} />
+        <Route path="audit-logs" element={<RoleRoute allowedRoles={['manager']}><AuditLogsPage /></RoleRoute>} />
 
         {/* Stock Manager */}
         <Route path="stock/dashboard" element={<RoleRoute allowedRoles={['stock_manager']}><StockDashboardPage /></RoleRoute>} />

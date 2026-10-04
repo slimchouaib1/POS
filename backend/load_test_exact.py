@@ -9,14 +9,14 @@ from statistics import mean
 BASE_URL = "http://localhost:8000"
 CONCURRENT_USERS = 10
 REQUESTS_PER_USER = 5
-ADMIN_PASSWORD = os.environ.get("POS_TEST_ADMIN_PASSWORD")
+MANAGER_PASSWORD = os.environ.get("POS_TEST_MANAGER_PASSWORD")
 
 def get_token():
-    if not ADMIN_PASSWORD:
-        raise RuntimeError("POS_TEST_ADMIN_PASSWORD is required")
+    if not MANAGER_PASSWORD:
+        raise RuntimeError("POS_TEST_MANAGER_PASSWORD is required")
     req = urllib.request.Request(
         f"{BASE_URL}/api/auth/login",
-        data=json.dumps({"username": "admin", "password": ADMIN_PASSWORD}).encode("utf-8"),
+        data=json.dumps({"username": "manager", "password": MANAGER_PASSWORD}).encode("utf-8"),
         headers={"Content-Type": "application/json"}
     )
     try:

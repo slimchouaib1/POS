@@ -156,7 +156,7 @@ def _stock_audit_action(reason: str) -> str:
 def stock_overview(
     low_only: bool = Query(False),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(Product)
     products = q.order_by(Product.name).all()
@@ -227,7 +227,7 @@ def adjust_stock(
     data: StockAdjust,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(
-        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+        settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
     )),
 ):
     product = db.query(Product).filter(Product.id == data.product_id).first()
@@ -290,7 +290,7 @@ def adjust_ingredient_stock(
     data: IngredientStockAdjust,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(
-        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+        settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
     )),
 ):
     ingredient = db.query(Ingredient).filter(Ingredient.id == data.ingredient_id).first()
@@ -355,7 +355,7 @@ def create_purchase_order(
     data: PurchaseOrderCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(
-        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+        settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
     )),
 ):
     ingredient = db.query(Ingredient).filter(Ingredient.id == data.ingredient_id).first()
@@ -395,7 +395,7 @@ def list_purchase_orders(
     status: Optional[Literal["pending", "received", "cancelled"]] = Query(None),
     limit: int = Query(100, ge=1, le=200),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(PurchaseOrder)
     if status:
@@ -409,7 +409,7 @@ def receive_purchase_order(
     purchase_order_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(
-        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+        settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
     )),
 ):
     po = db.query(PurchaseOrder).filter(PurchaseOrder.id == purchase_order_id).first()
@@ -459,7 +459,7 @@ def cancel_purchase_order(
     purchase_order_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(
-        settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
+        settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER
     )),
 ):
     po = db.query(PurchaseOrder).filter(PurchaseOrder.id == purchase_order_id).first()

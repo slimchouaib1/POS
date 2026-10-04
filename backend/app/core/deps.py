@@ -64,7 +64,7 @@ def require_role(*allowed_roles: str):
 
 
 def is_order_elevated_user(user) -> bool:
-    return user.role in {"admin", "manager"}
+    return user.role == "manager"
 
 
 def ensure_order_access(user, order) -> None:

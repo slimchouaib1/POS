@@ -1,6 +1,6 @@
-$adminPassword = $env:POS_TEST_ADMIN_PASSWORD
-if (-not $adminPassword) { throw "POS_TEST_ADMIN_PASSWORD is required" }
-$loginBody = @{ username = 'admin'; password = $adminPassword } | ConvertTo-Json
+$managerPassword = $env:POS_TEST_MANAGER_PASSWORD
+if (-not $managerPassword) { throw "POS_TEST_MANAGER_PASSWORD is required" }
+$loginBody = @{ username = 'manager'; password = $managerPassword } | ConvertTo-Json
 $loginResult = Invoke-RestMethod -Uri 'http://localhost:8000/api/auth/login' -Method POST -ContentType 'application/json' -Body $loginBody
 $token = $loginResult.access_token
 $headers = @{ Authorization = "Bearer $token" }

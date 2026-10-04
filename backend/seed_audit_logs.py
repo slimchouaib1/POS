@@ -47,7 +47,7 @@ for i in range(3):
 
 # Order events
 for i in range(20):
-    u = random.choice([u for u in users if u.role in ("cashier", "admin", "manager")])
+    u = random.choice([u for u in users if u.role in ("cashier", "manager")])
     order_id = random.randint(1, 50)
     ts = now - timedelta(hours=random.randint(1, 168))
     action = random.choice(["create_order", "order_paid", "order_in_progress", "order_served"])
@@ -68,7 +68,7 @@ for i in range(20):
 
 # Payment events
 for i in range(12):
-    u = random.choice([u for u in users if u.role in ("cashier", "admin", "manager")])
+    u = random.choice([u for u in users if u.role in ("cashier", "manager")])
     order_id = random.randint(1, 50)
     payment_id = random.randint(1, 30)
     amount = round(random.uniform(8, 95), 2)
@@ -82,7 +82,7 @@ for i in range(12):
 
 # Product updates
 for i in range(8):
-    u = user_map.get("admin") or users[0]
+    u = user_map.get("manager") or users[0]
     product_id = random.randint(1, 20)
     ts = now - timedelta(hours=random.randint(1, 168))
     action = random.choice(["update_product", "update_product", "delete_product"])
@@ -104,7 +104,7 @@ for i in range(6):
     ))
 
 # User management
-u = user_map.get("admin") or users[0]
+u = user_map.get("manager") or users[0]
 for i in range(3):
     ts = now - timedelta(hours=random.randint(24, 168))
     logs.append(AuditLog(

@@ -34,7 +34,7 @@ def list_audit_logs(
     user_id: Optional[int] = Query(None, gt=0),
     limit: int = Query(50, ge=1, le=200),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     q = db.query(AuditLog).filter(AuditLog.action != "refresh_token")
     if action:

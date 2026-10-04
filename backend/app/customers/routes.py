@@ -59,7 +59,7 @@ def list_customers(
     limit: int = Query(50, ge=1, le=500),
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     q = db.query(Customer)
     if search:
@@ -77,7 +77,7 @@ def list_customers(
 def get_customer(
     customer_id: int,
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     customer = db.query(Customer).filter(Customer.id == customer_id).first()
     if not customer:
@@ -89,7 +89,7 @@ def get_customer(
 def create_customer(
     data: CustomerCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     existing = db.query(Customer).filter(Customer.phone == data.phone).first()
     if existing:

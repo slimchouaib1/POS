@@ -222,7 +222,7 @@ def dashboard_kpis(
         pattern="^(last_week|last_month|last_year)$",
     ),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     today = datetime.utcnow().date()
     since = _range_start(date_range)
@@ -318,7 +318,7 @@ def sales_report(
         pattern="^(last_week|last_month|last_year)$",
     ),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     since = _range_start(date_range, days)
     orders = (
@@ -353,7 +353,7 @@ def dashboard_period_comparison(
         pattern="^(last_week|last_month|last_year)$",
     ),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     anchor_end = db.query(sqlfunc.max(Order.created_at)).filter(Order.status == "paid").scalar()
     if not anchor_end:
@@ -406,7 +406,7 @@ def export_sales_excel(
     ),
     days: int = Query(30, ge=1, le=365),
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     payload = _sales_export_payload(db, date_range, days)
     summary_rows = [["Metric", "Value"]]
@@ -462,7 +462,7 @@ def export_sales_pdf(
     ),
     days: int = Query(30, ge=1, le=365),
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     payload = _sales_export_payload(db, date_range, days)
     lines = [
@@ -502,7 +502,7 @@ def export_sales_pdf(
 @router.get("/products")
 def product_performance(
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     results = (
         db.query(

@@ -1,5 +1,6 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import { canAccessPath } from '../rbac';
 import {
   LayoutDashboard, Package, Users, UserRoundCheck,
   TrendingUp, ShieldAlert,
@@ -7,8 +8,8 @@ import {
   FileText, PieChart, Boxes, ArrowLeftRight, Truck, Lightbulb
 } from 'lucide-react';
 
-/* ── Admin/Manager Sidebar ─────────────── */
-const adminNav = [
+/* ── Manager Sidebar ─────────────── */
+const managerNav = [
   { section: 'ANALYTICS', items: [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/sales-reports', icon: FileText, label: 'Sales Reports' },
@@ -40,7 +41,7 @@ const stockNav = [
   ]},
 ];
 
-function SidebarNav({ sections }: { sections: typeof adminNav }) {
+function SidebarNav({ sections }: { sections: typeof managerNav }) {
   return (
     <nav style={{ flex: 1, paddingTop: '0.25rem' }}>
       {sections.map((group) => (
@@ -65,6 +66,7 @@ function SidebarNav({ sections }: { sections: typeof adminNav }) {
 export default function DashboardLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -72,14 +74,17 @@ export default function DashboardLayout() {
   };
 
   const roleSubtitle: Record<string, string> = {
-    admin: 'Management Portal',
-    manager: 'Reporting & Analytics',
+    manager: 'Management Portal',
     cashier: 'Main Terminal',
     stock_manager: 'Stock Management',
   };
 
   // Cashier gets redirected to POS, not the dashboard layout
-  const navSections = user?.role === 'stock_manager' ? stockNav : adminNav;
+  const navSections = user?.role === 'stock_manager' ? stockNav : managerNav;
+
+  if (user && !canAccessPath(user.role, location.pathname)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
 
   return (
     <div style={{ display: 'flex' }}>

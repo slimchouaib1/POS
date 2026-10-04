@@ -22,7 +22,7 @@ HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT = 70.0
 @router.get("/tables", response_model=list[TableOut])
 def list_tables(
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     return db.query(Table).order_by(Table.number).all()
 
@@ -31,22 +31,39 @@ def list_tables(
 def update_table_status(
     table_id: int,
     status: TableStatus = Query(...),
+    covers: Optional[int] = Query(None),
+    reservation_time: Optional[str] = Query(None),
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     table = db.query(Table).filter(Table.id == table_id).first()
     if not table:
         raise HTTPException(status_code=404, detail="Table introuvable")
     table.status = status
+    if covers is not None:
+        table.current_covers = covers
+    elif status == "available":
+        table.current_covers = 0
+
+    if reservation_time is not None:
+        table.reservation_time = reservation_time
+    elif status == "available":
+        table.reservation_time = ""
+
     db.add(AuditLog(
         user_id=current_user.id,
         action="table_status_updated",
         entity_type="table",
         entity_id=table.id,
-        details=f"Table {table.number} status set to {status}",
+        details=f"Table {table.number} status set to {status} (covers={table.current_covers}, time={table.reservation_time})",
     ))
     db.commit()
-    return {"detail": "Statut mis à jour", "status": status}
+    return {
+        "detail": "Statut mis à jour",
+        "status": status,
+        "current_covers": table.current_covers,
+        "reservation_time": table.reservation_time,
+    }
 
 
 # ─── Orders ─────────────────────────────────────────
@@ -86,19 +103,54 @@ def _max_discount_pct(order: Order) -> float:
     return max([order.discount_pct or 0, *item_discounts])
 
 
+def _score_live_anomaly(db: Session, order: Order, user_id: int):
+    try:
+        from app.ai.anomalies.service import score_order_live
+
+        alert = score_order_live(db, order)
+    except Exception as exc:
+        db.add(AuditLog(
+            user_id=user_id,
+            action="live_anomaly_scoring_failed",
+            entity_type="order",
+            entity_id=order.id,
+            details=f"Live anomaly scoring failed for order #{order.id}: {str(exc)[:400]}",
+        ))
+        return None
+
+    if alert:
+        db.add(AuditLog(
+            user_id=user_id,
+            action="live_anomaly_alert_created",
+            entity_type="order",
+            entity_id=order.id,
+            details=f"Live anomaly alert for order #{order.id}: risk={alert.risk_level}, score={alert.risk_score}",
+        ))
+    return alert
+
+
 @router.get("/orders", response_model=list[OrderOut])
 def list_orders(
-    status: Optional[OrderStatus] = Query(None),
+    status: Optional[str] = Query(None),
     table_id: Optional[int] = Query(None, gt=0),
+    active_only: bool = Query(False),
     limit: int = Query(50, ge=1, le=200),
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     q = db.query(Order)
     if not is_order_elevated_user(current_user):
         q = q.filter(Order.cashier_id == current_user.id)
+    if active_only:
+        q = q.filter(Order.status.in_(["draft", "in_progress", "served"]))
+        orders = q.order_by(Order.updated_at.desc(), Order.created_at.desc()).all()
+        return [_build_order_out(o, db) for o in orders]
     if status:
-        q = q.filter(Order.status == status)
+        statuses = [s.strip() for s in status.split(",") if s.strip()]
+        if len(statuses) == 1:
+            q = q.filter(Order.status == statuses[0])
+        else:
+            q = q.filter(Order.status.in_(statuses))
     if table_id:
         q = q.filter(Order.table_id == table_id)
     orders = q.order_by(Order.created_at.desc()).limit(limit).all()
@@ -109,7 +161,7 @@ def list_orders(
 def create_order(
     data: OrderCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     if data.table_id and not db.query(Table).filter(Table.id == data.table_id).first():
         raise HTTPException(status_code=404, detail="Table introuvable")
@@ -169,6 +221,7 @@ def create_order(
             entity_id=order.id,
             details=f"Order #{order.id} has discount {max_discount}% (threshold {HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT}%)",
         ))
+    _score_live_anomaly(db, order, current_user.id)
     db.commit()
     db.refresh(order)
     return _build_order_out(order, db)
@@ -178,7 +231,7 @@ def create_order(
 def get_order(
     order_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     order = db.query(Order).filter(Order.id == order_id).first()
     if not order:
@@ -192,7 +245,7 @@ def update_order(
     order_id: int,
     data: OrderUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     order = db.query(Order).filter(Order.id == order_id).first()
     if not order:
@@ -257,6 +310,7 @@ def update_order(
             entity_id=order.id,
             details=f"Order #{order.id} has discount {max_discount}% (threshold {HIGH_DISCOUNT_AUDIT_THRESHOLD_PCT}%)",
         ))
+    _score_live_anomaly(db, order, current_user.id)
     db.commit()
     db.refresh(order)
     return _build_order_out(order, db)
@@ -268,27 +322,24 @@ def update_order_status(
     status: OrderStatus = Query(...),
     cancel_reason: str = Query("", max_length=500),
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     order = db.query(Order).filter(Order.id == order_id).first()
     if not order:
         raise HTTPException(status_code=404, detail="Commande introuvable")
     ensure_order_access(current_user, order)
 
-    old_status = order.status  # capture before mutation for double-deduction guard
-
+    old_status = order.status
+    # Validation transitions
     valid_transitions = {
-        "draft": ["in_progress", "cancelled"],
-        "in_progress": ["served", "cancelled"],
+        "draft": ["in_progress", "paid", "cancelled"],
+        "in_progress": ["served", "paid", "cancelled"],
         "served": ["paid", "cancelled"],
         "paid": [],
         "cancelled": [],
     }
-    if status not in valid_transitions.get(order.status, []):
-        raise HTTPException(
-            status_code=400,
-            detail=f"Transition invalide: {order.status} → {status}",
-        )
+    if status not in valid_transitions.get(old_status, []):
+        raise HTTPException(status_code=400, detail=f"Transition de {old_status} vers {status} non autorisée")
 
     try:
         order.status = status
@@ -300,6 +351,8 @@ def update_order_status(
                 table = db.query(Table).filter(Table.id == order.table_id).first()
                 if table:
                     table.status = "available"
+                    table.current_covers = 0
+                    table.reservation_time = ""
 
         if status == "paid" and old_status != "paid":
             # Deduct product stock + consume ingredients via recipe
@@ -325,11 +378,14 @@ def update_order_status(
                 table = db.query(Table).filter(Table.id == order.table_id).first()
                 if table:
                     table.status = "available"
+                    table.current_covers = 0
+                    table.reservation_time = ""
 
         db.add(AuditLog(
             user_id=current_user.id, action=f"order_{status}", entity_type="order",
             entity_id=order.id, details=f"Order #{order.id} status changed: {old_status} → {status}" + (f" Reason: {cancel_reason}" if cancel_reason else ""),
         ))
+        _score_live_anomaly(db, order, current_user.id)
         db.commit()
         db.refresh(order)
     except Exception:

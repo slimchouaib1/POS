@@ -1,0 +1,7 @@
+rank,model,family,expected_role,selected_model,val_r2,test_r2,val_wape,test_wape,source_file,metric_source_note
+1,LightGBM,Machine learning,Selected model,True,0.6614117697292345,0.6681074672235086,0.3060801300930493,0.26168230876284254,backend/Ai models/data/final/Module 2/ml_comparison_summary.json,final JSON summary
+2,XGBoost,Machine learning,Strong challenger,False,0.6579300855186572,0.6707313253656252,0.30732131039337857,0.2613683584809884,backend/Ai models/data/final/Module 2/ml_comparison_summary.json,final JSON summary
+3,LSTM,Deep learning,Deep learning benchmark,False,0.6165049197774429,0.6400878007659172,0.3174823193624008,0.2676119780318451,backend/Ai models/data/final/Module 2/lstm_summary_weekly.json,final JSON summary
+4,TFT,Deep learning,Advanced benchmark,False,0.5475,0.6362,0.3471,0.2739,rapport (1).pdf Tables 6.10-6.11; backend/Ai models/notebooks/Module 2/06b_tft_weekly_aligned.ipynb output,report table plus executed TFT notebook output; no standalone final TFT summary file found
+5,Prophet,Statistical baseline,Baseline,False,0.4936622843069174,0.6196100551655064,0.3734039155394383,0.2837344504864329,backend/Ai models/data/final/Module 2/statistical_comparison_weekly.json,final JSON summary
+6,SARIMA,Statistical baseline,Baseline,False,0.4210561617809453,0.5820824646271601,0.4019024885158609,0.28670704596925684,backend/Ai models/data/final/Module 2/statistical_comparison_weekly.json,final JSON summary

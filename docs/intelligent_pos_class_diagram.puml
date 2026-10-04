@@ -1,0 +1,482 @@
+@startuml
+title Intelligent POS Application - Class Diagram
+
+' =========================================================
+' STYLE
+' =========================================================
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+skinparam ArrowColor #333333
+skinparam ArrowThickness 1
+skinparam ClassBorderColor #222222
+skinparam ClassFontColor #111111
+skinparam ClassFontSize 13
+
+skinparam nodesep 55
+skinparam ranksep 55
+
+hide empty members
+
+
+' =========================================================
+' ENUMS / VALUE SETS
+' =========================================================
+
+enum Role #D9EAD3 {
+    admin
+    manager
+    cashier
+    stock_manager
+}
+
+enum TableStatus #FFF2CC {
+    available
+    occupied
+    reserved
+}
+
+enum OrderStatus #FFF2CC {
+    draft
+    in_progress
+    served
+    paid
+    cancelled
+}
+
+enum PaymentMethod #FFF2CC {
+    cash
+    card
+    mobile
+}
+
+enum PaymentStatus #FFF2CC {
+    completed
+    refunded
+}
+
+enum StockMovementReason #FFF2CC {
+    adjustment
+    restock
+    waste
+    correction
+    sale
+    refund
+}
+
+enum PurchaseOrderStatus #FFF2CC {
+    pending
+    received
+    cancelled
+}
+
+enum AlertRiskLevel #FFF2CC {
+    NORMAL
+    ALERTE
+    CRITIQUE
+}
+
+enum AlertStatus #FFF2CC {
+    new
+    assigned
+    under_review
+    confirmed_fraud
+    false_positive
+    escalated
+    closed
+}
+
+
+' =========================================================
+' USERS / SECURITY
+' =========================================================
+
+class User #D9EAD3 {
+    -id : Integer
+    -username : String
+    -fullName : String
+    -email : String
+    -hashedPassword : String
+    -role : Role
+    -isActive : Boolean
+    -createdAt : DateTime
+    -updatedAt : DateTime
+    --
+    +authenticate(password : String) : Boolean
+    +hasPermission(role : Role) : Boolean
+}
+
+class RefreshToken #D9EAD3 {
+    -id : Integer
+    -tokenHash : String
+    -expiresAt : DateTime
+    -revokedAt : DateTime
+    -replacedByTokenId : Integer
+    -userAgent : String
+    -ipAddress : String
+    -createdAt : DateTime
+}
+
+class AuditLog #FFF2CC {
+    -id : Integer
+    -action : String
+    -entityType : String
+    -entityId : Integer
+    -details : Text
+    -ipAddress : String
+    -createdAt : DateTime
+    --
+    +recordAction() : void
+}
+
+
+' =========================================================
+' CATALOGUE / PRODUCTS
+' =========================================================
+
+class Category #F9CB9C {
+    -id : Integer
+    -name : String
+    -description : Text
+    -icon : String
+    -displayOrder : Integer
+    -createdAt : DateTime
+}
+
+class Product #F9CB9C {
+    -id : Integer
+    -name : String
+    -section : String
+    -price : Float
+    -description : Text
+    -imageUrl : String
+    -isAvailable : Boolean
+    -stockQuantity : Integer
+    -lowStockThreshold : Integer
+    -createdAt : DateTime
+    -updatedAt : DateTime
+    --
+    +updatePrice(price : Float) : void
+    +toggleAvailability() : void
+    +isLowStock() : Boolean
+}
+
+class Ingredient #CFE2F3 {
+    -id : Integer
+    -name : String
+    -unit : String
+    -currentStock : Float
+    -lowStockThreshold : Float
+    -costPerUnit : Float
+    -supplier : String
+    -category : String
+    -createdAt : DateTime
+    --
+    +updateStock(quantityChange : Float) : void
+    +isLowStock() : Boolean
+}
+
+class ProductIngredient #CFE2F3 {
+    -id : Integer
+    -quantityNeeded : Float
+    --
+    +calculateConsumption(quantitySold : Integer) : Float
+}
+
+
+' =========================================================
+' CUSTOMERS / ORDERS / PAYMENTS
+' =========================================================
+
+class Customer #FCE5CD {
+    -id : Integer
+    -name : String
+    -email : String
+    -phone : String
+    -archetype : String
+    -priceTier : String
+    -timePreference : String
+    -dayPreference : String
+    -visitCount : Integer
+    -totalSpent : Float
+    -lastVisit : DateTime
+    -createdAt : DateTime
+    --
+    +getPurchaseHistory() : List<Order>
+    +updateProfile() : void
+}
+
+class Table #FCE5CD {
+    -id : Integer
+    -number : Integer
+    -section : String
+    -capacity : Integer
+    -status : TableStatus
+    --
+    +occupy() : void
+    +release() : void
+    +changeStatus(status : TableStatus) : void
+}
+
+class Order #D9EAD3 {
+    -id : Integer
+    -status : OrderStatus
+    -totalAmount : Float
+    -discountPct : Float
+    -discountAmount : Float
+    -notes : Text
+    -cancelReason : Text
+    -createdAt : DateTime
+    -updatedAt : DateTime
+    --
+    +addItem(product : Product, quantity : Integer) : void
+    +updateItems(items : List<OrderItem>) : void
+    +calculateTotal() : Float
+    +applyDiscount(percent : Float) : void
+    +updateStatus(status : OrderStatus) : void
+}
+
+class OrderItem #F9CB9C {
+    -id : Integer
+    -productName : String
+    -quantity : Integer
+    -unitPrice : Float
+    -discountPct : Float
+    -subtotal : Float
+    -notes : Text
+    --
+    +calculateSubtotal() : Float
+}
+
+class Payment #D9D2E9 {
+    -id : Integer
+    -amount : Float
+    -method : PaymentMethod
+    -status : PaymentStatus
+    -reference : String
+    -createdAt : DateTime
+    --
+    +process() : Boolean
+    +refund() : Boolean
+}
+
+
+' =========================================================
+' INVENTORY / PROCUREMENT
+' =========================================================
+
+class StockMovement #CFE2F3 {
+    -id : Integer
+    -quantityChange : Integer
+    -reason : StockMovementReason
+    -details : Text
+    -createdAt : DateTime
+    --
+    +recordMovement() : void
+}
+
+class IngredientStockMovement #CFE2F3 {
+    -id : Integer
+    -quantityChange : Float
+    -reason : StockMovementReason
+    -details : Text
+    -createdAt : DateTime
+    --
+    +recordMovement() : void
+}
+
+class Supplier #FCE5CD {
+    -id : Integer
+    -name : String
+    -contactName : String
+    -phone : String
+    -email : String
+    -notes : Text
+    -createdAt : DateTime
+    -isActive : Boolean
+    --
+    +update() : void
+    +deactivate() : void
+}
+
+class PurchaseOrder #EAD1DC {
+    -id : Integer
+    -quantityOrdered : Float
+    -status : PurchaseOrderStatus
+    -createdAt : DateTime
+    -receivedAt : DateTime
+    --
+    +submit() : void
+    +receive() : void
+    +cancel() : void
+}
+
+
+' =========================================================
+' AI / DECISION SUPPORT
+' =========================================================
+
+abstract class AIResult #D9D2E9 {
+    -id : Integer
+    -generatedAt : DateTime
+    --
+    +generate() : void
+}
+
+class Recommendation #D9D2E9 {
+    -productName : String
+    -score : Float
+    -confidence : Float
+    -lift : Float
+    -source : List<String>
+    -explanation : String
+    --
+    +recommendProducts() : List<Product>
+}
+
+class DemandForecast #D9D2E9 {
+    -forecastDate : Date
+    -predictedQuantity : Float
+    --
+    +forecastDemand() : Float
+    +estimateIngredientNeeds() : Map
+}
+
+class AnomalyAlert #D9D2E9 {
+    -id : Integer
+    -riskScore : Float
+    -riskLevel : AlertRiskLevel
+    -predictedLabel : Integer
+    -anomalyType : String
+    -reasonCodes : Text
+    -alertExplanation : Text
+    -modelName : String
+    -status : AlertStatus
+    -createdAt : DateTime
+    -updatedAt : DateTime
+    --
+    +detect() : Boolean
+    +classifyRisk() : AlertRiskLevel
+    +assignTo(user : User) : void
+}
+
+class AlertComment #D9D2E9 {
+    -id : Integer
+    -comment : Text
+    -action : String
+    -createdAt : DateTime
+    --
+    +addComment() : void
+}
+
+class CustomerSegment #D9D2E9 {
+    -segmentName : String
+    -description : String
+    --
+    +segmentCustomer() : String
+    +suggestBusinessAction() : String
+}
+
+
+' =========================================================
+' RELATIONSHIPS - SECURITY
+' =========================================================
+
+User --> Role : has
+User "1" *-- "0..*" RefreshToken : owns >
+User "1" -- "0..*" AuditLog : generates >
+
+
+' =========================================================
+' RELATIONSHIPS - CATALOGUE
+' =========================================================
+
+Category "1" -- "0..*" Product : contains >
+Product "1" -- "0..*" ProductIngredient : recipe lines >
+ProductIngredient "0..*" --> "1" Ingredient : uses >
+
+
+' =========================================================
+' RELATIONSHIPS - SALES
+' =========================================================
+
+Customer "0..1" -- "0..*" Order : places >
+User "1" -- "0..*" Order : processes >
+Table "0..1" -- "0..*" Order : assigned to >
+
+Order "1" *-- "1..*" OrderItem : contains >
+OrderItem "0..*" --> "1" Product : product >
+
+Order "1" *-- "0..*" Payment : payments >
+
+
+' =========================================================
+' RELATIONSHIPS - INVENTORY / PROCUREMENT
+' =========================================================
+
+Product "1" -- "0..*" StockMovement : stock movements >
+Ingredient "1" -- "0..*" IngredientStockMovement : stock movements >
+
+User "1" -- "0..*" StockMovement : triggers >
+User "1" -- "0..*" IngredientStockMovement : triggers >
+
+PurchaseOrder "0..*" --> "1" Ingredient : orders >
+User "1" -- "0..*" PurchaseOrder : creates >
+PurchaseOrder ..> IngredientStockMovement : reception creates >
+
+' Supplier exists as a separate catalogue in the current project.
+' Ingredients currently store supplier names as text, not supplier_id foreign keys.
+Supplier ..> Ingredient : referenced by name >
+
+
+' =========================================================
+' RELATIONSHIPS - AI
+' =========================================================
+
+AIResult <|-- Recommendation
+AIResult <|-- DemandForecast
+AIResult <|-- AnomalyAlert
+AIResult <|-- CustomerSegment
+
+Order "0..*" ..> Recommendation : basket context >
+Customer "0..1" ..> Recommendation : customer context >
+Recommendation "0..*" --> "1" Product : suggests >
+
+Product "1" -- "0..*" DemandForecast : forecast for >
+DemandForecast ..> Ingredient : estimates needs >
+
+' This assumes AnomalyAlert.order_id is fixed to ForeignKey("orders.id").
+Order "1" -- "0..*" AnomalyAlert : analyzed by >
+User "0..1" -- "0..*" AnomalyAlert : assigned alerts >
+AnomalyAlert "1" *-- "0..*" AlertComment : comments >
+User "0..1" -- "0..*" AlertComment : writes >
+
+Customer "1" -- "0..1" CustomerSegment : classified as >
+
+
+' =========================================================
+' LAYOUT HELPERS
+' =========================================================
+
+Category -[hidden]right- Product
+Product -[hidden]right- ProductIngredient
+ProductIngredient -[hidden]right- Ingredient
+
+Customer -[hidden]right- Table
+Table -[hidden]right- Order
+Order -[hidden]right- OrderItem
+OrderItem -[hidden]right- Payment
+
+StockMovement -[hidden]right- IngredientStockMovement
+IngredientStockMovement -[hidden]right- PurchaseOrder
+PurchaseOrder -[hidden]right- Supplier
+
+Recommendation -[hidden]right- DemandForecast
+DemandForecast -[hidden]right- AnomalyAlert
+AnomalyAlert -[hidden]right- CustomerSegment
+
+@enduml

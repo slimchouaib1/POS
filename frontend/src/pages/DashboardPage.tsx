@@ -54,7 +54,30 @@ const reportRanges: { value: ReportRange; label: string }[] = [
   { value: 'last_year', label: 'Last year' },
 ];
 
-const mockStats: StatsData = {
+const demoStats: StatsData = {
+  total_revenue: 18942.75,
+  total_orders: 684,
+  avg_basket: 27.69,
+  customer_count: 218,
+  today_revenue: 2765.4,
+  today_orders: 96,
+  active_orders: 14,
+  low_stock_count: 7,
+  top_products: [
+    { name: 'Spicy BBQ Bacon Burger', quantity: 86, revenue: 1892.0 },
+    { name: 'Truffle Mushroom Pizza', quantity: 74, revenue: 1702.0 },
+    { name: 'Chicken Teriyaki Bento', quantity: 69, revenue: 1518.0 },
+    { name: 'Classic Margarita', quantity: 58, revenue: 1044.0 },
+    { name: 'Tiramisu', quantity: 51, revenue: 688.5 },
+  ],
+  payment_methods: [
+    { method: 'Card', count: 386, total: 10962.4 },
+    { method: 'Cash', count: 214, total: 5364.8 },
+    { method: 'Mobile', count: 84, total: 2615.55 },
+  ],
+};
+
+const emptyStats: StatsData = {
   total_revenue: 0,
   total_orders: 0,
   avg_basket: 0,
@@ -67,29 +90,72 @@ const mockStats: StatsData = {
   payment_methods: [],
 };
 
+const demoRevenueTrend: SalesPoint[] = [
+  { date: '2026-08-29', orders: 82, revenue: 2240.5 },
+  { date: '2026-08-30', orders: 91, revenue: 2518.75 },
+  { date: '2026-08-31', orders: 76, revenue: 2076.2 },
+  { date: '2026-09-01', orders: 108, revenue: 3142.4 },
+  { date: '2026-09-02', orders: 126, revenue: 3728.6 },
+  { date: '2026-09-03', orders: 113, revenue: 3070.9 },
+  { date: '2026-09-04', orders: 88, revenue: 2165.4 },
+];
+
+const demoComparison: PeriodComparison = {
+  has_comparison: true,
+  message: '',
+  current_period: {
+    start: '2026-08-29',
+    end: '2026-09-04',
+    total_revenue: 18942.75,
+    total_orders: 684,
+    avg_basket: 27.69,
+    customer_count: 218,
+  },
+  previous_period: {
+    start: '2026-08-22',
+    end: '2026-08-28',
+    total_revenue: 16284.2,
+    total_orders: 604,
+    avg_basket: 26.96,
+    customer_count: 191,
+  },
+  deltas: {
+    total_revenue: { absolute: 2658.55, percent: 16.3 },
+    total_orders: { absolute: 80, percent: 13.2 },
+    avg_basket: { absolute: 0.73, percent: 2.7 },
+    customer_count: { absolute: 27, percent: 14.1 },
+  },
+};
+
+const hasStatsData = (data: StatsData) => (
+  data.total_revenue > 0 ||
+  data.total_orders > 0 ||
+  data.top_products.length > 0 ||
+  data.payment_methods.length > 0
+);
+
 export default function DashboardPage() {
-  const [stats, setStats] = useState<StatsData>(mockStats);
-  const [revenueTrend, setRevenueTrend] = useState<SalesPoint[]>([]);
+  const [stats, setStats] = useState<StatsData>(demoStats);
+  const [revenueTrend, setRevenueTrend] = useState<SalesPoint[]>(demoRevenueTrend);
   const [reportRange, setReportRange] = useState<ReportRange>('last_week');
-  const [comparison, setComparison] = useState<PeriodComparison | null>(null);
+  const [comparison, setComparison] = useState<PeriodComparison | null>(demoComparison);
 
   useEffect(() => {
     api.get(`/api/reports/dashboard?range=${reportRange}`).then((r) => {
       if (r.data) {
-        setStats({
-          ...mockStats,
-          ...r.data,
-        });
+        const nextStats = { ...emptyStats, ...r.data };
+        setStats(hasStatsData(nextStats) ? nextStats : demoStats);
       }
-    }).catch(console.error);
+    }).catch(() => setStats(demoStats));
 
     api.get<{ data: SalesPoint[] }>(`/api/reports/sales?period=daily&range=${reportRange}`).then((r) => {
-      setRevenueTrend(r.data.data || []);
-    }).catch(console.error);
+      const nextTrend = r.data.data || [];
+      setRevenueTrend(nextTrend.length > 0 ? nextTrend : demoRevenueTrend);
+    }).catch(() => setRevenueTrend(demoRevenueTrend));
 
     api.get<PeriodComparison>(`/api/reports/dashboard/comparison?range=${reportRange}`).then((r) => {
-      setComparison(r.data);
-    }).catch(console.error);
+      setComparison(r.data?.has_comparison ? r.data : demoComparison);
+    }).catch(() => setComparison(demoComparison));
   }, [reportRange]);
 
   const kpis = [

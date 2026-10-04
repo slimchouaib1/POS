@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr, Field
 from typing import Literal, Optional
 from datetime import datetime
 
-Role = Literal["admin", "manager", "cashier", "stock_manager"]
+Role = Literal["manager", "cashier", "stock_manager"]
 
 
 class LoginRequest(BaseModel):

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api';
 import { TrendingUp, BarChart3, ShoppingCart } from 'lucide-react';
-import { Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, ReferenceLine } from 'recharts';
 import CustomSelect from '../components/CustomSelect';
 
 export default function ForecastingPage() {
@@ -98,15 +98,22 @@ export default function ForecastingPage() {
             <div className="card" style={{ marginBottom: '1.5rem' }}>
               <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem' }}>Sales Forecast — {forecast.item}</h3>
               <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={forecast.forecast}>
+                <LineChart data={forecast.forecast}>
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                   <XAxis dataKey="week_offset" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} label={{ value: 'Week', fill: 'var(--text-muted)', fontSize: 12 }} />
                   <YAxis tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} label={{ value: 'Units sold', angle: -90, fill: 'var(--text-muted)', fontSize: 12 }} />
                   <Tooltip contentStyle={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text-primary)' }} />
-                  <Area type="monotone" dataKey="confidence_upper" stroke="none" fill="rgba(99,102,241,0.1)" name="Upper bound" />
-                  <Area type="monotone" dataKey="confidence_lower" stroke="none" fill="var(--bg-main)" name="Lower bound" />
-                  <Line type="monotone" dataKey="predicted_demand" stroke="#6366f1" strokeWidth={3} dot={{ fill: '#6366f1', r: 5 }} name="Predicted sales" />
-                </AreaChart>
+                  <ReferenceLine
+                    y={forecast.recent_avg_demand}
+                    stroke="#f59e0b"
+                    strokeDasharray="5 5"
+                    strokeWidth={2}
+                    label={{ value: 'Recent average', position: 'insideTopRight', fill: '#f59e0b', fontSize: 12 }}
+                  />
+                  <Line type="monotone" dataKey="confidence_upper" stroke="#c7d2fe" strokeWidth={2} strokeDasharray="4 4" dot={false} name="Upper bound" />
+                  <Line type="monotone" dataKey="confidence_lower" stroke="#c7d2fe" strokeWidth={2} strokeDasharray="4 4" dot={false} name="Lower bound" />
+                  <Line type="monotone" dataKey="predicted_demand" stroke="#6366f1" strokeWidth={3} dot={{ fill: '#6366f1', stroke: '#ffffff', strokeWidth: 2, r: 5 }} activeDot={{ r: 7 }} name="Predicted sales" />
+                </LineChart>
               </ResponsiveContainer>
             </div>
           )}

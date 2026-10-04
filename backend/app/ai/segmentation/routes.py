@@ -29,14 +29,14 @@ _regen_status = {
 @router.get("/customer/{customer_id}")
 def customer_segment(
     customer_id: int = Path(..., gt=0),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     return get_customer_segment(customer_id)
 
 
 @router.get("/overview")
 def segmentation_overview(
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     data = get_segmentation_overview()
     data["last_regenerated"] = _regen_status["last_run"]
@@ -45,7 +45,7 @@ def segmentation_overview(
 
 @router.get("/regenerate/status")
 def regenerate_status(
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     return {
         "running": _regen_status["running"],
@@ -94,7 +94,7 @@ def _run_regeneration_bg(user_id: int):
 @router.post("/regenerate")
 def regenerate_segments(
     background_tasks: BackgroundTasks,
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     """Kick off a background segmentation run. Returns immediately."""
     if _regen_status["running"]:

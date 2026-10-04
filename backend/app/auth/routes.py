@@ -160,7 +160,7 @@ def logout(request: Request, response: Response, db: Session = Depends(get_db)):
 def register(
     data: UserCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     if db.query(User).filter(User.username == data.username).first():
         raise HTTPException(status_code=400, detail="Nom d'utilisateur deja utilise")

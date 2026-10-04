@@ -11,6 +11,8 @@ class Table(Base):
     section = Column(String(50), default="Main")
     capacity = Column(Integer, default=4)
     status = Column(String(20), default="available")  # available, occupied, reserved
+    current_covers = Column(Integer, default=0, nullable=True)
+    reservation_time = Column(String(50), default="", nullable=True)
 
     orders = relationship("Order", back_populates="table")
 

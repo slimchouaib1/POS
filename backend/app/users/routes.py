@@ -13,7 +13,7 @@ router = APIRouter(prefix="/api/users", tags=["User Management"])
 @router.get("", response_model=list[UserOut])
 def list_users(
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     users = db.query(User).order_by(User.created_at.desc()).all()
     return [UserOut.model_validate(u) for u in users]
@@ -23,7 +23,7 @@ def list_users(
 def get_user(
     user_id: int,
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN)),
+    _=Depends(require_role(settings.ROLE_MANAGER)),
 ):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
@@ -36,7 +36,7 @@ def update_user(
     user_id: int,
     data: UserUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
@@ -80,7 +80,7 @@ def update_user(
 def deactivate_user(
     user_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:

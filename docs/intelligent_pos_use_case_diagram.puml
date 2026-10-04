@@ -1,0 +1,192 @@
+@startuml
+title Intelligent POS Application - Global Use Case Diagram
+
+left to right direction
+
+skinparam backgroundColor white
+skinparam shadowing false
+
+skinparam actor {
+    BorderColor #333333
+    FontSize 10
+}
+
+skinparam usecase {
+    BackgroundColor #F8F8F8
+    BorderColor #333333
+    FontSize 9
+}
+
+skinparam ArrowColor #444444
+skinparam ArrowFontSize 8
+skinparam packageStyle rectangle
+
+
+' =========================================================
+' ACTORS
+' =========================================================
+
+actor "POS User" as POSUser
+actor Cashier
+actor Manager
+actor Admin
+actor "Stock Manager" as StockManager
+
+POSUser <|-- Cashier
+POSUser <|-- Manager
+POSUser <|-- Admin
+POSUser <|-- StockManager
+
+
+' =========================================================
+' SYSTEM
+' =========================================================
+
+rectangle "Intelligent POS Application" {
+
+    package "Authentication" {
+        usecase "Log In" as UC_Login
+        usecase "Log Out" as UC_Logout
+    }
+
+    package "POS Operations" {
+        usecase "Manage Tables" as UC_Tables
+        usecase "Create / Update\nOrders" as UC_Order
+        usecase "View Orders" as UC_ViewOrders
+        usecase "Manage Customers" as UC_Customer
+        usecase "Process Payment" as UC_Payment
+        usecase "Generate Receipt" as UC_Receipt
+        usecase "View Product\nRecommendations" as UC_Recommend
+    }
+
+    package "Catalogue" {
+        usecase "Manage Products\nand Categories" as UC_Products
+        usecase "Manage Ingredients\nand Recipes" as UC_Recipes
+    }
+
+    package "Stock and Procurement" {
+        usecase "View Stock\nDashboard" as UC_StockDashboard
+        usecase "Adjust Stock" as UC_AdjustStock
+        usecase "View Stock\nMovements" as UC_StockMovements
+        usecase "Manage Suppliers" as UC_Supplier
+        usecase "Manage Purchase\nOrders" as UC_PO
+        usecase "Receive Purchase\nOrder" as UC_Receive
+    }
+
+    package "Reporting and AI" {
+        usecase "View Dashboard" as UC_Dashboard
+        usecase "View Sales\nReports" as UC_Reports
+        usecase "Export Reports" as UC_Export
+        usecase "View Demand\nForecasts" as UC_Forecast
+        usecase "Review Anomaly\nAlerts" as UC_Anomaly
+        usecase "View Customer\nSegments" as UC_Segment
+    }
+
+    package "Administration" {
+        usecase "Manage Users\nand Roles" as UC_Users
+        usecase "View Audit Logs" as UC_Audit
+    }
+}
+
+
+' =========================================================
+' COMMON USER ACTIONS
+' =========================================================
+
+POSUser --> UC_Login
+POSUser --> UC_Logout
+
+
+' =========================================================
+' CASHIER
+' =========================================================
+
+Cashier --> UC_Tables
+Cashier --> UC_Order
+Cashier --> UC_ViewOrders
+Cashier --> UC_Customer
+Cashier --> UC_Payment
+Cashier --> UC_Receipt
+Cashier --> UC_Recommend
+
+
+' =========================================================
+' MANAGER
+' =========================================================
+
+Manager --> UC_ViewOrders
+Manager --> UC_Customer
+Manager --> UC_Products
+Manager --> UC_Recipes
+Manager --> UC_Dashboard
+Manager --> UC_Reports
+Manager --> UC_Export
+Manager --> UC_Forecast
+Manager --> UC_Anomaly
+Manager --> UC_Segment
+Manager --> UC_Audit
+
+
+' =========================================================
+' STOCK MANAGER
+' =========================================================
+
+StockManager --> UC_ViewOrders
+StockManager --> UC_StockDashboard
+StockManager --> UC_AdjustStock
+StockManager --> UC_StockMovements
+StockManager --> UC_Supplier
+StockManager --> UC_PO
+StockManager --> UC_Receive
+StockManager --> UC_Forecast
+
+
+' =========================================================
+' ADMIN
+' =========================================================
+
+Admin --> UC_Users
+Admin --> UC_ViewOrders
+Admin --> UC_Customer
+Admin --> UC_Products
+Admin --> UC_Recipes
+Admin --> UC_Dashboard
+Admin --> UC_Reports
+Admin --> UC_Export
+Admin --> UC_Forecast
+Admin --> UC_Anomaly
+Admin --> UC_Segment
+Admin --> UC_Audit
+
+
+' =========================================================
+' INCLUDE / EXTEND RELATIONSHIPS
+' =========================================================
+
+UC_Payment ..> UC_Receipt : <<include>>
+UC_Payment ..> UC_AdjustStock : <<include>>
+UC_Order ..> UC_Tables : <<include>>
+UC_Receive ..> UC_AdjustStock : <<include>>
+
+UC_Recommend ..> UC_Order : <<extend>>
+UC_Export ..> UC_Reports : <<extend>>
+
+
+' =========================================================
+' LAYOUT HELPERS
+' =========================================================
+
+UC_Tables -[hidden]down- UC_Order
+UC_Order -[hidden]down- UC_ViewOrders
+UC_ViewOrders -[hidden]down- UC_Payment
+
+UC_Products -[hidden]down- UC_Recipes
+UC_StockDashboard -[hidden]down- UC_AdjustStock
+UC_AdjustStock -[hidden]down- UC_StockMovements
+UC_Supplier -[hidden]down- UC_PO
+
+UC_Dashboard -[hidden]down- UC_Reports
+UC_Reports -[hidden]down- UC_Forecast
+UC_Forecast -[hidden]down- UC_Anomaly
+
+@enduml

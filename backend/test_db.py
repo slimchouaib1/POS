@@ -3,12 +3,12 @@ import os
 import requests
 
 BASE = "http://localhost:8000"
-ADMIN_PASSWORD = os.environ.get("POS_TEST_ADMIN_PASSWORD")
-if not ADMIN_PASSWORD:
-    raise RuntimeError("POS_TEST_ADMIN_PASSWORD is required")
+MANAGER_PASSWORD = os.environ.get("POS_TEST_MANAGER_PASSWORD")
+if not MANAGER_PASSWORD:
+    raise RuntimeError("POS_TEST_MANAGER_PASSWORD is required")
 
 # 1. Login
-resp = requests.post(f"{BASE}/api/auth/login", json={"username": "admin", "password": ADMIN_PASSWORD})
+resp = requests.post(f"{BASE}/api/auth/login", json={"username": "manager", "password": MANAGER_PASSWORD})
 assert resp.status_code == 200, f"Login failed: {resp.text}"
 token = resp.json()["access_token"]
 headers = {"Authorization": f"Bearer {token}"}

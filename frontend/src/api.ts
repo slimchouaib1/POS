@@ -42,6 +42,10 @@ api.interceptors.response.use(
       }
     }
 
+    if (err.response?.status === 403 && window.location.pathname !== '/unauthorized') {
+      window.location.href = '/unauthorized';
+    }
+
     if (err.response?.status === 401) {
       localStorage.removeItem('pos_token');
       localStorage.removeItem('pos_user');

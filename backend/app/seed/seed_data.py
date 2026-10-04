@@ -4,7 +4,7 @@ Loads real data from Notebooks datasets to populate the database.
 """
 import json
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from sqlalchemy.orm import Session
 
@@ -42,6 +42,8 @@ def seed_all(db: Session):
     if db.query(User).count() > 0:
         print("[SEED] Database already populated, skipping.")
         seed_orders_and_payments(db)
+        if db.query(AnomalyAlert).count() == 0:
+            seed_anomaly_alerts(db)
         # Still seed ingredients if they don't exist yet (new feature)
         from app.seed.seed_ingredients import seed_ingredients
         seed_ingredients(db)
@@ -60,10 +62,17 @@ def seed_all(db: Session):
     print("[SEED] Done!")
 
 
+def normalize_admin_roles(db: Session):
+    """Convert legacy admin users to manager after the admin role removal."""
+    updated = db.query(User).filter(User.role == "admin").update({"role": "manager"})
+    if updated:
+        db.commit()
+        print(f"  [SEED] Converted {updated} legacy admin user(s) to manager")
+
+
 def seed_users(db: Session):
     """Create default users for each role."""
     required_passwords = {
-        "admin": settings.SEED_ADMIN_PASSWORD,
         "manager": settings.SEED_MANAGER_PASSWORD,
         "cashier": settings.SEED_CASHIER_PASSWORD,
         "stock_manager": settings.SEED_STOCK_PASSWORD,
@@ -76,7 +85,6 @@ def seed_users(db: Session):
         )
 
     users = [
-        ("admin", "Sarah Johnson", "admin@restaurant.com", required_passwords["admin"], "admin"),
         ("manager", "Michael Chen", "manager@restaurant.com", required_passwords["manager"], "manager"),
         ("cashier1", "Emily Rodriguez", "cashier1@restaurant.com", required_passwords["cashier"], "cashier"),
         ("cashier2", "Bob Martinez", "cashier2@restaurant.com", required_passwords["cashier"], "cashier"),
@@ -212,40 +220,59 @@ def seed_customers(db: Session):
         df = pd.read_csv(path)
 
     count = 0
-    for _, row in df.head(200).iterrows():
-        customer = Customer(
+    customer_batch = []
+    for _, row in df.iterrows():
+        customer_batch.append(Customer(
             id=int(row.get("customer_id", count + 1)),
             name=f"Customer {row.get('customer_id', count + 1)}",
             archetype=str(row.get("archetype", "")),
             price_tier=str(row.get("price_tier", "")),
             time_preference=str(row.get("time_preference", "")),
             day_preference=str(row.get("day_preference", "")),
-        )
-        db.add(customer)
+        ))
         count += 1
+        if len(customer_batch) >= 1000:
+            db.bulk_save_objects(customer_batch)
+            db.commit()
+            customer_batch.clear()
 
-    db.commit()
+    if customer_batch:
+        db.bulk_save_objects(customer_batch)
+        db.commit()
+
+    # Reset customer sequence if postgresql
+    try:
+        if db.bind and db.bind.dialect.name == "postgresql":
+            from sqlalchemy import text
+            db.execute(text("SELECT setval(pg_get_serial_sequence('customers', 'id'), coalesce(max(id), 1) + 1, false) FROM customers;"))
+            db.commit()
+    except Exception:
+        pass
+
     print(f"  [SEED] Created {count} customers")
 
 
-def seed_orders_and_payments(db: Session, max_orders: int = 25000):
+def seed_orders_and_payments(db: Session, max_orders: int | None = None):
     """Replay real transaction rows into POS order/payment tables for reports."""
     dataset_note = "Seeded from enterprise_pos_dataset.csv source order"
-    dataset_orders = db.query(Order).filter(Order.notes.like(f"{dataset_note}%")).all()
+    dataset_orders_count = db.query(Order).filter(Order.notes.like(f"{dataset_note}%")).count()
     total_orders = db.query(Order).count()
-    if total_orders > 0 and not dataset_orders:
+    if total_orders > 0 and dataset_orders_count == 0:
         print("  [SEED] Non-dataset orders already exist, skipping transaction seed")
         return
-    if len(dataset_orders) >= max_orders:
-        print(f"  [SEED] Dataset orders already populated ({len(dataset_orders)} orders), skipping")
+    if (max_orders is not None and dataset_orders_count >= max_orders) or (max_orders is None and dataset_orders_count >= 50000):
+        print(f"  [SEED] Dataset orders already populated ({dataset_orders_count} orders), skipping")
         return
-    if dataset_orders:
-        dataset_order_ids = [order.id for order in dataset_orders]
-        db.query(Payment).filter(Payment.order_id.in_(dataset_order_ids)).delete(synchronize_session=False)
-        db.query(OrderItem).filter(OrderItem.order_id.in_(dataset_order_ids)).delete(synchronize_session=False)
-        db.query(Order).filter(Order.id.in_(dataset_order_ids)).delete(synchronize_session=False)
-        db.commit()
-        print(f"  [SEED] Removed {len(dataset_order_ids)} previous dataset-seeded orders")
+    if dataset_orders_count > 0:
+        dataset_order_ids = [r[0] for r in db.query(Order.id).filter(Order.notes.like(f"{dataset_note}%")).all()]
+        if dataset_order_ids:
+            for i in range(0, len(dataset_order_ids), 5000):
+                chunk = dataset_order_ids[i:i+5000]
+                db.query(Payment).filter(Payment.order_id.in_(chunk)).delete(synchronize_session=False)
+                db.query(OrderItem).filter(OrderItem.order_id.in_(chunk)).delete(synchronize_session=False)
+                db.query(Order).filter(Order.id.in_(chunk)).delete(synchronize_session=False)
+                db.commit()
+            print(f"  [SEED] Removed {len(dataset_order_ids)} previous dataset-seeded orders")
 
     path = _first_existing_data_path("enterprise_pos_dataset.csv")
     if not path:
@@ -258,7 +285,7 @@ def seed_orders_and_payments(db: Session, max_orders: int = 25000):
         return
 
     users_by_username = {user.username: user for user in db.query(User).all()}
-    cashier_fallback = users_by_username.get("cashier1") or users_by_username.get("admin")
+    cashier_fallback = users_by_username.get("cashier1") or users_by_username.get("manager")
     if not cashier_fallback:
         print("  [SEED] Cashier user missing, skipping orders")
         return
@@ -285,18 +312,27 @@ def seed_orders_and_payments(db: Session, max_orders: int = 25000):
         return
 
     latest_source_date = df["source_created_at"].max().to_pydatetime()
-    date_shift = datetime.utcnow() - latest_source_date
-    ordered_source_ids = (
-        df[["order_id", "source_created_at"]]
-        .drop_duplicates("order_id")
-        .sort_values("source_created_at")
-        .tail(max_orders)
-    )
-    order_ids = ordered_source_ids["order_id"].tolist()
-    df = df[df["order_id"].isin(order_ids)].copy()
+    now = datetime.utcnow()
+    date_shift = (now - latest_source_date) if now > latest_source_date else timedelta(0)
+
+    if max_orders is not None:
+        ordered_source_ids = (
+            df[["order_id", "source_created_at"]]
+            .drop_duplicates("order_id")
+            .sort_values("source_created_at")
+            .tail(max_orders)
+        )
+        order_ids = ordered_source_ids["order_id"].tolist()
+        df = df[df["order_id"].isin(order_ids)].copy()
 
     created_orders = 0
     created_items = 0
+
+    order_batch = []
+    item_batch = []
+    payment_batch = []
+    batch_size = 2000
+
     for source_order_id, group in df.groupby("order_id", sort=True):
         first = group.iloc[0]
         table = None
@@ -314,20 +350,6 @@ def seed_orders_and_payments(db: Session, max_orders: int = 25000):
 
         customer_id = None if pd.isna(first["customer_id"]) else int(first["customer_id"])
         cashier = cashier_map.get(str(first["cashier_id"]), cashier_fallback)
-        order = Order(
-            table_id=table.id if table else None,
-            customer_id=customer_id if customer_id and customer_id in customers else None,
-            cashier_id=cashier.id,
-            status="paid",
-            total_amount=0.0,
-            discount_pct=float(first.get("discount_pct", 0.0) or 0.0),
-            discount_amount=0.0,
-            notes=f"{dataset_note} {source_order_id}",
-            created_at=created_at,
-            updated_at=created_at,
-        )
-        db.add(order)
-        db.flush()
 
         gross_total = 0.0
         net_total = 0.0
@@ -339,8 +361,8 @@ def seed_orders_and_payments(db: Session, max_orders: int = 25000):
             line_total = round(float(row["line_total"]), 2)
             gross_total += unit_price
             net_total += line_total
-            db.add(OrderItem(
-                order_id=order.id,
+            item_batch.append(OrderItem(
+                order_id=int(source_order_id),
                 product_id=product.id,
                 product_name=product.name,
                 quantity=1,
@@ -351,11 +373,24 @@ def seed_orders_and_payments(db: Session, max_orders: int = 25000):
             ))
             created_items += 1
 
-        order.total_amount = round(net_total, 2)
-        order.discount_amount = round(max(gross_total - net_total, 0.0), 2)
-        db.add(Payment(
-            order_id=order.id,
-            amount=order.total_amount,
+        total_amount = round(net_total, 2)
+        discount_amount = round(max(gross_total - net_total, 0.0), 2)
+        order_batch.append(Order(
+            id=int(source_order_id),
+            table_id=table.id if table else None,
+            customer_id=customer_id if customer_id and customer_id in customers else None,
+            cashier_id=cashier.id,
+            status="paid",
+            total_amount=total_amount,
+            discount_pct=float(first.get("discount_pct", 0.0) or 0.0),
+            discount_amount=discount_amount,
+            notes=f"{dataset_note} {source_order_id}",
+            created_at=created_at,
+            updated_at=created_at,
+        ))
+        payment_batch.append(Payment(
+            order_id=int(source_order_id),
+            amount=total_amount,
             method="unknown" if pd.isna(first["payment_method"]) else str(first["payment_method"]),
             status="completed",
             reference=f"dataset-order-{source_order_id}",
@@ -363,7 +398,30 @@ def seed_orders_and_payments(db: Session, max_orders: int = 25000):
         ))
         created_orders += 1
 
-    db.commit()
+        if len(order_batch) >= batch_size:
+            db.bulk_save_objects(order_batch)
+            db.bulk_save_objects(item_batch)
+            db.bulk_save_objects(payment_batch)
+            db.commit()
+            order_batch.clear()
+            item_batch.clear()
+            payment_batch.clear()
+
+    if order_batch:
+        db.bulk_save_objects(order_batch)
+        db.bulk_save_objects(item_batch)
+        db.bulk_save_objects(payment_batch)
+        db.commit()
+
+    # Reset orders sequence if postgresql
+    try:
+        if db.bind and db.bind.dialect.name == "postgresql":
+            from sqlalchemy import text
+            db.execute(text("SELECT setval(pg_get_serial_sequence('orders', 'id'), coalesce(max(id), 1) + 1, false) FROM orders;"))
+            db.commit()
+    except Exception as e:
+        print(f"  [SEED] Note: Could not reset orders sequence ({e})")
+
     print(f"  [SEED] Created {created_orders} orders, {created_items} order items, {created_orders} payments")
 
 
@@ -377,7 +435,7 @@ def seed_anomaly_alerts(db: Session):
         return
 
     count = 0
-    for row in alerts[:200]:
+    for row in alerts:
         alert = AnomalyAlert(
             order_id=str(row.get("order_id", f"ORD-{count}")),
             risk_score=float(row.get("risk_score", 0.5)),

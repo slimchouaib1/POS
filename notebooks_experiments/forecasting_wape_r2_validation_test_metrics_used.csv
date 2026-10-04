@@ -1,0 +1,7 @@
+model,family,source_file,val_wape,val_r2,test_wape,test_r2
+Prophet,Statistical,backend/Ai models/data/final/Module 2/statistical_comparison_weekly.json,0.3734039155394383,0.4936622843069174,0.2837344504864329,0.6196100551655064
+SARIMA,Statistical,backend/Ai models/data/final/Module 2/statistical_comparison_weekly.json,0.4019024885158609,0.4210561617809453,0.28670704596925684,0.5820824646271601
+XGBoost,Machine Learning,backend/Ai models/data/final/Module 2/ml_comparison_summary.json,0.30732131039337857,0.6579300855186572,0.2613683584809884,0.6707313253656252
+LightGBM,Machine Learning,backend/Ai models/data/final/Module 2/ml_comparison_summary.json,0.3060801300930493,0.6614117697292345,0.26168230876284254,0.6681074672235086
+LSTM,Deep Learning,backend/Ai models/data/final/Module 2/lstm_summary_weekly.json,0.3174823193624008,0.6165049197774429,0.2676119780318451,0.6400878007659172
+TFT,Deep Learning,rapport (1).pdf Tables 6.10-6.11; backend/Ai models/notebooks/Module 2/06b_tft_weekly_aligned.ipynb output,0.3471,0.5475,0.2739,0.6362

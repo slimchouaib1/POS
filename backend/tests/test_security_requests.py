@@ -28,12 +28,12 @@ def _reset_db():
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
     try:
-        admin = User(
-            username="admin",
-            full_name="Admin User",
-            email="admin@example.test",
-            hashed_password=hash_password("AdminPassword123!"),
-            role="admin",
+        manager = User(
+            username="manager",
+            full_name="Manager User",
+            email="manager@example.test",
+            hashed_password=hash_password("ManagerPassword123!"),
+            role="manager",
         )
         cashier_a = User(
             username="cashier_a",
@@ -49,7 +49,7 @@ def _reset_db():
             hashed_password=hash_password("CashierPassword123!"),
             role="cashier",
         )
-        db.add_all([admin, cashier_a, cashier_b])
+        db.add_all([manager, cashier_a, cashier_b])
         db.flush()
         other_order = Order(cashier_id=cashier_b.id, status="draft")
         own_order = Order(cashier_id=cashier_a.id, status="draft")
@@ -80,10 +80,10 @@ def _alg_none_token(subject: int) -> str:
         raw = json.dumps(part, separators=(",", ":")).encode("utf-8")
         return base64.urlsafe_b64encode(raw).rstrip(b"=").decode("ascii")
 
-    return f'{encode({"alg": "none", "typ": "JWT"})}.{encode({"sub": str(subject), "role": "admin"})}.'
+    return f'{encode({"alg": "none", "typ": "JWT"})}.{encode({"sub": str(subject), "role": "manager"})}.'
 
 
-def test_cashier_cannot_call_admin_route():
+def test_cashier_cannot_call_manager_route():
     _reset_db()
     with TestClient(app, raise_server_exceptions=False) as client:
         token = _login(client, "cashier_a")
@@ -113,7 +113,7 @@ def test_cashier_cannot_access_another_cashiers_order_by_id():
 def test_purchase_order_receive_increments_stock_and_audits():
     _reset_db()
     with TestClient(app, raise_server_exceptions=False) as client:
-        token = _login(client, "admin", "AdminPassword123!")
+        token = _login(client, "manager", "ManagerPassword123!")
         headers = {"Authorization": f"Bearer {token}"}
 
         db = SessionLocal()

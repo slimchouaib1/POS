@@ -3,7 +3,7 @@ export interface User {
   username: string;
   full_name: string;
   email: string;
-  role: 'admin' | 'manager' | 'cashier' | 'stock_manager';
+  role: 'manager' | 'cashier' | 'stock_manager';
   is_active: boolean;
   created_at?: string;
 }
@@ -37,6 +37,8 @@ export interface TableItem {
   section: string;
   capacity: number;
   status: 'available' | 'occupied' | 'reserved';
+  current_covers?: number;
+  reservation_time?: string;
 }
 
 export interface OrderItem {

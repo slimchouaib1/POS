@@ -5,7 +5,8 @@ import { useAuth } from '../AuthContext';
 import type { Product, Category, CartItem, TableItem, Recommendation } from '../types';
 import {
   ShoppingCart, Plus, Trash2, Search, Grid3X3, Zap,
-  Clock, Users, ChefHat, CreditCard, Save, Sparkles, Image, LogOut
+  Clock, Users, ChefHat, CreditCard, Save, Sparkles, Image, LogOut,
+  Calendar, Check, X, Minus
 } from 'lucide-react';
 import CustomSelect from '../components/CustomSelect';
 
@@ -31,6 +32,8 @@ export default function POSPage() {
   const [reserveCovers, setReserveCovers] = useState(2);
   const [reserveTime, setReserveTime] = useState('');
   const [clearTableConfirmOpen, setClearTableConfirmOpen] = useState(false);
+  const [reservedActionOpen, setReservedActionOpen] = useState(false);
+  const [selectedReservedTable, setSelectedReservedTable] = useState<TableItem | null>(null);
 
   // Customer State
   const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
@@ -44,9 +47,8 @@ export default function POSPage() {
 
   const fetchTables = () => {
     api.get('/api/tables').then((r) => setTables(r.data));
-    api.get('/api/orders').then((r) => {
-      const active = r.data.filter((o: any) => o.status === 'in_progress' || o.status === 'draft');
-      setActiveOrders(active);
+    api.get('/api/orders?active_only=true').then((r) => {
+      setActiveOrders(r.data);
     });
   };
 
@@ -112,46 +114,61 @@ export default function POSPage() {
   const handleSelectTable = async (table: TableItem) => {
     if (table.status === 'available') {
       setTableToReserve(table);
+      setReserveCovers(2);
+      setReserveTime('');
       setTableModalOpen(true);
-    } else {
-      const tableOrder = activeOrders.find(o => o.table_id === table.id);
-      if (tableOrder && tableOrder.items) {
-        const newCart = tableOrder.items.map((item: any) => {
-          const product = products.find((p) => p.id === item.product_id) || {
-            id: item.product_id,
-            name: item.product_name,
-            price: item.unit_price,
-            category_id: 0,
-            stock_quantity: 999,
-            is_available: true,
-            description: ''
-          };
-          return { product, quantity: item.quantity, notes: item.notes || '' };
-        });
-        setCart(newCart);
-        if (tableOrder.customer_id) {
-          try {
-            const cRes = await api.get(`/api/customers/${tableOrder.customer_id}`);
-            setSelectedCustomer(cRes.data);
-          } catch (e) {
-            console.error('Failed to fetch customer', e);
-          }
-        } else {
-          setSelectedCustomer(null);
+      return;
+    }
+
+    if (table.status === 'reserved') {
+      setSelectedReservedTable(table);
+      setReservedActionOpen(true);
+      return;
+    }
+
+    // Occupied table
+    const tableOrder = activeOrders.find(o => o.table_id === table.id);
+    if (tableOrder && tableOrder.items && tableOrder.items.length > 0) {
+      const newCart = tableOrder.items.map((item: any) => {
+        const product = products.find((p) => p.id === item.product_id) || {
+          id: item.product_id,
+          name: item.product_name,
+          price: item.unit_price,
+          category_id: 0,
+          stock_quantity: 999,
+          is_available: true,
+          description: ''
+        };
+        return { product, quantity: item.quantity, notes: item.notes || '' };
+      });
+      setCart(newCart);
+      if (tableOrder.customer_id) {
+        try {
+          const cRes = await api.get(`/api/customers/${tableOrder.customer_id}`);
+          setSelectedCustomer(cRes.data);
+        } catch (e) {
+          console.error('Failed to fetch customer', e);
         }
       } else {
-        setCart([]);
         setSelectedCustomer(null);
       }
-      setSelectedTable(table);
-      setMode('menu');
+    } else {
+      setCart([]);
+      setSelectedCustomer(null);
     }
+    setSelectedTable(table);
+    setMode('menu');
   };
 
   const handleReserveOnly = async () => {
     if (!tableToReserve) return;
     try {
-      await api.put(`/api/tables/${tableToReserve.id}/status?status=reserved`);
+      const q = new URLSearchParams({
+        status: 'reserved',
+        covers: String(reserveCovers),
+        reservation_time: reserveTime || ''
+      });
+      await api.put(`/api/tables/${tableToReserve.id}/status?${q.toString()}`);
       setTableModalOpen(false);
       fetchTables();
     } catch {
@@ -159,10 +176,61 @@ export default function POSPage() {
     }
   };
 
-  const handleOpenOrder = () => {
-    setSelectedTable(tableToReserve);
+  const handleOpenOrder = async () => {
+    if (!tableToReserve) return;
+    try {
+      const q = new URLSearchParams({
+        status: 'occupied',
+        covers: String(reserveCovers)
+      });
+      await api.put(`/api/tables/${tableToReserve.id}/status?${q.toString()}`);
+    } catch (e) {
+      console.error('Error setting table status', e);
+    }
+    setSelectedTable({
+      ...tableToReserve,
+      status: 'occupied',
+      current_covers: reserveCovers
+    });
+    setCart([]);
+    setSelectedCustomer(null);
     setMode('menu');
     setTableModalOpen(false);
+    fetchTables();
+  };
+
+  const handleSeatReservedTable = async () => {
+    if (!selectedReservedTable) return;
+    try {
+      const q = new URLSearchParams({
+        status: 'occupied',
+        covers: String(selectedReservedTable.current_covers || 2)
+      });
+      await api.put(`/api/tables/${selectedReservedTable.id}/status?${q.toString()}`);
+    } catch (e) {
+      console.error('Error seating reserved table', e);
+    }
+    setSelectedTable({
+      ...selectedReservedTable,
+      status: 'occupied'
+    });
+    setCart([]);
+    setSelectedCustomer(null);
+    setMode('menu');
+    setReservedActionOpen(false);
+    fetchTables();
+  };
+
+  const handleCancelReservation = async () => {
+    if (!selectedReservedTable) return;
+    try {
+      await api.put(`/api/tables/${selectedReservedTable.id}/status?status=available`);
+      setReservedActionOpen(false);
+      setSelectedReservedTable(null);
+      fetchTables();
+    } catch {
+      alert('Failed to cancel reservation');
+    }
   };
 
   const handleClearTable = () => {
@@ -179,6 +247,7 @@ export default function POSPage() {
         await api.put(`/api/tables/${selectedTable.id}/status?status=available`);
       }
       setCart([]);
+      setSelectedCustomer(null);
       setSelectedTable(null);
       setMode('tables');
       fetchTables();
@@ -203,7 +272,7 @@ export default function POSPage() {
         items: cart.map((c) => ({
           product_id: c.product.id,
           quantity: c.quantity,
-          notes: c.notes,
+          notes: c.notes || '',
         })),
       };
       let orderData;
@@ -230,7 +299,7 @@ export default function POSPage() {
         items: cart.map((c) => ({
           product_id: c.product.id,
           quantity: c.quantity,
-          notes: c.notes,
+          notes: c.notes || '',
         })),
       };
       if (existingOrder) {
@@ -239,6 +308,8 @@ export default function POSPage() {
         await api.post('/api/orders', payload);
       }
       setCart([]);
+      setSelectedCustomer(null);
+      setSelectedTable(null);
       setMode('tables');
       fetchTables();
     } catch (err: any) {
@@ -256,7 +327,7 @@ export default function POSPage() {
         items: cart.map((c) => ({
           product_id: c.product.id,
           quantity: c.quantity,
-          notes: c.notes,
+          notes: c.notes || '',
         })),
       };
       let orderId = existingOrder?.id;
@@ -270,6 +341,8 @@ export default function POSPage() {
       await api.patch(`/api/orders/${orderId}/status?status=in_progress`);
       
       setCart([]);
+      setSelectedCustomer(null);
+      setSelectedTable(null);
       setMode('tables');
       fetchTables();
     } catch (err: any) {
@@ -401,7 +474,7 @@ export default function POSPage() {
                   className={`table-card ${t.status}`}
                   onClick={() => handleSelectTable(t)}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                     <div>
                       <div className="table-num">T{t.number}</div>
                       <div className={`table-status ${t.status}`}>
@@ -410,17 +483,85 @@ export default function POSPage() {
                          t.status === 'reserved' ? 'Reserved' : 'Ready for Payment'}
                       </div>
                     </div>
-                    {t.status !== 'available' && (
-                      <div className="guest-count">
-                        <Users size={12} /> {t.capacity}
-                      </div>
-                    )}
+
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.375rem' }}>
+                      {t.status === 'reserved' && (
+                        <>
+                          <div style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.25rem',
+                            fontSize: '0.75rem',
+                            fontWeight: 700,
+                            color: 'var(--color-primary)',
+                            background: 'rgba(220, 53, 69, 0.08)',
+                            padding: '0.2rem 0.5rem',
+                            borderRadius: 6,
+                            border: '1px solid rgba(220, 53, 69, 0.2)'
+                          }}>
+                            <Users size={12} /> {t.current_covers || 2}
+                          </div>
+                          {t.reservation_time && (
+                            <div style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.25rem',
+                              fontSize: '0.6875rem',
+                              fontWeight: 600,
+                              color: 'var(--color-text-secondary)',
+                              background: 'var(--color-bg-secondary)',
+                              padding: '0.15rem 0.45rem',
+                              borderRadius: 6,
+                              border: '1px solid var(--color-border)'
+                            }}>
+                              <Clock size={11} color="var(--color-primary)" /> {t.reservation_time}
+                            </div>
+                          )}
+                        </>
+                      )}
+
+                      {t.status === 'occupied' && (
+                        <div style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.25rem',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          color: '#F4845F',
+                          background: 'rgba(244, 132, 95, 0.1)',
+                          padding: '0.2rem 0.5rem',
+                          borderRadius: 6,
+                          border: '1px solid rgba(244, 132, 95, 0.2)'
+                        }}>
+                          <Users size={12} /> {t.current_covers || t.capacity}
+                        </div>
+                      )}
+
+                      {t.status === 'available' && (
+                        <div style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.25rem',
+                          fontSize: '0.6875rem',
+                          color: 'var(--color-text-muted)'
+                        }}>
+                          <Users size={11} /> max {t.capacity}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  {t.status === 'occupied' && (
+                  {(t.status === 'occupied' || tableOrder) && (
                     <>
                       <div style={{ marginTop: 'auto' }}>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Current Total</div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Current Total</div>
+                          {tableOrder?.status === 'draft' && (
+                            <span style={{ fontSize: '0.625rem', fontWeight: 700, padding: '1px 5px', borderRadius: 4, background: 'rgba(245, 158, 11, 0.15)', color: '#D97706' }}>
+                              DRAFT
+                            </span>
+                          )}
+                        </div>
                         <div className="table-total">{tableOrder ? tableOrder.total_amount.toFixed(2) : '0.00'} DT</div>
                       </div>
                       <div className="table-meta">
@@ -586,39 +727,362 @@ export default function POSPage() {
 
       {/* ── Table Reservation Modal ── */}
       {tableModalOpen && tableToReserve && (
-        <div className="modal-overlay">
-          <div className="modal-content animate-slideUp">
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem' }}>
-              Table T{tableToReserve.number}
-            </h3>
-            
-            <div className="form-group" style={{ marginBottom: '1rem' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>Number of People (Covers)</label>
-              <input 
-                type="number" 
-                className="input" 
-                style={{ width: '100%', padding: '0.5rem', border: '1px solid var(--color-border)', borderRadius: '4px' }} 
-                value={reserveCovers} 
-                onChange={(e) => setReserveCovers(Number(e.target.value))} 
-                min={1} 
-              />
-            </div>
-            
-            <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>Reservation Time (if reserving)</label>
-              <input 
-                type="time" 
-                className="input" 
-                style={{ width: '100%', padding: '0.5rem', border: '1px solid var(--color-border)', borderRadius: '4px' }} 
-                value={reserveTime} 
-                onChange={(e) => setReserveTime(e.target.value)} 
-              />
+        <div className="modal-overlay" onClick={() => setTableModalOpen(false)}>
+          <div
+            className="modal-content animate-slideUp"
+            style={{ maxWidth: 440, padding: '1.75rem', borderRadius: 16 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                  <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                    Table T{tableToReserve.number}
+                  </span>
+                  <span style={{
+                    fontSize: '0.6875rem',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    padding: '0.2rem 0.5rem',
+                    borderRadius: 20,
+                    background: 'var(--color-bg-secondary)',
+                    color: 'var(--color-text-secondary)',
+                    border: '1px solid var(--color-border)'
+                  }}>
+                    {tableToReserve.section || 'Main Hall'}
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', margin: 0 }}>
+                  Capacity: {tableToReserve.capacity} seats
+                </p>
+              </div>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                style={{ padding: '0.25rem', borderRadius: '50%', color: 'var(--color-text-muted)' }}
+                onClick={() => setTableModalOpen(false)}
+              >
+                <X size={18} />
+              </button>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
-              <button className="btn btn-outline" onClick={() => setTableModalOpen(false)}>Cancel</button>
-              <button className="btn btn-primary" onClick={handleReserveOnly}>Reserve Only</button>
-              <button className="btn btn-primary" style={{ background: 'var(--color-success)', borderColor: 'var(--color-success)' }} onClick={handleOpenOrder}>Open Order</button>
+            {/* Covers / Guests Stepper */}
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '0.5rem' }}>
+                <Users size={15} color="var(--color-primary)" /> Number of Guests (Covers)
+              </label>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', background: 'var(--color-bg-secondary)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '0.25rem' }}>
+                  <button
+                    type="button"
+                    style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', borderRadius: 6 }}
+                    onClick={() => setReserveCovers(Math.max(1, reserveCovers - 1))}
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <span style={{ minWidth: 44, textAlign: 'center', fontWeight: 700, fontSize: '0.9375rem' }}>
+                    {reserveCovers}
+                  </span>
+                  <button
+                    type="button"
+                    style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', background: 'transparent', cursor: 'pointer', borderRadius: 6 }}
+                    onClick={() => setReserveCovers(reserveCovers + 1)}
+                  >
+                    <Plus size={16} />
+                  </button>
+                </div>
+                <div style={{ display: 'flex', gap: '0.375rem', flex: 1 }}>
+                  {[1, 2, 4, 6, 8].map(num => (
+                    <button
+                      key={num}
+                      type="button"
+                      onClick={() => setReserveCovers(num)}
+                      style={{
+                        flex: 1,
+                        padding: '0.4rem 0',
+                        fontSize: '0.8125rem',
+                        fontWeight: 600,
+                        borderRadius: 8,
+                        border: reserveCovers === num ? '1px solid var(--color-primary)' : '1px solid var(--color-border)',
+                        background: reserveCovers === num ? 'rgba(220, 53, 69, 0.08)' : 'var(--color-bg-card)',
+                        color: reserveCovers === num ? 'var(--color-primary)' : 'var(--color-text-secondary)',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Custom Time Selector */}
+            <div style={{ marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                  <Clock size={15} color="var(--color-primary)" /> Reservation Time (Optional)
+                </label>
+                {reserveTime && (
+                  <button
+                    type="button"
+                    onClick={() => setReserveTime('')}
+                    style={{ border: 'none', background: 'transparent', color: 'var(--color-text-muted)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
+                  >
+                    Clear (Walk-in)
+                  </button>
+                )}
+              </div>
+
+              {/* Quick time slot pills */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.375rem', marginBottom: '0.75rem' }}>
+                {[
+                  { label: 'Now', time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) },
+                  { label: '+30m', time: new Date(Date.now() + 30 * 60000).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) },
+                  { label: '+1h', time: new Date(Date.now() + 60 * 60000).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) },
+                  { label: '18:30', time: '18:30' },
+                  { label: '19:00', time: '19:00' },
+                  { label: '19:30', time: '19:30' },
+                  { label: '20:00', time: '20:00' },
+                  { label: '20:30', time: '20:30' },
+                ].map((slot) => {
+                  const isSelected = reserveTime === slot.time;
+                  return (
+                    <button
+                      key={slot.label}
+                      type="button"
+                      onClick={() => setReserveTime(slot.time)}
+                      style={{
+                        padding: '0.45rem 0.25rem',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        borderRadius: 8,
+                        border: isSelected ? '1px solid var(--color-primary)' : '1px solid var(--color-border)',
+                        background: isSelected ? 'var(--color-primary)' : 'var(--color-bg-card)',
+                        color: isSelected ? '#FFFFFF' : 'var(--color-text-primary)',
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      {slot.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Custom Time Selector (Hour : Minute) */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--color-bg-secondary)', padding: '0.5rem 0.75rem', borderRadius: 10, border: '1px solid var(--color-border)' }}>
+                <Clock size={16} color="var(--color-text-muted)" />
+                <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', marginRight: 'auto' }}>Custom Time:</span>
+                <select
+                  value={reserveTime ? reserveTime.split(':')[0] : '19'}
+                  onChange={(e) => {
+                    const min = reserveTime ? reserveTime.split(':')[1] || '00' : '00';
+                    setReserveTime(`${e.target.value.padStart(2, '0')}:${min}`);
+                  }}
+                  style={{
+                    padding: '0.3rem 0.5rem',
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border)',
+                    background: 'var(--color-bg-card)',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0')).map(h => (
+                    <option key={h} value={h}>{h}:00</option>
+                  ))}
+                </select>
+                <span style={{ fontWeight: 700 }}>:</span>
+                <select
+                  value={reserveTime ? reserveTime.split(':')[1] : '00'}
+                  onChange={(e) => {
+                    const hr = reserveTime ? reserveTime.split(':')[0] || '19' : '19';
+                    setReserveTime(`${hr}:${e.target.value.padStart(2, '0')}`);
+                  }}
+                  style={{
+                    padding: '0.3rem 0.5rem',
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border)',
+                    background: 'var(--color-bg-card)',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {['00', '15', '30', '45'].map(m => (
+                    <option key={m} value={m}>{m}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.625rem' }}>
+              <button
+                type="button"
+                className="btn btn-outline"
+                style={{ gridColumn: 'span 2', justifyContent: 'center', padding: '0.55rem' }}
+                onClick={() => setTableModalOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                style={{
+                  background: 'var(--color-primary)',
+                  borderColor: 'var(--color-primary)',
+                  justifyContent: 'center',
+                  padding: '0.65rem 0.5rem',
+                  fontWeight: 600,
+                  fontSize: '0.875rem'
+                }}
+                onClick={handleReserveOnly}
+              >
+                <Calendar size={16} style={{ marginRight: '0.375rem' }} />
+                Reserve Only
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                style={{
+                  background: '#28A745',
+                  borderColor: '#28A745',
+                  justifyContent: 'center',
+                  padding: '0.65rem 0.5rem',
+                  fontWeight: 600,
+                  fontSize: '0.875rem'
+                }}
+                onClick={handleOpenOrder}
+              >
+                <Check size={16} style={{ marginRight: '0.375rem' }} />
+                Open Order
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Reserved Table Action Modal ── */}
+      {reservedActionOpen && selectedReservedTable && (
+        <div className="modal-overlay" onClick={() => setReservedActionOpen(false)}>
+          <div
+            className="modal-content animate-slideUp"
+            style={{ maxWidth: 420, padding: '1.75rem', borderRadius: 16 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                  <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                    Table T{selectedReservedTable.number}
+                  </span>
+                  <span style={{
+                    fontSize: '0.6875rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: 20,
+                    background: 'rgba(220, 53, 69, 0.1)',
+                    color: 'var(--color-primary)',
+                    border: '1px solid var(--color-primary)'
+                  }}>
+                    Reserved
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', margin: 0 }}>
+                  {selectedReservedTable.section || 'Main Hall'} Section
+                </p>
+              </div>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                style={{ padding: '0.25rem', borderRadius: '50%', color: 'var(--color-text-muted)' }}
+                onClick={() => setReservedActionOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Reservation Summary Card */}
+            <div style={{
+              background: 'var(--color-bg-secondary)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 12,
+              padding: '1rem',
+              marginBottom: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.625rem'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                  <Users size={14} color="var(--color-primary)" /> Reserved Guests:
+                </span>
+                <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                  {selectedReservedTable.current_covers || 2} People
+                </span>
+              </div>
+              {selectedReservedTable.reservation_time && (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                    <Clock size={14} color="var(--color-primary)" /> Time Scheduled:
+                  </span>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-primary)' }}>
+                    {selectedReservedTable.reservation_time}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.625rem' }}>
+              <button
+                type="button"
+                className="btn btn-outline"
+                style={{ gridColumn: 'span 2', justifyContent: 'center', padding: '0.55rem' }}
+                onClick={() => setReservedActionOpen(false)}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline"
+                style={{
+                  color: 'var(--color-danger)',
+                  borderColor: 'var(--color-danger)',
+                  justifyContent: 'center',
+                  padding: '0.65rem 0.5rem',
+                  fontWeight: 600,
+                  fontSize: '0.875rem'
+                }}
+                onClick={handleCancelReservation}
+              >
+                <X size={15} style={{ marginRight: '0.25rem' }} />
+                Cancel Reservation
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                style={{
+                  background: '#28A745',
+                  borderColor: '#28A745',
+                  justifyContent: 'center',
+                  padding: '0.65rem 0.5rem',
+                  fontWeight: 600,
+                  fontSize: '0.875rem'
+                }}
+                onClick={handleSeatReservedTable}
+              >
+                <Check size={16} style={{ marginRight: '0.375rem' }} />
+                Seat & Start Order
+              </button>
             </div>
           </div>
         </div>

@@ -95,14 +95,14 @@ class SupplierOut(BaseModel):
 
 
 def _supplier_write_roles():
-    return require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)
+    return require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)
 
 
 @router.get("", response_model=list[SupplierOut])
 def list_suppliers(
     active_only: bool = Query(True),
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
 ):
     q = db.query(Supplier)
     if active_only:
@@ -114,7 +114,7 @@ def list_suppliers(
 def get_supplier(
     supplier_id: int,
     db: Session = Depends(get_db),
-    _=Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
+    _=Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_STOCK_MANAGER)),
 ):
     supplier = db.query(Supplier).filter(Supplier.id == supplier_id).first()
     if not supplier:

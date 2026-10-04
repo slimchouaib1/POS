@@ -1,0 +1,99 @@
+@startuml
+title Cashier Use Case Diagram
+
+left to right direction
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+skinparam actor {
+    BorderColor #333333
+    FontSize 11
+}
+
+skinparam usecase {
+    BackgroundColor #F8F8F8
+    BorderColor #333333
+    FontSize 10
+}
+
+skinparam ArrowColor #444444
+skinparam ArrowFontSize 9
+
+
+' =========================================================
+' ACTOR
+' =========================================================
+
+actor Cashier
+
+
+' =========================================================
+' SYSTEM
+' =========================================================
+
+rectangle "Intelligent POS Application" {
+
+    usecase "Log In" as UC_Login
+    usecase "Log Out" as UC_Logout
+
+    usecase "View Tables\nDashboard" as UC_ViewTables
+    usecase "Manage Table\nStatus" as UC_ManageTables
+
+    usecase "Create / Update\nOrder" as UC_Order
+    usecase "Manage Basket" as UC_Basket
+    usecase "View Own\nOrders" as UC_ViewOrders
+
+    usecase "Register / Select\nCustomer" as UC_Customer
+
+    usecase "View Product\nRecommendations" as UC_Recommend
+
+    usecase "Process Payment" as UC_Payment
+    usecase "Generate Receipt" as UC_Receipt
+}
+
+
+' =========================================================
+' CASHIER ACTIONS
+' =========================================================
+
+Cashier --> UC_Login
+Cashier --> UC_Logout
+
+Cashier --> UC_ViewTables
+Cashier --> UC_ManageTables
+Cashier --> UC_Order
+Cashier --> UC_ViewOrders
+Cashier --> UC_Customer
+Cashier --> UC_Recommend
+Cashier --> UC_Payment
+Cashier --> UC_Receipt
+
+
+' =========================================================
+' INCLUDE / EXTEND
+' =========================================================
+
+UC_Order ..> UC_Basket : <<include>>
+UC_Order ..> UC_ViewTables : <<include>>
+
+UC_Customer ..> UC_Order : <<extend>>
+UC_Recommend ..> UC_Order : <<extend>>
+
+UC_Payment ..> UC_Order : <<include>>
+UC_Payment ..> UC_Receipt : <<include>>
+
+
+' =========================================================
+' LAYOUT
+' =========================================================
+
+UC_Login -[hidden]down- UC_ViewTables
+UC_ViewTables -[hidden]down- UC_ManageTables
+UC_ManageTables -[hidden]down- UC_Order
+UC_Order -[hidden]down- UC_Basket
+UC_Basket -[hidden]down- UC_Payment
+UC_Payment -[hidden]down- UC_Receipt
+
+@enduml

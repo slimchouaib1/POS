@@ -36,6 +36,13 @@ async def lifespan(app: FastAPI):
     init_db()
     print("[OK] Database tables created")
 
+    db = SessionLocal()
+    try:
+        from app.seed.seed_data import normalize_admin_roles
+        normalize_admin_roles(db)
+    finally:
+        db.close()
+
     if settings.SEED_DEMO_DATA:
         from app.seed.seed_data import seed_all
         db = SessionLocal()

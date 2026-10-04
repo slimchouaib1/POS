@@ -13,6 +13,8 @@ class TableOut(BaseModel):
     section: str
     capacity: int
     status: str
+    current_covers: Optional[int] = 0
+    reservation_time: Optional[str] = ""
 
     class Config:
         from_attributes = True

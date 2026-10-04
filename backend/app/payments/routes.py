@@ -39,11 +39,37 @@ class PaymentOut(BaseModel):
         from_attributes = True
 
 
+def _score_live_anomaly(db: Session, order: Order, user_id: int):
+    try:
+        from app.ai.anomalies.service import score_order_live
+
+        alert = score_order_live(db, order)
+    except Exception as exc:
+        db.add(AuditLog(
+            user_id=user_id,
+            action="live_anomaly_scoring_failed",
+            entity_type="order",
+            entity_id=order.id,
+            details=f"Live anomaly scoring failed for order #{order.id}: {str(exc)[:400]}",
+        ))
+        return None
+
+    if alert:
+        db.add(AuditLog(
+            user_id=user_id,
+            action="live_anomaly_alert_created",
+            entity_type="order",
+            entity_id=order.id,
+            details=f"Live anomaly alert for order #{order.id}: risk={alert.risk_level}, score={alert.risk_score}",
+        ))
+    return alert
+
+
 @router.post("", response_model=PaymentOut)
 def process_payment(
     data: PaymentCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     order = db.query(Order).filter(Order.id == data.order_id).first()
     if not order:
@@ -85,6 +111,8 @@ def process_payment(
             table = db.query(Table).filter(Table.id == order.table_id).first()
             if table:
                 table.status = "available"
+                table.current_covers = 0
+                table.reservation_time = ""
 
         db.add(AuditLog(
             user_id=current_user.id,
@@ -93,6 +121,7 @@ def process_payment(
             entity_id=payment.id,
             details=f"Payment of {data.amount} DT via {data.method} for order #{order.id}",
         ))
+        _score_live_anomaly(db, order, current_user.id)
         db.commit()
         db.refresh(payment)
     except Exception:
@@ -106,7 +135,7 @@ def process_payment(
 def get_payments_for_order(
     order_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER, settings.ROLE_CASHIER)),
 ):
     order = db.query(Order).filter(Order.id == order_id).first()
     if not order:
@@ -120,7 +149,7 @@ def get_payments_for_order(
 def refund_payment(
     payment_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(settings.ROLE_ADMIN, settings.ROLE_MANAGER)),
+    current_user: User = Depends(require_role(settings.ROLE_MANAGER)),
 ):
     payment = db.query(Payment).filter(Payment.id == payment_id).first()
     if not payment:

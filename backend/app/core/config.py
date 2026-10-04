@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     ENVIRONMENT: Literal["development", "test", "production"] = "production"
     ENABLE_API_DOCS: bool = False
     SEED_DEMO_DATA: bool = False
+    # Deprecated: accepted only so older local .env files keep starting.
     SEED_ADMIN_PASSWORD: str | None = None
     SEED_MANAGER_PASSWORD: str | None = None
     SEED_CASHIER_PASSWORD: str | None = None
@@ -41,7 +42,6 @@ class Settings(BaseSettings):
     NOTEBOOKS_PATH: str = str(Path("Ai models"))
 
     # Roles
-    ROLE_ADMIN: str = "admin"
     ROLE_MANAGER: str = "manager"
     ROLE_CASHIER: str = "cashier"
     ROLE_STOCK_MANAGER: str = "stock_manager"
